@@ -35,30 +35,35 @@ export default function Hero() {
         {/* ── 1. Full First Page 3D Interactive Keyboard & Neural Canvas ── */}
         <motion.div
           style={{ opacity: canvasOpacity, scale: canvasScale }}
-          className="absolute inset-0 w-full h-full z-0 pointer-events-auto flex flex-col items-center justify-between py-20 pointer-events-none"
+          className="absolute inset-0 w-full h-full z-0 pointer-events-auto flex flex-col items-center pt-24 md:pt-32 pb-10 pointer-events-none"
         >
           {/* Welcome Note Header (Above Keyboard) */}
-          <div className="relative z-10 text-center flex flex-col items-center max-w-2xl px-6 pointer-events-none pt-8">
-            <h2
-              className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4"
-              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
-            >
-              Welcome to my <span className="gradient-text">digital workspace.</span>
-            </h2>
-            <p className="text-sm sm:text-base text-slate-700 font-medium max-w-2xl mb-4 leading-relaxed">
-              I’m <span className="font-bold text-indigo-600">Umair Amjad Khan</span>—a Machine Learning Engineer and AI Specialist dedicated to building production-grade AI systems, LLM pipelines, and intelligent software applications. Whether you&apos;re exploring my latest open-source research, reviewing deployment architectures, or looking to collaborate on custom AI solutions, I&apos;m glad you&apos;re here.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-500 font-medium max-w-xl">
-              Explore my featured projects below, or feel free to reach out directly to start a conversation.
-            </p>
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm bg-white border border-indigo-200 text-indigo-700">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Scroll down to reveal profile
+          <div className="relative z-10 w-full max-w-4xl px-4 sm:px-6 flex flex-col items-center pointer-events-none shrink-0 mb-4 sm:mb-8">
+            <div className="bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl p-6 sm:p-10 text-center relative overflow-hidden">
+              {/* Subtle top gradient line for premium feel */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 opacity-80" />
+              
+              <h2
+                className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4"
+                style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+              >
+                Welcome to my <span className="gradient-text">digital workspace.</span>
+              </h2>
+              <p className="text-sm sm:text-base text-slate-700 font-medium mb-4 leading-relaxed max-w-3xl mx-auto">
+                I’m <span className="font-bold text-indigo-600">Umair Amjad Khan</span>—a Machine Learning Engineer and AI Specialist dedicated to building production-grade AI systems, LLM pipelines, and intelligent software applications. Whether you&apos;re exploring my latest open-source research, reviewing deployment architectures, or looking to collaborate on custom AI solutions, I&apos;m glad you&apos;re here.
+              </p>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                Explore my featured projects below, or feel free to reach out directly to start a conversation.
+              </p>
+              <div className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-wide shadow-md bg-indigo-600 text-white shadow-indigo-600/20">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Scroll down to explore
+              </div>
             </div>
           </div>
 
           {/* 3D Canvas */}
-          <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto">
+          <div className="relative w-full flex-1 z-0 pointer-events-auto min-h-[300px]">
             <NeuralCanvas />
           </div>
         </motion.div>
