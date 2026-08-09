@@ -145,7 +145,7 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: "#64748B" }}>
-          <p>
+          <p suppressHydrationWarning>
             © {new Date().getFullYear()} Umair Amjad Khan. All rights reserved.
           </p>
           <p className="flex items-center gap-1.5">

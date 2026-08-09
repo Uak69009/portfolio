@@ -307,6 +307,7 @@ export default function Contact() {
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col gap-5"
                   noValidate
+                  suppressHydrationWarning
                 >
                   {errorMessage && (
                     <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm font-medium">
@@ -328,6 +329,7 @@ export default function Contact() {
                         type="text"
                         placeholder="John Doe"
                         className="form-input"
+                        suppressHydrationWarning
                         {...register("name", { required: "Name is required" })}
                       />
                       {errors.name && (
@@ -351,6 +353,7 @@ export default function Contact() {
                         type="email"
                         placeholder="john@example.com"
                         className="form-input"
+                        suppressHydrationWarning
                         {...register("email", {
                           required: "Email is required",
                           pattern: {
@@ -381,6 +384,7 @@ export default function Contact() {
                       type="text"
                       placeholder="Project Inquiry / Collaboration / Job Offer..."
                       className="form-input"
+                      suppressHydrationWarning
                       {...register("subject", { required: "Subject is required" })}
                     />
                     {errors.subject && (
@@ -404,6 +408,7 @@ export default function Contact() {
                       rows={5}
                       placeholder="Tell me about your project, idea, or opportunity..."
                       className="form-input resize-none"
+                      suppressHydrationWarning
                       {...register("message", {
                         required: "Message is required",
                         minLength: { value: 20, message: "Message must be at least 20 characters" },
