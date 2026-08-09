@@ -2,7 +2,7 @@
 
 import { Mail, Heart } from "lucide-react";
 import { SiGithub, SiUpwork, SiFiverr } from "react-icons/si";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -16,6 +16,7 @@ const navLinks = [
 const socialLinks = [
   { icon: SiGithub, href: "https://github.com/Uak69009", label: "GitHub" },
   { icon: FaLinkedinIn, href: "https://linkedin.com/in/umairamjadkhan", label: "LinkedIn" },
+  { icon: FaWhatsapp, href: "https://wa.me/923170478541", label: "WhatsApp" },
   { icon: SiUpwork, href: "https://upwork.com", label: "Upwork" },
   { icon: SiFiverr, href: "https://fiverr.com", label: "Fiverr" },
   { icon: Mail, href: "mailto:umairamjadkhanamazai@gmail.com", label: "Email" },

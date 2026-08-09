@@ -11,7 +11,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { SiGithub, SiUpwork, SiFiverr } from "react-icons/si";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 
 import { Variants } from "framer-motion";
 
@@ -45,6 +45,13 @@ const socialLinks = [
     href: "https://linkedin.com/in/umairamjadkhan",
     color: "#0A66C2",
     bg: "rgba(10,102,194,0.08)",
+  },
+  {
+    icon: FaWhatsapp,
+    label: "WhatsApp",
+    href: "https://wa.me/923170478541",
+    color: "#25D366",
+    bg: "rgba(37,211,102,0.08)",
   },
   {
     icon: SiUpwork,
@@ -176,6 +183,13 @@ export default function Contact() {
                 value: "umairamjadkhanamazai@gmail.com",
                 href: "mailto:umairamjadkhanamazai@gmail.com",
                 color: "#0369A1",
+              },
+              {
+                icon: FaWhatsapp,
+                label: "WhatsApp",
+                value: "+92 317 0478541",
+                href: "https://wa.me/923170478541",
+                color: "#25D366",
               },
               {
                 icon: MapPin,
