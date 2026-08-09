@@ -5,12 +5,14 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Brain, Server, Layers } from "lucide-react";
 
-const fadeUp = {
+import { Variants } from "framer-motion";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" },
+    transition: { duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -97,12 +99,12 @@ export default function Skills() {
     <section
       id="skills"
       className="section-base"
-      style={{ background: "linear-gradient(180deg, #0B0F19 0%, #111827 60%, #0B0F19 100%)" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* Orb */}
       <div
-        className="orb w-[500px] h-[500px] left-[-200px] top-1/2 -translate-y-1/2 opacity-10"
-        style={{ background: "radial-gradient(circle, #8B5CF6, transparent 70%)" }}
+        className="orb w-[500px] h-[500px] left-[-200px] top-1/2 -translate-y-1/2 opacity-15"
+        style={{ background: "radial-gradient(circle, #7C3AED, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -118,21 +120,21 @@ export default function Skills() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#6366F1",
-              background: "rgba(99,102,241,0.1)",
-              border: "1px solid rgba(99,102,241,0.2)",
+              color: "#4F46E5",
+              background: "rgba(79,70,229,0.08)",
+              border: "1px solid rgba(79,70,229,0.2)",
             }}
           >
             Technical Arsenal
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
           >
             Core Skills &amp;{" "}
             <span className="gradient-text">Technologies</span>
           </h2>
-          <p className="max-w-xl mx-auto text-base" style={{ color: "#9CA3AF" }}>
+          <p className="max-w-xl mx-auto text-base" style={{ color: "#475569" }}>
             A battle-tested toolkit for building production AI systems — from
             raw data to deployed intelligent applications.
           </p>
@@ -162,7 +164,7 @@ export default function Skills() {
                   <h3
                     className="font-semibold text-base"
                     style={{
-                      color: "#F9FAFB",
+                      color: "#0F172A",
                       fontFamily: "var(--font-space-grotesk, sans-serif)",
                     }}
                   >
@@ -177,17 +179,18 @@ export default function Skills() {
                       key={skill}
                       className="skill-badge"
                       style={{
-                        borderColor: `${cat.color}25`,
+                        borderColor: `${cat.color}30`,
                         background: `${cat.color}0D`,
+                        color: "#334155",
                       }}
                       onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}60`;
-                        (e.currentTarget as HTMLElement).style.color = "#F9FAFB";
-                        (e.currentTarget as HTMLElement).style.boxShadow = `0 0 14px ${cat.glow}`;
+                        (e.currentTarget as HTMLElement).style.color = "#0F172A";
+                        (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 12px ${cat.glow}`;
                       }}
                       onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}25`;
-                        (e.currentTarget as HTMLElement).style.color = "#D1D5DB";
+                        (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}30`;
+                        (e.currentTarget as HTMLElement).style.color = "#334155";
                         (e.currentTarget as HTMLElement).style.boxShadow = "none";
                       }}
                     >
@@ -208,23 +211,23 @@ export default function Skills() {
           custom={6}
           className="mt-12 glass-card p-6"
         >
-          <p className="text-sm mb-5 font-medium" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm mb-5 font-medium" style={{ color: "#475569" }}>
             Core Proficiency
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Python & ML Frameworks", pct: 92, color: "#6366F1" },
-              { label: "Generative AI & LLMs", pct: 88, color: "#00F2FE" },
-              { label: "MLOps & Deployment", pct: 80, color: "#8B5CF6" },
+              { label: "Python & ML Frameworks", pct: 92, color: "#4F46E5" },
+              { label: "Generative AI & LLMs", pct: 88, color: "#0284C7" },
+              { label: "MLOps & Deployment", pct: 80, color: "#7C3AED" },
             ].map((bar) => (
               <div key={bar.label}>
-                <div className="flex justify-between mb-2 text-xs" style={{ color: "#9CA3AF" }}>
+                <div className="flex justify-between mb-2 text-xs font-medium" style={{ color: "#475569" }}>
                   <span>{bar.label}</span>
                   <span style={{ color: bar.color }}>{bar.pct}%</span>
                 </div>
                 <div
                   className="w-full h-1.5 rounded-full overflow-hidden"
-                  style={{ background: "rgba(255,255,255,0.06)" }}
+                  style={{ background: "#E2E8F0" }}
                 >
                   <motion.div
                     initial={{ width: 0 }}
@@ -232,8 +235,8 @@ export default function Skills() {
                     transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
                     className="h-full rounded-full"
                     style={{
-                      background: `linear-gradient(90deg, ${bar.color}, ${bar.color}99)`,
-                      boxShadow: `0 0 10px ${bar.color}55`,
+                      background: `linear-gradient(90deg, ${bar.color}, ${bar.color}CC)`,
+                      boxShadow: `0 0 8px ${bar.color}44`,
                     }}
                   />
                 </div>

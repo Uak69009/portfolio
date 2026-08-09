@@ -4,12 +4,14 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Cpu, Layers, Zap, Globe } from "lucide-react";
 
-const fadeUp = {
+import { Variants } from "framer-motion";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, delay: i * 0.12, ease: "easeOut" },
+    transition: { duration: 0.65, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -28,12 +30,12 @@ export default function About() {
     <section
       id="about"
       className="section-base"
-      style={{ background: "linear-gradient(180deg, #111827 0%, #0B0F19 100%)" }}
+      style={{ background: "#F8FAFC" }}
     >
       {/* Ambient orbs */}
       <div
-        className="orb w-[500px] h-[500px] right-[-150px] top-1/2 -translate-y-1/2 opacity-10"
-        style={{ background: "radial-gradient(circle, #00F2FE, transparent 70%)" }}
+        className="orb w-[500px] h-[500px] right-[-150px] top-1/2 -translate-y-1/2 opacity-15"
+        style={{ background: "radial-gradient(circle, #0284C7, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -50,9 +52,9 @@ export default function About() {
               <span
                 className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
                 style={{
-                  color: "#00F2FE",
-                  background: "rgba(0,242,254,0.08)",
-                  border: "1px solid rgba(0,242,254,0.2)",
+                  color: "#0284C7",
+                  background: "rgba(2,132,199,0.08)",
+                  border: "1px solid rgba(2,132,199,0.2)",
                 }}
               >
                 About Me
@@ -65,7 +67,7 @@ export default function About() {
               variants={fadeUp}
               custom={1}
               className="text-4xl lg:text-5xl font-bold mb-6"
-              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
             >
               Turning Data into{" "}
               <span className="gradient-text">Intelligent Systems</span>
@@ -77,10 +79,10 @@ export default function About() {
               variants={fadeUp}
               custom={2}
               className="flex flex-col gap-4 text-base leading-relaxed"
-              style={{ color: "#9CA3AF" }}
+              style={{ color: "#475569" }}
             >
               <p>
-                I&apos;m <span style={{ color: "#F9FAFB", fontWeight: 600 }}>Umair Amjad Khan</span>,
+                I&apos;m <span style={{ color: "#0F172A", fontWeight: 600 }}>Umair Amjad Khan</span>,
                 Founder &amp; CEO at <span className="gradient-text font-bold">icode Studios</span> (&ldquo;you imagine, WE code&rdquo;)
                 and an AI &amp; Machine Learning Engineer specializing in building production-grade intelligent systems.
               </p>
@@ -114,9 +116,9 @@ export default function About() {
                   key={tag}
                   className="px-4 py-2 text-sm rounded-lg font-medium"
                   style={{
-                    background: "rgba(99,102,241,0.08)",
-                    border: "1px solid rgba(99,102,241,0.2)",
-                    color: "#A5B4FC",
+                    background: "rgba(79,70,229,0.08)",
+                    border: "1px solid rgba(79,70,229,0.2)",
+                    color: "#4F46E5",
                   }}
                 >
                   {tag}
@@ -158,7 +160,7 @@ export default function About() {
                     >
                       {stat.value}
                     </div>
-                    <div className="text-xs" style={{ color: "#6B7280" }}>
+                    <div className="text-xs" style={{ color: "#64748B" }}>
                       {stat.label}
                     </div>
                   </motion.div>
@@ -173,18 +175,18 @@ export default function About() {
               variants={fadeUp}
               custom={7}
               className="glass-card p-6 relative overflow-hidden"
-              style={{ border: "1px solid rgba(99,102,241,0.2)" }}
+              style={{ border: "1px solid rgba(79,70,229,0.2)" }}
             >
               <div
                 className="absolute top-0 left-0 w-full h-1 gradient-border"
               />
               <div
                 className="text-4xl mb-3 leading-none"
-                style={{ color: "rgba(99,102,241,0.3)", fontFamily: "Georgia, serif" }}
+                style={{ color: "rgba(79,70,229,0.3)", fontFamily: "Georgia, serif" }}
               >
                 &ldquo;
               </div>
-              <p className="text-sm leading-relaxed italic" style={{ color: "#9CA3AF" }}>
+              <p className="text-sm leading-relaxed italic" style={{ color: "#475569" }}>
                 The best AI systems are not the most complex — they are the ones
                 that solve real problems reliably, at scale, in production.
               </p>
@@ -200,18 +202,18 @@ export default function About() {
               variants={fadeUp}
               custom={8}
               className="glass-card p-5"
-              style={{ border: "1px solid rgba(0,242,254,0.15)" }}
+              style={{ border: "1px solid rgba(2,132,199,0.2)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <span
                   className="w-2 h-2 rounded-full"
-                  style={{ background: "#00F2FE", boxShadow: "0 0 8px #00F2FE" }}
+                  style={{ background: "#0284C7", boxShadow: "0 0 8px #0284C7" }}
                 />
-                <span className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+                <span className="text-sm font-semibold" style={{ color: "#0F172A" }}>
                   Currently Working On
                 </span>
               </div>
-              <ul className="flex flex-col gap-2 text-sm" style={{ color: "#9CA3AF" }}>
+              <ul className="flex flex-col gap-2 text-sm" style={{ color: "#475569" }}>
                 <li>🤖 Advanced multi-modal RAG systems</li>
                 <li>🌾 Expanding Zari.AI to new crop diseases</li>
                 <li>🛡️ Publishing cyber defense research</li>

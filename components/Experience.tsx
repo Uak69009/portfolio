@@ -5,12 +5,14 @@ import { motion, useInView } from "framer-motion";
 import { Briefcase, GraduationCap, MapPin, Calendar } from "lucide-react";
 import Image from "next/image";
 
-const fadeUp = {
+import { Variants } from "framer-motion";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, delay: i * 0.15, ease: "easeOut" },
+    transition: { duration: 0.65, delay: i * 0.15, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -134,12 +136,12 @@ export default function Experience() {
     <section
       id="experience"
       className="section-base"
-      style={{ background: "linear-gradient(180deg, #111827 0%, #0B0F19 100%)" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* Orb */}
       <div
-        className="orb w-[400px] h-[400px] left-1/2 -translate-x-1/2 -top-20 opacity-10"
-        style={{ background: "radial-gradient(circle, #6366F1, transparent 70%)" }}
+        className="orb w-[400px] h-[400px] left-1/2 -translate-x-1/2 -top-20 opacity-15"
+        style={{ background: "radial-gradient(circle, #4F46E5, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-4xl" ref={ref}>
@@ -155,21 +157,21 @@ export default function Experience() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#00F2FE",
-              background: "rgba(0,242,254,0.08)",
-              border: "1px solid rgba(0,242,254,0.2)",
+              color: "#0284C7",
+              background: "rgba(2,132,199,0.08)",
+              border: "1px solid rgba(2,132,199,0.2)",
             }}
           >
             Journey
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
           >
             Experience &amp;{" "}
             <span className="gradient-text">Education</span>
           </h2>
-          <p className="max-w-lg mx-auto text-base" style={{ color: "#9CA3AF" }}>
+          <p className="max-w-lg mx-auto text-base" style={{ color: "#475569" }}>
             A track record of building real AI systems — from academic research
             to production deployments for global clients.
           </p>
@@ -180,14 +182,14 @@ export default function Experience() {
           {/* Vertical Line */}
           <div
             className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-px lg:-translate-x-1/2"
-            style={{ background: "linear-gradient(to bottom, transparent, rgba(99,102,241,0.3) 10%, rgba(99,102,241,0.3) 90%, transparent)" }}
+            style={{ background: "linear-gradient(to bottom, transparent, rgba(79,70,229,0.2) 10%, rgba(79,70,229,0.2) 90%, transparent)" }}
           >
             <motion.div
               initial={{ height: "0%" }}
               animate={inView ? { height: "100%" } : { height: "0%" }}
               transition={{ duration: 1.5, delay: 0.3, ease: "easeInOut" }}
               className="w-full"
-              style={{ background: "linear-gradient(to bottom, #6366F1, #8B5CF6)" }}
+              style={{ background: "linear-gradient(to bottom, #4F46E5, #7C3AED)" }}
             />
           </div>
 
@@ -228,7 +230,7 @@ export default function Experience() {
                       style={{
                         background: item.bg,
                         border: `2px solid ${item.color}`,
-                        boxShadow: `0 0 0 4px rgba(11,15,25,1), 0 0 20px ${item.color}40`,
+                        boxShadow: `0 0 0 4px #FFFFFF, 0 4px 16px ${item.color}30`,
                       }}
                     >
                       {item.url ? (
@@ -274,7 +276,7 @@ export default function Experience() {
                               target="_blank"
                               rel="noopener noreferrer"
                               title={`Visit ${item.organization} official site`}
-                              className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-white/20 shadow-md transition-all duration-200 hover:scale-110 hover:shadow-lg hover:border-amber-400"
+                              className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm transition-all duration-200 hover:scale-110 hover:shadow-md hover:border-amber-400"
                             >
                               <Image
                                 src={item.logo}
@@ -285,7 +287,7 @@ export default function Experience() {
                               />
                             </a>
                           ) : (
-                            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-white/20 shadow-md">
+                            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm">
                               <Image
                                 src={item.logo}
                                 alt={item.organization}
@@ -301,7 +303,7 @@ export default function Experience() {
                       <h3
                         className="text-lg font-bold mb-1"
                         style={{
-                          color: "#F9FAFB",
+                          color: "#0F172A",
                           fontFamily: "var(--font-space-grotesk, sans-serif)",
                         }}
                       >
@@ -323,7 +325,7 @@ export default function Experience() {
                         )}
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#6B7280" }}>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#64748B" }}>
                         <span className="flex items-center gap-1">
                           <MapPin size={12} />
                           {item.location}
@@ -336,17 +338,17 @@ export default function Experience() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: "#9CA3AF" }}>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: "#475569" }}>
                       {item.description}
                     </p>
 
                     {/* Highlights */}
                     <ul className="flex flex-col gap-2">
                       {item.highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-2 text-sm" style={{ color: "#D1D5DB" }}>
+                        <li key={h} className="flex items-start gap-2 text-sm" style={{ color: "#334155" }}>
                           <span
                             className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
-                            style={{ background: item.color, boxShadow: `0 0 6px ${item.color}80` }}
+                            style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }}
                           />
                           {h}
                         </li>

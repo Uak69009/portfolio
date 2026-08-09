@@ -13,12 +13,14 @@ import {
 import { SiGithub, SiUpwork, SiFiverr } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 
-const fadeUp = {
+import { Variants } from "framer-motion";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, delay: i * 0.12, ease: "easeOut" },
+    transition: { duration: 0.65, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -34,36 +36,36 @@ const socialLinks = [
     icon: SiGithub,
     label: "GitHub",
     href: "https://github.com/Uak69009",
-    color: "#F9FAFB",
-    bg: "rgba(255,255,255,0.06)",
+    color: "#0F172A",
+    bg: "rgba(15,23,42,0.06)",
   },
   {
     icon: FaLinkedinIn,
     label: "LinkedIn",
     href: "https://linkedin.com/in/umairamjadkhan",
     color: "#0A66C2",
-    bg: "rgba(10,102,194,0.1)",
+    bg: "rgba(10,102,194,0.08)",
   },
   {
     icon: SiUpwork,
     label: "Upwork",
     href: "https://upwork.com",
-    color: "#6FDA44",
-    bg: "rgba(111,218,68,0.1)",
+    color: "#14A800",
+    bg: "rgba(20,168,0,0.08)",
   },
   {
     icon: SiFiverr,
     label: "Fiverr",
     href: "https://fiverr.com",
     color: "#1DBF73",
-    bg: "rgba(29,191,115,0.1)",
+    bg: "rgba(29,191,115,0.08)",
   },
   {
     icon: Mail,
     label: "Email",
     href: "mailto:umairamjadkhan@gmail.com",
-    color: "#00F2FE",
-    bg: "rgba(0,242,254,0.1)",
+    color: "#0284C7",
+    bg: "rgba(2,132,199,0.08)",
   },
 ];
 
@@ -95,16 +97,16 @@ export default function Contact() {
     <section
       id="contact"
       className="section-base"
-      style={{ background: "linear-gradient(180deg, #0B0F19 0%, #111827 100%)" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* Orbs */}
       <div
-        className="orb w-[500px] h-[500px] left-[-150px] bottom-[-150px] opacity-10"
-        style={{ background: "radial-gradient(circle, #6366F1, transparent 70%)" }}
+        className="orb w-[500px] h-[500px] left-[-150px] bottom-[-150px] opacity-15"
+        style={{ background: "radial-gradient(circle, #4F46E5, transparent 70%)" }}
       />
       <div
-        className="orb w-[400px] h-[400px] right-[-100px] top-0 opacity-10"
-        style={{ background: "radial-gradient(circle, #00F2FE, transparent 70%)" }}
+        className="orb w-[400px] h-[400px] right-[-100px] top-0 opacity-15"
+        style={{ background: "radial-gradient(circle, #0284C7, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -120,21 +122,21 @@ export default function Contact() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#6366F1",
-              background: "rgba(99,102,241,0.1)",
-              border: "1px solid rgba(99,102,241,0.2)",
+              color: "#4F46E5",
+              background: "rgba(79,70,229,0.08)",
+              border: "1px solid rgba(79,70,229,0.2)",
             }}
           >
             Get In Touch
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
           >
             Let&apos;s Build Something{" "}
             <span className="gradient-text">Together</span>
           </h2>
-          <p className="max-w-lg mx-auto text-base" style={{ color: "#9CA3AF" }}>
+          <p className="max-w-lg mx-auto text-base" style={{ color: "#475569" }}>
             Whether you have a project in mind, want to collaborate, or just
             want to say hi — my inbox is always open.
           </p>
@@ -157,21 +159,21 @@ export default function Contact() {
                 label: "Email",
                 value: "umairamjadkhan@gmail.com",
                 href: "mailto:umairamjadkhan@gmail.com",
-                color: "#00F2FE",
+                color: "#0284C7",
               },
               {
                 icon: MapPin,
                 label: "Location",
                 value: "Pakistan 🇵🇰 — Available Remotely",
                 href: null,
-                color: "#8B5CF6",
+                color: "#7C3AED",
               },
               {
                 icon: MessageSquare,
                 label: "Response Time",
                 value: "Usually within 24 hours",
                 href: null,
-                color: "#6366F1",
+                color: "#4F46E5",
               },
             ].map((info) => {
               const Icon = info.icon;
@@ -188,21 +190,21 @@ export default function Contact() {
                     <Icon size={20} color={info.color} />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "#6B7280" }}>
+                    <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "#64748B" }}>
                       {info.label}
                     </p>
                     {info.href ? (
                       <a
                         href={info.href}
                         className="text-sm font-medium transition-colors"
-                        style={{ color: "#E5E7EB" }}
+                        style={{ color: "#0F172A" }}
                         onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = info.color)}
-                        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#E5E7EB")}
+                        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#0F172A")}
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-sm font-medium" style={{ color: "#E5E7EB" }}>
+                      <p className="text-sm font-medium" style={{ color: "#0F172A" }}>
                         {info.value}
                       </p>
                     )}
@@ -212,8 +214,8 @@ export default function Contact() {
             })}
 
             {/* Social Links */}
-            <div className="glass-card p-6" style={{ border: "1px solid rgba(255,255,255,0.06)" }}>
-              <p className="text-sm font-semibold mb-4" style={{ color: "#9CA3AF" }}>
+            <div className="glass-card p-6" style={{ border: "1px solid #E2E8F0" }}>
+              <p className="text-sm font-semibold mb-4" style={{ color: "#475569" }}>
                 Connect With Me
               </p>
               <div className="flex flex-wrap gap-3">
@@ -233,7 +235,7 @@ export default function Contact() {
                         color: s.color,
                       }}
                       onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.boxShadow = `0 0 16px ${s.color}30`;
+                        (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 12px ${s.color}25`;
                         (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
                       }}
                       onMouseLeave={(e) => {
@@ -260,7 +262,7 @@ export default function Contact() {
           >
             <div
               className="glass-card p-8 relative overflow-hidden"
-              style={{ border: "1px solid rgba(99,102,241,0.2)" }}
+              style={{ border: "1px solid rgba(79,70,229,0.2)" }}
             >
               {/* Top gradient accent */}
               <div className="absolute top-0 left-0 right-0 h-px gradient-border" />
@@ -271,14 +273,14 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center gap-4"
                 >
-                  <CheckCircle2 size={56} color="#00F2FE" />
+                  <CheckCircle2 size={56} color="#0284C7" />
                   <h3
                     className="text-2xl font-bold"
-                    style={{ color: "#F9FAFB", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+                    style={{ color: "#0F172A", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
                   >
                     Message Sent!
                   </h3>
-                  <p style={{ color: "#9CA3AF" }}>
+                  <p style={{ color: "#475569" }}>
                     Thanks for reaching out. I&apos;ll get back to you within 24 hours.
                   </p>
                 </motion.div>
@@ -295,9 +297,9 @@ export default function Contact() {
                       <label
                         htmlFor="contact-name"
                         className="block text-sm font-medium mb-2"
-                        style={{ color: "#D1D5DB" }}
+                        style={{ color: "#334155" }}
                       >
-                        Full Name <span style={{ color: "#6366F1" }}>*</span>
+                        Full Name <span style={{ color: "#4F46E5" }}>*</span>
                       </label>
                       <input
                         id="contact-name"
@@ -307,7 +309,7 @@ export default function Contact() {
                         {...register("name", { required: "Name is required" })}
                       />
                       {errors.name && (
-                        <p className="text-xs mt-1.5" style={{ color: "#F87171" }}>
+                        <p className="text-xs mt-1.5 text-rose-600 font-medium">
                           {errors.name.message}
                         </p>
                       )}
@@ -318,9 +320,9 @@ export default function Contact() {
                       <label
                         htmlFor="contact-email"
                         className="block text-sm font-medium mb-2"
-                        style={{ color: "#D1D5DB" }}
+                        style={{ color: "#334155" }}
                       >
-                        Email Address <span style={{ color: "#6366F1" }}>*</span>
+                        Email Address <span style={{ color: "#4F46E5" }}>*</span>
                       </label>
                       <input
                         id="contact-email"
@@ -336,7 +338,7 @@ export default function Contact() {
                         })}
                       />
                       {errors.email && (
-                        <p className="text-xs mt-1.5" style={{ color: "#F87171" }}>
+                        <p className="text-xs mt-1.5 text-rose-600 font-medium">
                           {errors.email.message}
                         </p>
                       )}
@@ -348,9 +350,9 @@ export default function Contact() {
                     <label
                       htmlFor="contact-subject"
                       className="block text-sm font-medium mb-2"
-                      style={{ color: "#D1D5DB" }}
+                      style={{ color: "#334155" }}
                     >
-                      Subject <span style={{ color: "#6366F1" }}>*</span>
+                      Subject <span style={{ color: "#4F46E5" }}>*</span>
                     </label>
                     <input
                       id="contact-subject"
@@ -360,7 +362,7 @@ export default function Contact() {
                       {...register("subject", { required: "Subject is required" })}
                     />
                     {errors.subject && (
-                      <p className="text-xs mt-1.5" style={{ color: "#F87171" }}>
+                      <p className="text-xs mt-1.5 text-rose-600 font-medium">
                         {errors.subject.message}
                       </p>
                     )}
@@ -371,9 +373,9 @@ export default function Contact() {
                     <label
                       htmlFor="contact-message"
                       className="block text-sm font-medium mb-2"
-                      style={{ color: "#D1D5DB" }}
+                      style={{ color: "#334155" }}
                     >
-                      Message <span style={{ color: "#6366F1" }}>*</span>
+                      Message <span style={{ color: "#4F46E5" }}>*</span>
                     </label>
                     <textarea
                       id="contact-message"
@@ -386,7 +388,7 @@ export default function Contact() {
                       })}
                     />
                     {errors.message && (
-                      <p className="text-xs mt-1.5" style={{ color: "#F87171" }}>
+                      <p className="text-xs mt-1.5 text-rose-600 font-medium">
                         {errors.message.message}
                       </p>
                     )}

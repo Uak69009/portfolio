@@ -13,40 +13,40 @@ export default function Hero() {
     <section
       id="hero"
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #0B0F19 0%, #111827 100%)" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* ── 3D Neural Canvas Background ── */}
       <NeuralCanvas />
 
       {/* ── Ambient Orbs ── */}
       <div
-        className="orb w-[600px] h-[600px] top-[-200px] left-[-200px] opacity-20"
-        style={{ background: "radial-gradient(circle, #6366F1 0%, transparent 70%)" }}
+        className="orb w-[600px] h-[600px] top-[-200px] left-[-200px] opacity-15"
+        style={{ background: "radial-gradient(circle, #4F46E5 0%, transparent 70%)" }}
       />
       <div
         className="orb w-[500px] h-[500px] bottom-[-150px] right-[-150px] opacity-15"
-        style={{ background: "radial-gradient(circle, #00F2FE 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #0284C7 0%, transparent 70%)" }}
       />
       <div
         className="orb w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10"
-        style={{ background: "radial-gradient(circle, #8B5CF6 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)" }}
       />
 
       {/* ── Vignette overlay ── */}
       <div
-        className="absolute inset-0 z-[1]"
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(11,15,25,0.85) 100%)",
+            "radial-gradient(ellipse at center, transparent 50%, rgba(255,255,255,0.85) 100%)",
         }}
       />
 
       {/* ── Grid Pattern ── */}
       <div
-        className="absolute inset-0 z-[1] opacity-[0.025]"
+        className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(#6366F1 1px, transparent 1px), linear-gradient(90deg, #6366F1 1px, transparent 1px)",
+            "linear-gradient(#4F46E5 1px, transparent 1px), linear-gradient(90deg, #4F46E5 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -65,14 +65,14 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-medium"
               style={{
-                background: "rgba(99,102,241,0.12)",
-                border: "1px solid rgba(99,102,241,0.3)",
-                color: "#C4B5FD",
+                background: "rgba(79,70,229,0.08)",
+                border: "1px solid rgba(79,70,229,0.2)",
+                color: "#4338CA",
               }}
             >
               <span
                 className="w-2 h-2 rounded-full"
-                style={{ background: "#00F2FE", boxShadow: "0 0 8px #00F2FE" }}
+                style={{ background: "#0284C7", boxShadow: "0 0 8px #0284C7" }}
               />
               Available for Opportunities
             </motion.div>
@@ -85,7 +85,7 @@ export default function Hero() {
               className="text-5xl lg:text-7xl font-bold mb-4 leading-[1.1] tracking-tight"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
             >
-              <span className="text-white">Umair</span>
+              <span className="text-slate-900">Umair</span>
               <br />
               <span className="gradient-text">Amjad Khan</span>
             </motion.h1>
@@ -96,10 +96,10 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
               className="text-xl lg:text-2xl font-semibold mb-4 flex flex-wrap items-center gap-2"
-              style={{ color: "#A5B4FC" }}
+              style={{ color: "#334155" }}
             >
-              <span>Founder &amp; CEO @ <span className="text-white">icode Studios</span></span>
-              <span className="hidden sm:inline text-gray-500">•</span>
+              <span>Founder &amp; CEO @ <span className="text-indigo-600 font-bold">icode Studios</span></span>
+              <span className="hidden sm:inline text-slate-400">•</span>
               <span className="gradient-text-cyan-indigo">AI &amp; ML Engineer</span>
             </motion.p>
 
@@ -109,7 +109,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.45 }}
               className="text-base lg:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
-              style={{ color: "#9CA3AF" }}
+              style={{ color: "#475569" }}
             >
               Spearheading{" "}
               <span className="gradient-text-cyan-indigo font-semibold">
@@ -150,7 +150,7 @@ export default function Hero() {
                 id="btn-contact"
                 href="#contact"
                 className="btn-outline"
-                style={{ borderColor: "rgba(0,242,254,0.4)", color: "#67E8F9" }}
+                style={{ borderColor: "rgba(2,132,199,0.4)", color: "#0284C7" }}
               >
                 <Mail size={18} />
                 Contact Me
@@ -176,7 +176,7 @@ export default function Hero() {
                   >
                     {stat.value}
                   </div>
-                  <div className="text-xs mt-1" style={{ color: "#6B7280" }}>
+                  <div className="text-xs mt-1" style={{ color: "#64748B" }}>
                     {stat.label}
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function Hero() {
 
           {/* Right: Avatar — Rounded Rectangle Portrait */}
           <motion.div
-            initial={{ opacity: 0, x: 60, opacity: 0 }}
+            initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, type: "spring", stiffness: 70 }}
             className="flex-shrink-0 float-anim"
@@ -197,10 +197,10 @@ export default function Hero() {
               <div
                 className="relative p-[3px] rounded-3xl"
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE, #6366F1, #8B5CF6, #00F2FE)",
+                  background: "linear-gradient(135deg, #0284C7, #4F46E5, #7C3AED, #0284C7)",
                   backgroundSize: "300% 300%",
                   animation: "borderRotate 4s ease infinite",
-                  boxShadow: "0 0 50px rgba(99,102,241,0.3), 0 0 100px rgba(0,242,254,0.1)",
+                  boxShadow: "0 20px 50px -10px rgba(79,70,229,0.3), 0 10px 30px -5px rgba(2,132,199,0.2)",
                 }}
               >
                 {/* Inner frame */}
@@ -209,7 +209,7 @@ export default function Hero() {
                   style={{
                     width: "260px",
                     height: "340px",
-                    background: "#0B0F19",
+                    background: "#FFFFFF",
                   }}
                 >
                   <Image

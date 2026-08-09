@@ -5,12 +5,14 @@ import { motion, useInView } from "framer-motion";
 import { Award, ShieldCheck, Cpu } from "lucide-react";
 import { SiAnthropic, SiCoursera } from "react-icons/si";
 
-const fadeUp = {
+import { Variants } from "framer-motion";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 35 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.08, ease: "easeOut" },
+    transition: { duration: 0.6, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -166,12 +168,12 @@ export default function Certifications() {
     <section
       id="certifications"
       className="section-base"
-      style={{ background: "linear-gradient(180deg, #0B0F19 0%, #111827 50%, #0B0F19 100%)" }}
+      style={{ background: "#F8FAFC" }}
     >
       {/* Ambient Orb */}
       <div
-        className="orb w-[500px] h-[500px] right-[-150px] top-1/3 opacity-10"
-        style={{ background: "radial-gradient(circle, #8B5CF6, transparent 70%)" }}
+        className="orb w-[500px] h-[500px] right-[-150px] top-1/3 opacity-15"
+        style={{ background: "radial-gradient(circle, #7C3AED, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -186,20 +188,20 @@ export default function Certifications() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#8B5CF6",
-              background: "rgba(139,92,246,0.1)",
-              border: "1px solid rgba(139,92,246,0.2)",
+              color: "#7C3AED",
+              background: "rgba(124,58,237,0.08)",
+              border: "1px solid rgba(124,58,237,0.2)",
             }}
           >
             Verified Credentials
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
           >
             Certifications &amp; <span className="gradient-text">Specializations</span>
           </h2>
-          <p className="max-w-xl mx-auto text-base" style={{ color: "#9CA3AF" }}>
+          <p className="max-w-xl mx-auto text-base" style={{ color: "#475569" }}>
             Continuous learning credentials from leading AI organizations including Anthropic,
             IBM, DeepLearning.AI, and Vanderbilt University.
           </p>
@@ -237,7 +239,7 @@ export default function Certifications() {
                     {getBrandIcon(cert.brandIcon)}
                   </div>
                   <span
-                    className="text-xs font-medium px-2.5 py-1 rounded-full"
+                    className="text-xs font-medium px-2.5 py-1 rounded-full font-semibold"
                     style={{
                       color: cert.color,
                       background: cert.badgeBg,
@@ -251,7 +253,7 @@ export default function Certifications() {
                 <h3
                   className="font-bold text-base mb-1.5 leading-snug"
                   style={{
-                    color: "#F9FAFB",
+                    color: "#0F172A",
                     fontFamily: "var(--font-space-grotesk, sans-serif)",
                   }}
                 >
@@ -268,12 +270,12 @@ export default function Certifications() {
                   <div
                     className="flex items-center gap-1.5 text-[11px] mb-4 font-mono px-2.5 py-1 rounded-md"
                     style={{
-                      background: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(255,255,255,0.06)",
-                      color: "#9CA3AF",
+                      background: "rgba(248,250,252,0.9)",
+                      border: "1px solid #E2E8F0",
+                      color: "#64748B",
                     }}
                   >
-                    <ShieldCheck size={13} className="text-emerald-400 flex-shrink-0" />
+                    <ShieldCheck size={13} className="text-emerald-600 flex-shrink-0" />
                     <span className="truncate">ID: {cert.credentialId}</span>
                   </div>
                 )}
@@ -286,9 +288,9 @@ export default function Certifications() {
                         key={skill}
                         className="text-[11px] font-medium px-2 py-0.5 rounded-md"
                         style={{
-                          background: "rgba(255,255,255,0.05)",
-                          color: "#D1D5DB",
-                          border: "1px solid rgba(255,255,255,0.08)",
+                          background: "rgba(79,70,229,0.06)",
+                          color: "#334155",
+                          border: "1px solid rgba(79,70,229,0.15)",
                         }}
                       >
                         {skill}

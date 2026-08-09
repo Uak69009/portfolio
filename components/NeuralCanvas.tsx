@@ -64,10 +64,10 @@ export default function NeuralCanvas() {
     pointGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
     const pointMat = new THREE.PointsMaterial({
-      color: 0x6366f1,
-      size: 0.18,
+      color: 0x4F46E5,
+      size: 0.24,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.9,
       sizeAttenuation: true,
     });
     const points = new THREE.Points(pointGeo, pointMat);
@@ -95,9 +95,9 @@ export default function NeuralCanvas() {
     scene.add(lineMat);
 
     // ── Helpers ───────────────────────────────────────────────
-    const cyanColor = new THREE.Color(0x00f2fe);
-    const indigoColor = new THREE.Color(0x6366f1);
-    const violetColor = new THREE.Color(0x8b5cf6);
+    const cyanColor = new THREE.Color(0x0284C7);
+    const indigoColor = new THREE.Color(0x4F46E5);
+    const violetColor = new THREE.Color(0x7C3AED);
 
     function lerpColor(a: THREE.Color, b: THREE.Color, t: number) {
       return new THREE.Color().lerpColors(a, b, t);

@@ -5,12 +5,14 @@ import { motion, useInView } from "framer-motion";
 import { ExternalLink, Bot, Shield, Network } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 
-const fadeUp = {
+import { Variants } from "framer-motion";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.15, ease: "easeOut" },
+    transition: { duration: 0.7, delay: i * 0.15, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -94,12 +96,12 @@ export default function Projects() {
     <section
       id="projects"
       className="section-base"
-      style={{ background: "#0B0F19" }}
+      style={{ background: "#F8FAFC" }}
     >
       {/* Orbs */}
       <div
-        className="orb w-[600px] h-[600px] right-[-200px] top-1/2 -translate-y-1/2 opacity-10"
-        style={{ background: "radial-gradient(circle, #6366F1, transparent 70%)" }}
+        className="orb w-[600px] h-[600px] right-[-200px] top-1/2 -translate-y-1/2 opacity-15"
+        style={{ background: "radial-gradient(circle, #4F46E5, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -115,21 +117,21 @@ export default function Projects() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#8B5CF6",
-              background: "rgba(139,92,246,0.1)",
-              border: "1px solid rgba(139,92,246,0.2)",
+              color: "#7C3AED",
+              background: "rgba(124,58,237,0.08)",
+              border: "1px solid rgba(124,58,237,0.2)",
             }}
           >
             Featured Work
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
           >
             Production{" "}
             <span className="gradient-text">AI Projects</span>
           </h2>
-          <p className="max-w-xl mx-auto text-base" style={{ color: "#9CA3AF" }}>
+          <p className="max-w-xl mx-auto text-base" style={{ color: "#475569" }}>
             Real-world intelligent systems built from research to deployment —
             spanning computer vision, generative AI, and autonomous agents.
           </p>
@@ -149,7 +151,7 @@ export default function Projects() {
                 className="glass-card p-8 group relative overflow-hidden transition-all duration-400"
                 style={{ border: `1px solid ${project.borderColor}` }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 0 60px ${project.glowColor}, 0 0 1px ${project.iconColor}20`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 40px -10px ${project.glowColor}, 0 4px 16px -2px ${project.iconColor}20`;
                   (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
                   (e.currentTarget as HTMLElement).style.borderColor = project.borderColor.replace("0.25", "0.5");
                 }}
@@ -195,7 +197,7 @@ export default function Projects() {
                       className="text-2xl font-bold mb-1"
                       style={{
                         fontFamily: "var(--font-space-grotesk, sans-serif)",
-                        color: "#F9FAFB",
+                        color: "#0F172A",
                       }}
                     >
                       {project.title}
@@ -205,7 +207,7 @@ export default function Projects() {
                     </p>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed mb-6" style={{ color: "#9CA3AF" }}>
+                    <p className="text-sm leading-relaxed mb-6" style={{ color: "#475569" }}>
                       {project.description}
                     </p>
 
@@ -228,14 +230,14 @@ export default function Projects() {
                     {/* Key Highlights */}
                     <div
                       className="rounded-xl p-5"
-                      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+                      style={{ background: "rgba(248,250,252,0.9)", border: "1px solid #E2E8F0" }}
                     >
-                      <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#6B7280" }}>
+                      <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#64748B" }}>
                         Key Features
                       </p>
                       <ul className="flex flex-col gap-2.5">
                         {project.highlights.map((h) => (
-                          <li key={h} className="flex items-start gap-2.5 text-sm" style={{ color: "#D1D5DB" }}>
+                          <li key={h} className="flex items-start gap-2.5 text-sm" style={{ color: "#334155" }}>
                             <span
                               className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
                               style={{ background: project.iconColor, boxShadow: `0 0 6px ${project.iconColor}` }}
@@ -255,16 +257,16 @@ export default function Projects() {
                           rel="noopener noreferrer"
                           className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
                           style={{
-                            background: `linear-gradient(135deg, ${project.iconColor}22, ${project.iconColor}11)`,
+                            background: `linear-gradient(135deg, ${project.iconColor}18, ${project.iconColor}0A)`,
                             border: `1px solid ${project.iconColor}35`,
                             color: project.iconColor,
                           }}
                           onMouseEnter={(e) => {
                             (e.currentTarget as HTMLElement).style.background = `${project.iconColor}22`;
-                            (e.currentTarget as HTMLElement).style.boxShadow = `0 0 16px ${project.iconColor}30`;
+                            (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 12px ${project.iconColor}25`;
                           }}
                           onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLElement).style.background = `linear-gradient(135deg, ${project.iconColor}22, ${project.iconColor}11)`;
+                            (e.currentTarget as HTMLElement).style.background = `linear-gradient(135deg, ${project.iconColor}18, ${project.iconColor}0A)`;
                             (e.currentTarget as HTMLElement).style.boxShadow = "none";
                           }}
                         >
@@ -278,17 +280,17 @@ export default function Projects() {
                         rel="noopener noreferrer"
                         className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
-                          background: "rgba(255,255,255,0.04)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                          color: "#9CA3AF",
+                          background: "#FFFFFF",
+                          border: "1px solid #CBD5E1",
+                          color: "#475569",
                         }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
-                          (e.currentTarget as HTMLElement).style.color = "#F9FAFB";
+                          (e.currentTarget as HTMLElement).style.borderColor = "#4F46E5";
+                          (e.currentTarget as HTMLElement).style.color = "#4F46E5";
                         }}
                         onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                          (e.currentTarget as HTMLElement).style.color = "#9CA3AF";
+                          (e.currentTarget as HTMLElement).style.borderColor = "#CBD5E1";
+                          (e.currentTarget as HTMLElement).style.color = "#475569";
                         }}
                       >
                       <SiGithub size={15} />

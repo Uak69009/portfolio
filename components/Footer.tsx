@@ -31,14 +31,14 @@ export default function Footer() {
     <footer
       className="relative overflow-hidden"
       style={{
-        background: "#070B14",
-        borderTop: "1px solid rgba(255,255,255,0.05)",
+        background: "#F8FAFC",
+        borderTop: "1px solid #E2E8F0",
       }}
     >
       {/* Ambient glow */}
       <div
-        className="orb w-[400px] h-[200px] left-1/2 -translate-x-1/2 -top-10 opacity-10"
-        style={{ background: "radial-gradient(ellipse, #6366F1, transparent 70%)" }}
+        className="orb w-[400px] h-[200px] left-1/2 -translate-x-1/2 -top-10 opacity-15"
+        style={{ background: "radial-gradient(ellipse, #4F46E5, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -52,18 +52,18 @@ export default function Footer() {
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm"
                 style={{
-                  background: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+                  background: "linear-gradient(135deg, #4F46E5, #7C3AED)",
                   color: "#fff",
                   fontFamily: "var(--font-space-grotesk, sans-serif)",
                 }}
               >
                 UAK
               </div>
-              <span className="font-semibold" style={{ color: "#F9FAFB" }}>
+              <span className="font-semibold" style={{ color: "#0F172A" }}>
                 Umair Amjad Khan
               </span>
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#64748B" }}>
               AI &amp; Machine Learning Engineer specializing in LLM pipelines, RAG
               architectures, and production-grade intelligent systems.
             </p>
@@ -71,7 +71,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="md:text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#64748B" }}>
               Navigation
             </p>
             <ul className="flex flex-col gap-2.5">
@@ -80,9 +80,9 @@ export default function Footer() {
                   <button
                     onClick={() => scrollTo(link.href)}
                     className="text-sm transition-colors"
-                    style={{ color: "#9CA3AF" }}
-                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#A5B4FC")}
-                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#9CA3AF")}
+                    style={{ color: "#475569" }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#4F46E5")}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#475569")}
                   >
                     {link.label}
                   </button>
@@ -93,7 +93,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#64748B" }}>
               Connect
             </p>
             <div className="flex flex-wrap gap-3">
@@ -108,21 +108,21 @@ export default function Footer() {
                     title={s.label}
                     className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
                     style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.07)",
-                      color: "#9CA3AF",
+                      background: "#FFFFFF",
+                      border: "1px solid #CBD5E1",
+                      color: "#475569",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(99,102,241,0.12)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.3)";
-                      (e.currentTarget as HTMLElement).style.color = "#A5B4FC";
+                      (e.currentTarget as HTMLElement).style.background = "rgba(79,70,229,0.08)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(79,70,229,0.3)";
+                      (e.currentTarget as HTMLElement).style.color = "#4F46E5";
                       (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-                      (e.currentTarget as HTMLElement).style.boxShadow = "0 0 14px rgba(99,102,241,0.25)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(79,70,229,0.15)";
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
-                      (e.currentTarget as HTMLElement).style.color = "#9CA3AF";
+                      (e.currentTarget as HTMLElement).style.background = "#FFFFFF";
+                      (e.currentTarget as HTMLElement).style.borderColor = "#CBD5E1";
+                      (e.currentTarget as HTMLElement).style.color = "#475569";
                       (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
                       (e.currentTarget as HTMLElement).style.boxShadow = "none";
                     }}
@@ -133,17 +133,17 @@ export default function Footer() {
               })}
             </div>
 
-            <p className="text-sm mt-4" style={{ color: "#6B7280" }}>
+            <p className="text-sm mt-4" style={{ color: "#64748B" }}>
               📍 Pakistan &nbsp;|&nbsp; Open to Remote Work Worldwide
             </p>
           </div>
         </div>
 
         {/* Divider */}
-        <div style={{ height: "1px", background: "rgba(255,255,255,0.05)" }} />
+        <div style={{ height: "1px", background: "#E2E8F0" }} />
 
         {/* Bottom row */}
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: "#4B5563" }}>
+        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: "#64748B" }}>
           <p>
             © {new Date().getFullYear()} Umair Amjad Khan. All rights reserved.
           </p>

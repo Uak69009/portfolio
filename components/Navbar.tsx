@@ -60,11 +60,11 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           background: scrolled
-            ? "rgba(11, 15, 25, 0.85)"
+            ? "rgba(255, 255, 255, 0.9)"
             : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
-          boxShadow: scrolled ? "0 4px 40px rgba(0,0,0,0.4)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(226, 232, 240, 0.9)" : "none",
+          boxShadow: scrolled ? "0 4px 20px -2px rgba(0,0,0,0.05)" : "none",
         }}
       >
         <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between h-16">
@@ -79,7 +79,7 @@ export default function Navbar() {
             <div
               className="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-sm"
               style={{
-                background: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+                background: "linear-gradient(135deg, #4F46E5, #7C3AED)",
                 color: "#fff",
                 fontFamily: "var(--font-space-grotesk, sans-serif)",
               }}
@@ -88,7 +88,7 @@ export default function Navbar() {
             </div>
             <span
               className="hidden sm:block font-semibold text-sm"
-              style={{ color: "#E5E7EB" }}
+              style={{ color: "#0F172A" }}
             >
               Umair Amjad Khan
             </span>
@@ -104,18 +104,18 @@ export default function Navbar() {
                     onClick={() => handleNavClick(link.href)}
                     className="relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200"
                     style={{
-                      color: isActive ? "#A5B4FC" : "#9CA3AF",
+                      color: isActive ? "#4F46E5" : "#64748B",
                       background: isActive
-                        ? "rgba(99,102,241,0.1)"
+                        ? "rgba(79,70,229,0.08)"
                         : "transparent",
                     }}
                     onMouseEnter={(e) => {
                       if (!isActive)
-                        (e.currentTarget as HTMLElement).style.color = "#E5E7EB";
+                        (e.currentTarget as HTMLElement).style.color = "#0F172A";
                     }}
                     onMouseLeave={(e) => {
                       if (!isActive)
-                        (e.currentTarget as HTMLElement).style.color = "#9CA3AF";
+                        (e.currentTarget as HTMLElement).style.color = "#64748B";
                     }}
                   >
                     {link.label}
@@ -123,7 +123,7 @@ export default function Navbar() {
                       <motion.div
                         layoutId="nav-indicator"
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                        style={{ background: "#6366F1" }}
+                        style={{ background: "#4F46E5" }}
                       />
                     )}
                   </button>
@@ -138,15 +138,16 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
             className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
             style={{
-              background: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+              background: "linear-gradient(135deg, #4F46E5, #7C3AED)",
               color: "#fff",
+              boxShadow: "0 4px 14px rgba(79, 70, 229, 0.25)",
             }}
             onMouseEnter={(e) =>
               ((e.currentTarget as HTMLElement).style.boxShadow =
-                "0 0 20px rgba(99,102,241,0.45)")
+                "0 6px 20px rgba(79,70,229,0.4)")
             }
             onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLElement).style.boxShadow = "none")
+              ((e.currentTarget as HTMLElement).style.boxShadow = "0 4px 14px rgba(79, 70, 229, 0.25)")
             }
           >
             Hire Me
@@ -157,8 +158,8 @@ export default function Navbar() {
             onClick={() => setMobileOpen((v) => !v)}
             className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
             style={{
-              background: "rgba(99,102,241,0.1)",
-              color: "#A5B4FC",
+              background: "rgba(79,70,229,0.08)",
+              color: "#4F46E5",
             }}
             aria-label="Toggle mobile menu"
           >
@@ -177,9 +178,10 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed top-0 right-0 bottom-0 z-40 w-72"
             style={{
-              background: "rgba(11,15,25,0.97)",
+              background: "rgba(255,255,255,0.98)",
               backdropFilter: "blur(24px)",
-              borderLeft: "1px solid rgba(255,255,255,0.07)",
+              borderLeft: "1px solid #E2E8F0",
+              boxShadow: "-10px 0 30px rgba(0,0,0,0.05)",
             }}
           >
             <div className="flex flex-col h-full pt-20 px-8 pb-8">
@@ -193,10 +195,10 @@ export default function Navbar() {
                     onClick={() => handleNavClick(link.href)}
                     className="text-left px-4 py-3 rounded-xl text-base font-medium transition-all"
                     style={{
-                      color: active === link.href.slice(1) ? "#A5B4FC" : "#9CA3AF",
+                      color: active === link.href.slice(1) ? "#4F46E5" : "#64748B",
                       background:
                         active === link.href.slice(1)
-                          ? "rgba(99,102,241,0.12)"
+                          ? "rgba(79,70,229,0.08)"
                           : "transparent",
                     }}
                   >
