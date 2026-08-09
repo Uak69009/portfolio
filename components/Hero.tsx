@@ -19,18 +19,18 @@ export default function Hero() {
   });
 
   // 1. Initial State (scrollYProgress = 0): 100% full screen 3D interactive keyboard animation ONLY
-  // 2. As user scrolls down, canvas fades out completely to 0 opacity so text sits on clean white background
-  const canvasOpacity = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
-  const canvasScale = useTransform(scrollYProgress, [0, 0.28], [1, 0.94]);
+  // 2. As user begins scrolling down, canvas fades out rapidly to 0 opacity
+  const canvasOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
+  const canvasScale = useTransform(scrollYProgress, [0, 0.18], [1, 0.95]);
 
-  // 3. Profile details slide up & fade in smoothly on scroll
-  const contentOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.1, 0.35], [60, 0]);
+  // 3. Profile details reach 100% full opacity quickly with small subtle Y transition (y: 20 -> 0)
+  const contentOpacity = useTransform(scrollYProgress, [0.03, 0.2], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0.03, 0.2], [20, 0]);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[160vh]" id="hero">
+    <div ref={containerRef} className="relative w-full min-h-[140vh]" id="hero">
       {/* Sticky 100vh Viewport Container */}
-      <div className="sticky top-0 left-0 w-full h-screen flex items-center justify-center overflow-hidden bg-white">
+      <div className="sticky top-0 left-0 w-full h-screen flex flex-col justify-center items-center overflow-hidden bg-white">
 
         {/* ── 1. Full First Page 3D Interactive Keyboard & Neural Canvas ── */}
         <motion.div
@@ -69,10 +69,10 @@ export default function Hero() {
           }}
         />
 
-        {/* ── 2. Main Hero Profile Content (Padded at top to clear fixed navbar) ── */}
+        {/* ── 2. Main Hero Profile Content (pt-32 md:pt-40 to clear navbar completely) ── */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 container mx-auto px-6 max-w-6xl h-full flex flex-col justify-center pt-24 lg:pt-28 pb-10"
+          className="relative z-10 container mx-auto px-6 max-w-6xl w-full flex-1 flex flex-col justify-center items-center pt-32 md:pt-40 pb-12 overflow-y-auto"
         >
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 w-full">
 
