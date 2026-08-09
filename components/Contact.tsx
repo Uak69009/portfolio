@@ -94,17 +94,38 @@ export default function Contact() {
     setSending(true);
     setErrorMessage(null);
     try {
-      const res = await fetch("/api/contact", {
+      // Sending directly from the client to avoid server-side blocking
+      const res = await fetch("https://formsubmit.co/ajax/umairamjadkhanamazai@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          _subject: data.subject || `Portfolio Inquiry from ${data.name}`,
+          message: `Sender Name: ${data.name}\nSender Email: ${data.email}\nSubject: ${data.subject || "N/A"}\n\nMessage:\n${data.message}`,
+          _captcha: "false",
+          _template: "table",
+        }),
       });
 
-      const resData = await res.json();
-      if (res.ok && resData.success) {
+      const resText = await res.text();
+      let resData;
+      try {
+        resData = JSON.parse(resText);
+      } catch (e) {
+        throw new Error("Invalid response from server");
+      }
+
+      if (res.ok && (resData.success === "true" || resData.success === true)) {
         setSubmitted(true);
         reset();
         setTimeout(() => setSubmitted(false), 6000);
+      } else if (resData.message && resData.message.toLowerCase().includes("activation")) {
+        // FormSubmit requires activation on first run
+        setErrorMessage("Please check your email (umairamjadkhanamazai@gmail.com) to activate the form, then try again.");
       } else {
         setErrorMessage(resData.error || "Failed to send message. Please try again.");
       }

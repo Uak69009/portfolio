@@ -38,28 +38,23 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full z-0 pointer-events-auto flex flex-col items-center justify-between py-20 pointer-events-none"
         >
           {/* Welcome Note Header (Above Keyboard) */}
-          <div className="relative z-10 text-center flex flex-col items-center max-w-xl px-6 pointer-events-none pt-4">
-            <div
-              className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm"
-              style={{
-                background: "rgba(255, 255, 255, 0.9)",
-                border: "1px solid rgba(79,70,229,0.3)",
-                color: "#4338CA",
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Welcome to Umair&apos;s Portfolio
-            </div>
+          <div className="relative z-10 text-center flex flex-col items-center max-w-2xl px-6 pointer-events-none pt-8">
             <h2
-              className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2"
+              className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
             >
-              Interactive <span className="gradient-text">3D AI Neural Engine</span>
+              Welcome to my <span className="gradient-text">digital workspace.</span>
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md">
-              Hover over keycaps to trigger neural signal activations • Scroll down to reveal profile
+            <p className="text-sm sm:text-base text-slate-700 font-medium max-w-2xl mb-4 leading-relaxed">
+              I’m <span className="font-bold text-indigo-600">Umair Amjad Khan</span>—a Machine Learning Engineer and AI Specialist dedicated to building production-grade AI systems, LLM pipelines, and intelligent software applications. Whether you&apos;re exploring my latest open-source research, reviewing deployment architectures, or looking to collaborate on custom AI solutions, I&apos;m glad you&apos;re here.
             </p>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium max-w-xl">
+              Explore my featured projects below, or feel free to reach out directly to start a conversation.
+            </p>
+            <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm bg-white border border-indigo-200 text-indigo-700">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Scroll down to reveal profile
+            </div>
           </div>
 
           {/* 3D Canvas */}
