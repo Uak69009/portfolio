@@ -35,9 +35,37 @@ export default function Hero() {
         {/* ── 1. Full First Page 3D Interactive Keyboard & Neural Canvas ── */}
         <motion.div
           style={{ opacity: canvasOpacity, scale: canvasScale }}
-          className="absolute inset-0 w-full h-full z-0 pointer-events-auto"
+          className="absolute inset-0 w-full h-full z-0 pointer-events-auto flex flex-col items-center justify-between py-20 pointer-events-none"
         >
-          <NeuralCanvas />
+          {/* Welcome Note Header (Above Keyboard) */}
+          <div className="relative z-10 text-center flex flex-col items-center max-w-xl px-6 pointer-events-none pt-4">
+            <div
+              className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm"
+              style={{
+                background: "rgba(255, 255, 255, 0.9)",
+                border: "1px solid rgba(79,70,229,0.3)",
+                color: "#4338CA",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Welcome to Umair&apos;s Portfolio
+            </div>
+            <h2
+              className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2"
+              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+            >
+              Interactive <span className="gradient-text">3D AI Neural Engine</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md">
+              Hover over keycaps to trigger neural signal activations • Scroll down to reveal profile
+            </p>
+          </div>
+
+          {/* 3D Canvas */}
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto">
+            <NeuralCanvas />
+          </div>
         </motion.div>
 
         {/* ── Ambient Glow Orbs ── */}
