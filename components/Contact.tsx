@@ -74,6 +74,7 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -84,13 +85,28 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     setSending(true);
-    // Simulate async send (replace with your API / EmailJS / Formspree endpoint)
-    await new Promise((r) => setTimeout(r, 1400));
-    console.log("Form data:", data);
-    setSubmitted(true);
-    setSending(false);
-    reset();
-    setTimeout(() => setSubmitted(false), 5000);
+    setErrorMessage(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const resData = await res.json();
+      if (res.ok && resData.success) {
+        setSubmitted(true);
+        reset();
+        setTimeout(() => setSubmitted(false), 6000);
+      } else {
+        setErrorMessage(resData.error || "Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      setErrorMessage("Network error. Please try again or email directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -292,6 +308,11 @@ export default function Contact() {
                   className="flex flex-col gap-5"
                   noValidate
                 >
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm font-medium">
+                      {errorMessage}
+                    </div>
+                  )}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Name */}
                     <div>
