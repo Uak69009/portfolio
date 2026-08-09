@@ -18,24 +18,24 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // 1. Initial State (scrollYProgress = 0 to 0.15): 100% full screen 3D animation ONLY
-  // 2. Canvas contrast fades down softly as user scrolls (0.12 -> 0.55)
-  const canvasOpacity = useTransform(scrollYProgress, [0.12, 0.55], [1, 0.15]);
-  const canvasScale = useTransform(scrollYProgress, [0.12, 0.55], [1, 0.95]);
+  // 1. Initial State (scrollYProgress = 0): 100% full screen 3D interactive keyboard animation ONLY
+  // 2. As user scrolls down, canvas fades out completely to 0 opacity so text sits on clean white background
+  const canvasOpacity = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
+  const canvasScale = useTransform(scrollYProgress, [0, 0.28], [1, 0.94]);
 
-  // 3. Profile details start 120px lower, sliding up & fading in smoothly between 0.18 and 0.55
-  const contentOpacity = useTransform(scrollYProgress, [0.18, 0.55], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.18, 0.55], [120, 0]);
+  // 3. Profile details slide up & fade in smoothly on scroll
+  const contentOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0.1, 0.35], [60, 0]);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[220vh]" id="hero">
+    <div ref={containerRef} className="relative w-full min-h-[160vh]" id="hero">
       {/* Sticky 100vh Viewport Container */}
       <div className="sticky top-0 left-0 w-full h-screen flex items-center justify-center overflow-hidden bg-white">
 
         {/* ── 1. Full First Page 3D Interactive Keyboard & Neural Canvas ── */}
         <motion.div
           style={{ opacity: canvasOpacity, scale: canvasScale }}
-          className="absolute inset-0 w-full h-full z-0 transition-opacity duration-200"
+          className="absolute inset-0 w-full h-full z-0 pointer-events-auto"
         >
           <NeuralCanvas />
         </motion.div>
@@ -69,10 +69,10 @@ export default function Hero() {
           }}
         />
 
-        {/* ── 2. Main Hero Profile Content (Slides up & reveals smoothly as user scrolls) ── */}
+        {/* ── 2. Main Hero Profile Content (Padded at top to clear fixed navbar) ── */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 container mx-auto px-6 max-w-6xl h-full flex items-center justify-center py-4"
+          className="relative z-10 container mx-auto px-6 max-w-6xl h-full flex flex-col justify-center pt-24 lg:pt-28 pb-10"
         >
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 w-full">
 
