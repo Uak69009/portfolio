@@ -16,8 +16,6 @@ interface NeuralNode {
   targetX: number;
   targetY: number;
   layer: number;
-  label: string;
-  subLabel?: string;
   radius: number;
   pulseOffset: number;
 }
@@ -60,17 +58,15 @@ export default function NeuralCanvas() {
 
     const codeTokens = [
       "import torch",
-      "model = ResNeXt()",
-      "pipeline = RAG()",
-      "LoRA.fit()",
-      "FastAPI.serve()",
-      "W · X + b",
-      "q_k_v_attn",
+      "ResNeXt()",
+      "RAG()",
+      "LoRA",
+      "FastAPI",
+      "W·X+b",
+      "attn",
       "0.998",
-      "yolo.detect()",
-      "loss: 0.0012",
-      "Docker.run()",
-      "agent.act()",
+      "YOLO",
+      "Docker",
     ];
 
     const initNeuralNodes = () => {
@@ -79,26 +75,20 @@ export default function NeuralCanvas() {
       pulses = [];
 
       const layerCount = 4;
-      const layerNames = [
-        ["Input Code", "Audio Stream", "Vision Frames", "Text Prompt"],
-        ["Multi-Head Attn", "ResNeXt Conv Block", "LoRA Adapter", "Dense Synapse"],
-        ["Latent Space", "Transformer Weights", "Tensor Core", "Embeddings"],
-        ["Zari.AI", "Deepfake Shield", "RAG Pipeline", "Agentic Output"],
-      ];
+      const nodesPerLayer = [4, 5, 5, 4];
 
-      const marginX = width * 0.15;
-      const startX = width < 768 ? width * 0.1 : marginX;
-      const availableW = width - startX * 2;
+      // Position nodes towards the right half & ambient background to avoid obscuring left hero text
+      const startX = width < 768 ? width * 0.15 : width * 0.45;
+      const availableW = width - startX - width * 0.08;
       const stepX = availableW / (layerCount - 1);
 
-      layerNames.forEach((layerLabels, lIdx) => {
+      nodesPerLayer.forEach((count, lIdx) => {
         const x = startX + lIdx * stepX;
-        const count = layerLabels.length;
-        const totalH = Math.min(height * 0.55, 360);
-        const startY = height * 0.42 - totalH / 2;
+        const totalH = Math.min(height * 0.5, 340);
+        const startY = height * 0.4 - totalH / 2;
         const stepY = totalH / (count - 1 || 1);
 
-        layerLabels.forEach((label, nIdx) => {
+        for (let nIdx = 0; nIdx < count; nIdx++) {
           const y = startY + nIdx * stepY;
           nodes.push({
             x,
@@ -106,19 +96,17 @@ export default function NeuralCanvas() {
             targetX: x,
             targetY: y,
             layer: lIdx,
-            label,
-            radius: lIdx === 0 || lIdx === 3 ? 12 : 9,
+            radius: lIdx === 0 || lIdx === 3 ? 8 : 6,
             pulseOffset: Math.random() * Math.PI * 2,
           });
-        });
+        }
       });
 
       // Build connections between consecutive layers
       for (let i = 0; i < nodes.length; i++) {
         for (let j = 0; j < nodes.length; j++) {
           if (nodes[j].layer === nodes[i].layer + 1) {
-            // Connect 60% of layer pairs
-            if (Math.random() < 0.65) {
+            if (Math.random() < 0.6) {
               connections.push({
                 from: i,
                 to: j,
@@ -129,13 +117,13 @@ export default function NeuralCanvas() {
         }
       }
 
-      // Initialize floating code particles
-      codeParticles = Array.from({ length: 14 }, () => ({
-        x: Math.random() * width,
-        y: height + Math.random() * 100,
-        speedY: 0.4 + Math.random() * 0.6,
+      // Initialize ambient code particles on the right side
+      codeParticles = Array.from({ length: 10 }, () => ({
+        x: width * 0.4 + Math.random() * (width * 0.55),
+        y: height + Math.random() * 80,
+        speedY: 0.3 + Math.random() * 0.5,
         text: codeTokens[Math.floor(Math.random() * codeTokens.length)],
-        opacity: 0.2 + Math.random() * 0.4,
+        opacity: 0.15 + Math.random() * 0.25,
       }));
     };
 
@@ -164,114 +152,77 @@ export default function NeuralCanvas() {
       time += 0.015;
       pulseTimer++;
 
-      if (pulseTimer % 18 === 0) {
+      if (pulseTimer % 22 === 0) {
         spawnPulse();
       }
 
       ctx.clearRect(0, 0, width, height);
 
-      // ── Draw Laptop & Keyboard Graphic Base ──
-      const laptopW = Math.min(width * 0.48, 420);
+      // ── Draw Laptop & Keyboard Graphic Base (Right Side Ambient Perspective) ──
+      const laptopW = Math.min(width * 0.35, 320);
       const laptopH = laptopW * 0.42;
-      const laptopX = width / 2 - laptopW / 2;
-      const laptopY = height * 0.78;
+      const laptopX = width * 0.65 - laptopW / 2;
+      const laptopY = height * 0.8;
 
-      // Laptop Shadow
+      // Keyboard Base Chassis (Soft Ambient Geometry)
       ctx.save();
       ctx.beginPath();
-      ctx.ellipse(width / 2, laptopY + laptopH * 0.55, laptopW * 0.55, 20, 0, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(79, 70, 229, 0.06)";
-      ctx.fill();
-      ctx.restore();
-
-      // Keyboard Base Chassis (Isometric Polygon)
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(laptopX + 30, laptopY);
-      ctx.lineTo(laptopX + laptopW - 30, laptopY);
-      ctx.lineTo(laptopX + laptopW + 30, laptopY + laptopH);
-      ctx.lineTo(laptopX - 30, laptopY + laptopH);
+      ctx.moveTo(laptopX + 20, laptopY);
+      ctx.lineTo(laptopX + laptopW - 20, laptopY);
+      ctx.lineTo(laptopX + laptopW + 20, laptopY + laptopH);
+      ctx.lineTo(laptopX - 20, laptopY + laptopH);
       ctx.closePath();
-      ctx.fillStyle = "rgba(248, 250, 252, 0.95)";
-      ctx.strokeStyle = "rgba(79, 70, 229, 0.25)";
-      ctx.lineWidth = 2;
+      ctx.fillStyle = "rgba(248, 250, 252, 0.6)";
+      ctx.strokeStyle = "rgba(79, 70, 229, 0.12)";
+      ctx.lineWidth = 1.5;
       ctx.fill();
       ctx.stroke();
 
-      // Keyboard Key Grid Lines
-      ctx.strokeStyle = "rgba(79, 70, 229, 0.12)";
+      // Subtle Key Grid Lines
+      ctx.strokeStyle = "rgba(79, 70, 229, 0.07)";
       ctx.lineWidth = 1;
-      const rows = 4;
-      const cols = 10;
-      for (let r = 1; r < rows; r++) {
-        const ry = laptopY + (laptopH / rows) * r;
-        const rRatio = r / rows;
-        const leftX = laptopX + 30 - 60 * rRatio;
-        const rightX = laptopX + laptopW - 30 + 60 * rRatio;
+      for (let r = 1; r < 4; r++) {
+        const ry = laptopY + (laptopH / 4) * r;
+        const rRatio = r / 4;
         ctx.beginPath();
-        ctx.moveTo(leftX, ry);
-        ctx.lineTo(rightX, ry);
-        ctx.stroke();
-      }
-      for (let c = 1; c < cols; c++) {
-        const ratio = c / cols;
-        const topX = laptopX + 30 + (laptopW - 60) * ratio;
-        const botX = laptopX - 30 + (laptopW + 60) * ratio;
-        ctx.beginPath();
-        ctx.moveTo(topX, laptopY);
-        ctx.lineTo(botX, laptopY + laptopH);
+        ctx.moveTo(laptopX + 20 - 40 * rRatio, ry);
+        ctx.lineTo(laptopX + laptopW - 20 + 40 * rRatio, ry);
         ctx.stroke();
       }
 
       // Illuminated Laptop Screen Frame
       const screenW = laptopW * 0.72;
       const screenH = screenW * 0.48;
-      const screenX = width / 2 - screenW / 2;
+      const screenX = width * 0.65 - screenW / 2;
       const screenY = laptopY - screenH - 4;
 
       ctx.beginPath();
-      ctx.roundRect(screenX, screenY, screenW, screenH, 8);
-      ctx.fillStyle = "rgba(15, 23, 42, 0.94)";
-      ctx.strokeStyle = "rgba(3, 105, 161, 0.4)";
-      ctx.lineWidth = 2;
+      ctx.roundRect(screenX, screenY, screenW, screenH, 6);
+      ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+      ctx.strokeStyle = "rgba(3, 105, 161, 0.25)";
+      ctx.lineWidth = 1.5;
       ctx.fill();
       ctx.stroke();
 
-      // Terminal Header Dots
-      ctx.fillStyle = "#EF4444";
-      ctx.beginPath();
-      ctx.arc(screenX + 14, screenY + 12, 3.5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#F59E0B";
-      ctx.beginPath();
-      ctx.arc(screenX + 24, screenY + 12, 3.5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#10B981";
-      ctx.beginPath();
-      ctx.arc(screenX + 34, screenY + 12, 3.5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Terminal Code Lines
-      ctx.font = "11px var(--font-space-grotesk), monospace";
-      ctx.fillStyle = "#38BDF8";
-      ctx.fillText("> icode-studios --model gpt-4o-pipeline", screenX + 14, screenY + 30);
-      ctx.fillStyle = "#A5B4FC";
-      ctx.fillText("[Layer 1] Input Embeddings -> Connected", screenX + 14, screenY + 45);
-      ctx.fillStyle = "#34D399";
-      ctx.fillText("[Status] Neural Engine Active (Loss: 0.0012)", screenX + 14, screenY + 60);
+      // Screen Terminal Code Lines
+      ctx.font = "10px monospace";
+      ctx.fillStyle = "rgba(56, 189, 248, 0.8)";
+      ctx.fillText("> model.train()", screenX + 12, screenY + 24);
+      ctx.fillStyle = "rgba(165, 180, 252, 0.8)";
+      ctx.fillText("Loss: 0.0012 [OK]", screenX + 12, screenY + 40);
 
       ctx.restore();
 
-      // ── Draw Code Stream Particles Rising From Keyboard ──
+      // ── Draw Ambient Code Streams ──
       ctx.save();
-      ctx.font = "11px monospace";
+      ctx.font = "10px monospace";
       codeParticles.forEach((p) => {
         p.y -= p.speedY;
         if (p.y < height * 0.1) {
           p.y = height * 0.85 + Math.random() * 40;
-          p.x = Math.random() * width;
+          p.x = width * 0.4 + Math.random() * (width * 0.55);
         }
-        ctx.fillStyle = `rgba(3, 105, 161, ${p.opacity * 0.7})`;
+        ctx.fillStyle = `rgba(3, 105, 161, ${p.opacity * 0.5})`;
         ctx.fillText(p.text, p.x, p.y);
       });
       ctx.restore();
@@ -283,26 +234,24 @@ export default function NeuralCanvas() {
         const toNode = nodes[conn.to];
         if (!fromNode || !toNode) return;
 
-        // Hover distance influence
-        const dx = (mouseRef.current.x - (fromNode.x + toNode.x) / 2);
-        const dy = (mouseRef.current.y - (fromNode.y + toNode.y) / 2);
+        const dx = mouseRef.current.x - (fromNode.x + toNode.x) / 2;
+        const dy = mouseRef.current.y - (fromNode.y + toNode.y) / 2;
         const mouseDist = Math.sqrt(dx * dx + dy * dy);
-        const isHovered = mouseDist < 140;
+        const isHovered = mouseDist < 120;
 
         ctx.beginPath();
         ctx.moveTo(fromNode.x, fromNode.y);
 
-        // Curved Bezier Synapse
         const cpX = (fromNode.x + toNode.x) / 2;
-        const cpY = (fromNode.y + toNode.y) / 2 + Math.sin(time + conn.from) * 15;
+        const cpY = (fromNode.y + toNode.y) / 2 + Math.sin(time + conn.from) * 12;
         ctx.quadraticCurveTo(cpX, cpY, toNode.x, toNode.y);
 
         if (isHovered) {
-          ctx.strokeStyle = "rgba(79, 70, 229, 0.45)";
-          ctx.lineWidth = 2.2;
+          ctx.strokeStyle = "rgba(79, 70, 229, 0.35)";
+          ctx.lineWidth = 1.8;
         } else {
-          ctx.strokeStyle = `rgba(79, 70, 229, ${0.12 * conn.weight})`;
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = `rgba(79, 70, 229, ${0.08 * conn.weight})`;
+          ctx.lineWidth = 1;
         }
         ctx.stroke();
       });
@@ -323,67 +272,56 @@ export default function NeuralCanvas() {
         }
 
         const px = fromNode.x + (toNode.x - fromNode.x) * p.progress;
-        const py = fromNode.y + (toNode.y - fromNode.y) * p.progress + Math.sin(p.progress * Math.PI) * 10;
+        const py = fromNode.y + (toNode.y - fromNode.y) * p.progress + Math.sin(p.progress * Math.PI) * 8;
 
         ctx.beginPath();
-        ctx.arc(px, py, 3.5, 0, Math.PI * 2);
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.shadowColor = p.color;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 6;
         ctx.fill();
       }
       ctx.restore();
 
       // ── Draw Neural Nodes ──
       ctx.save();
-      nodes.forEach((n, idx) => {
-        // Float oscillation
-        n.y = n.targetY + Math.sin(time * 2 + n.pulseOffset) * 4;
+      nodes.forEach((n) => {
+        n.y = n.targetY + Math.sin(time * 2 + n.pulseOffset) * 3;
 
-        // Mouse distance
         const dx = mouseRef.current.x - n.x;
         const dy = mouseRef.current.y - n.y;
         const mouseDist = Math.sqrt(dx * dx + dy * dy);
-        const isHovered = mouseDist < 80;
+        const isHovered = mouseDist < 70;
 
-        // Connect node to mouse cursor if hovered
-        if (mouseDist < 120) {
+        if (mouseDist < 100) {
           ctx.beginPath();
           ctx.moveTo(n.x, n.y);
           ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-          ctx.strokeStyle = `rgba(3, 105, 161, ${0.35 * (1 - mouseDist / 120)})`;
-          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = `rgba(3, 105, 161, ${0.25 * (1 - mouseDist / 100)})`;
+          ctx.lineWidth = 1;
           ctx.stroke();
         }
 
-        // Outer Glow Ring
+        // Outer Ring
         ctx.beginPath();
-        ctx.arc(n.x, n.y, isHovered ? n.radius + 6 : n.radius + 3, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, isHovered ? n.radius + 4 : n.radius + 2, 0, Math.PI * 2);
         ctx.fillStyle = isHovered
-          ? "rgba(3, 105, 161, 0.25)"
+          ? "rgba(3, 105, 161, 0.2)"
           : n.layer === 0
-          ? "rgba(3, 105, 161, 0.12)"
+          ? "rgba(3, 105, 161, 0.08)"
           : n.layer === 3
-          ? "rgba(124, 58, 237, 0.15)"
-          : "rgba(79, 70, 229, 0.12)";
+          ? "rgba(124, 58, 237, 0.1)"
+          : "rgba(79, 70, 229, 0.08)";
         ctx.fill();
 
         // Node Circle Core
         ctx.beginPath();
-        ctx.arc(n.x, n.y, isHovered ? n.radius + 2 : n.radius, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, isHovered ? n.radius + 1 : n.radius, 0, Math.PI * 2);
         ctx.fillStyle = n.layer === 0 ? "#0369A1" : n.layer === 3 ? "#7C3AED" : "#4F46E5";
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
-
-        // Node Label
-        ctx.font = "600 12px var(--font-sans), sans-serif";
-        ctx.fillStyle = isHovered ? "#0F172A" : "#334155";
-        ctx.textAlign = n.layer === 0 ? "right" : n.layer === 3 ? "left" : "center";
-        const labelX = n.layer === 0 ? n.x - 18 : n.layer === 3 ? n.x + 18 : n.x;
-        const labelY = n.layer === 1 || n.layer === 2 ? n.y - 16 : n.y + 4;
-        ctx.fillText(n.label, labelX, labelY);
       });
       ctx.restore();
     };
@@ -417,7 +355,7 @@ export default function NeuralCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-auto"
+      className="absolute inset-0 w-full h-full pointer-events-auto z-0"
       aria-hidden="true"
     />
   );

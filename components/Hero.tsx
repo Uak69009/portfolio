@@ -82,12 +82,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-5xl lg:text-7xl font-bold mb-4 leading-[1.1] tracking-tight"
+              className="text-5xl lg:text-7xl font-extrabold mb-4 leading-[1.1] tracking-tight text-slate-950"
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
             >
-              <span className="text-slate-900">Umair</span>
+              <span>Umair</span>
               <br />
-              <span className="gradient-text">Amjad Khan</span>
+              <span className="text-indigo-600">Amjad Khan</span>
             </motion.h1>
 
             {/* Title */}
@@ -95,12 +95,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className="text-xl lg:text-2xl font-semibold mb-4 flex flex-wrap items-center gap-2"
-              style={{ color: "#334155" }}
+              className="text-xl lg:text-2xl font-bold mb-4 flex flex-wrap items-center gap-2 text-slate-800"
             >
-              <span>Founder &amp; CEO @ <span className="text-indigo-600 font-bold">icode Studios</span></span>
+              <span>Founder &amp; CEO @ <span className="text-indigo-600 font-extrabold">icode Studios</span></span>
               <span className="hidden sm:inline text-slate-400">•</span>
-              <span className="gradient-text-cyan-indigo font-bold">AI &amp; ML Engineer</span>
+              <span className="text-sky-700 font-extrabold">AI &amp; ML Engineer</span>
             </motion.p>
 
             {/* Tagline */}
@@ -108,11 +107,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.45 }}
-              className="text-base lg:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
-              style={{ color: "#475569" }}
+              className="text-base lg:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium"
             >
               Spearheading{" "}
-              <span className="gradient-text-cyan-indigo font-bold">
+              <span className="text-indigo-600 font-bold">
                 icode Studios
               </span>{" "}
               — Building Production AI Systems, LLM Pipelines, and Intelligent Applications that solve real-world problems.
@@ -150,7 +148,7 @@ export default function Hero() {
                 id="btn-contact"
                 href="#contact"
                 className="btn-outline"
-                style={{ borderColor: "rgba(3,105,161,0.4)", color: "#0369A1" }}
+                style={{ borderColor: "rgba(3,105,161,0.5)", color: "#0369A1" }}
               >
                 <Mail size={18} />
                 Contact Me
@@ -165,18 +163,18 @@ export default function Hero() {
               className="flex gap-10 mt-12 justify-center lg:justify-start"
             >
               {[
-                { label: "Projects Built", value: "10+" },
-                { label: "AI Models Deployed", value: "5+" },
-                { label: "GitHub Repos", value: "21" },
+                { label: "Projects Built", value: "10+", color: "#4F46E5" },
+                { label: "AI Models Deployed", value: "5+", color: "#0369A1" },
+                { label: "GitHub Repos", value: "21", color: "#7C3AED" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center lg:text-left">
                   <div
-                    className="text-3xl font-bold gradient-text-cyan-indigo"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+                    className="text-3xl font-extrabold"
+                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: stat.color }}
                   >
                     {stat.value}
                   </div>
-                  <div className="text-xs mt-1" style={{ color: "#64748B" }}>
+                  <div className="text-xs mt-1 font-semibold text-slate-600">
                     {stat.label}
                   </div>
                 </div>
@@ -184,50 +182,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Avatar — Rounded Rectangle Portrait + Neural & Code Badges */}
+          {/* Right: Avatar — Clean Rounded Rectangle Portrait (No overlays) */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, type: "spring", stiffness: 70 }}
-            className="flex-shrink-0 float-anim relative"
+            className="flex-shrink-0 float-anim"
           >
             <div className="relative">
-
-              {/* Floating Top-Left Badge: Terminal IDE Input */}
-              <motion.div
-                initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="absolute -top-6 -left-10 z-20 hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-mono font-medium bg-white/95 backdrop-blur-md shadow-lg border border-slate-200 text-slate-800"
-              >
-                <div className="w-6 h-6 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600">
-                  <Terminal size={13} />
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-semibold text-slate-400 block tracking-wider">Keyboard IDE</span>
-                  <span className="text-indigo-600 font-bold">&gt; model.fit(RAG)</span>
-                </div>
-              </motion.div>
-
-              {/* Floating Bottom-Right Badge: Neural Engine */}
-              <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-                className="absolute -bottom-6 -right-8 z-20 hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-sans font-medium bg-white/95 backdrop-blur-md shadow-lg border border-slate-200 text-slate-800"
-              >
-                <div className="w-6 h-6 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600">
-                  <Brain size={14} />
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-semibold text-slate-400 block tracking-wider">Neural Synapses</span>
-                  <span className="text-sky-700 font-bold flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Multi-Head Attn Active
-                  </span>
-                </div>
-              </motion.div>
-
               {/* Animated gradient border wrapper */}
               <div
                 className="relative p-[3px] rounded-3xl"
@@ -235,7 +197,7 @@ export default function Hero() {
                   background: "linear-gradient(135deg, #0284C7, #4F46E5, #7C3AED, #0284C7)",
                   backgroundSize: "300% 300%",
                   animation: "borderRotate 4s ease infinite",
-                  boxShadow: "0 20px 50px -10px rgba(79,70,229,0.3), 0 10px 30px -5px rgba(2,132,199,0.2)",
+                  boxShadow: "0 20px 50px -10px rgba(79,70,229,0.25), 0 10px 30px -5px rgba(2,132,199,0.15)",
                 }}
               >
                 {/* Inner frame */}
