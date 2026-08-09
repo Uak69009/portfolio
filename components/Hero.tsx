@@ -18,16 +18,17 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Canvas contrast fades down softly as user scrolls
-  const canvasOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.18]);
-  const canvasScale = useTransform(scrollYProgress, [0, 0.4], [1, 0.96]);
+  // 1. Initial State (scrollYProgress = 0 to 0.15): 100% full screen 3D animation ONLY
+  // 2. Canvas contrast fades down softly as user scrolls (0.12 -> 0.55)
+  const canvasOpacity = useTransform(scrollYProgress, [0.12, 0.55], [1, 0.15]);
+  const canvasScale = useTransform(scrollYProgress, [0.12, 0.55], [1, 0.95]);
 
-  // Main profile content fades in & slides up smoothly on scroll
-  const contentOpacity = useTransform(scrollYProgress, [0.05, 0.35], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.05, 0.35], [60, 0]);
+  // 3. Profile details start 120px lower, sliding up & fading in smoothly between 0.18 and 0.55
+  const contentOpacity = useTransform(scrollYProgress, [0.18, 0.55], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0.18, 0.55], [120, 0]);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[160vh]" id="hero">
+    <div ref={containerRef} className="relative w-full min-h-[220vh]" id="hero">
       {/* Sticky 100vh Viewport Container */}
       <div className="sticky top-0 left-0 w-full h-screen flex items-center justify-center overflow-hidden bg-white">
 
@@ -68,19 +69,19 @@ export default function Hero() {
           }}
         />
 
-        {/* ── 2. Main Hero Profile Content (Slides up & reveals as user scrolls) ── */}
+        {/* ── 2. Main Hero Profile Content (Slides up & reveals smoothly as user scrolls) ── */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 container mx-auto px-6 max-w-6xl py-8"
+          className="relative z-10 container mx-auto px-6 max-w-6xl h-full flex items-center justify-center py-4"
         >
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 w-full">
 
             {/* Left: Text Content */}
             <div className="flex-1 text-center lg:text-left">
 
               {/* Badge */}
               <div
-                className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-medium"
+                className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full text-xs font-semibold"
                 style={{
                   background: "rgba(79,70,229,0.08)",
                   border: "1px solid rgba(79,70,229,0.2)",
@@ -96,7 +97,7 @@ export default function Hero() {
 
               {/* Name */}
               <h1
-                className="text-5xl lg:text-7xl font-extrabold mb-4 leading-[1.1] tracking-tight text-slate-950"
+                className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-3 leading-[1.08] tracking-tight text-slate-950"
                 style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
               >
                 <span>Umair</span>
@@ -105,14 +106,14 @@ export default function Hero() {
               </h1>
 
               {/* Title */}
-              <p className="text-xl lg:text-2xl font-bold mb-4 flex flex-wrap items-center gap-2 text-slate-800">
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold mb-3 flex flex-wrap items-center gap-2 justify-center lg:justify-start text-slate-800">
                 <span>Founder &amp; CEO @ <span className="text-indigo-600 font-extrabold">icode Studios</span></span>
                 <span className="hidden sm:inline text-slate-400">•</span>
                 <span className="text-sky-700 font-extrabold">AI &amp; ML Engineer</span>
               </p>
 
               {/* Tagline */}
-              <p className="text-base lg:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium">
+              <p className="text-sm sm:text-base lg:text-lg mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium">
                 Spearheading{" "}
                 <span className="text-indigo-600 font-bold">
                   icode Studios
@@ -121,14 +122,14 @@ export default function Hero() {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <div className="flex flex-wrap gap-3.5 justify-center lg:justify-start">
                 <a
                   id="btn-download-cv"
                   href="/cv.pdf"
                   download="Umair_Amjad_Khan_CV.pdf"
                   className="btn-primary"
                 >
-                  <Download size={18} />
+                  <Download size={17} />
                   Download CV
                 </a>
 
@@ -139,7 +140,7 @@ export default function Hero() {
                   rel="noopener noreferrer"
                   className="btn-outline"
                 >
-                  <SiGithub size={18} />
+                  <SiGithub size={17} />
                   View GitHub
                 </a>
 
@@ -149,13 +150,13 @@ export default function Hero() {
                   className="btn-outline"
                   style={{ borderColor: "rgba(3,105,161,0.5)", color: "#0369A1" }}
                 >
-                  <Mail size={18} />
+                  <Mail size={17} />
                   Contact Me
                 </a>
               </div>
 
               {/* Stats row */}
-              <div className="flex gap-10 mt-10 justify-center lg:justify-start">
+              <div className="flex gap-8 sm:gap-10 mt-8 justify-center lg:justify-start">
                 {[
                   { label: "Projects Built", value: "10+", color: "#4F46E5" },
                   { label: "AI Models Deployed", value: "5+", color: "#0369A1" },
@@ -163,7 +164,7 @@ export default function Hero() {
                 ].map((stat) => (
                   <div key={stat.label} className="text-center lg:text-left">
                     <div
-                      className="text-3xl font-extrabold"
+                      className="text-2xl sm:text-3xl font-extrabold"
                       style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: stat.color }}
                     >
                       {stat.value}
@@ -193,8 +194,8 @@ export default function Hero() {
                   <div
                     className="relative overflow-hidden rounded-[22px]"
                     style={{
-                      width: "250px",
-                      height: "320px",
+                      width: "240px",
+                      height: "300px",
                       background: "#FFFFFF",
                     }}
                   >
@@ -204,7 +205,7 @@ export default function Hero() {
                       fill
                       className="object-cover object-top"
                       priority
-                      sizes="250px"
+                      sizes="240px"
                       onError={(e) => {
                         const target = e.currentTarget as HTMLImageElement;
                         target.style.display = "none";
@@ -220,5 +221,6 @@ export default function Hero() {
     </div>
   );
 }
+
 
 
