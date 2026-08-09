@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Download, Mail, ArrowDown, Sparkles } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 
@@ -12,40 +12,26 @@ const NeuralCanvas = dynamic(() => import("./NeuralCanvas"), { ssr: false });
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll position inside the Hero section
+  // Track scroll position inside Hero
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  // Animation transformations based on scroll:
-  // 1. Initial State (scrollYProgress = 0): Canvas is 100% full opacity, full contrast
-  // 2. As user scrolls down (0 -> 0.4): Canvas fades down to 0.25 ambient background
-  const canvasOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0.2]);
-  const canvasScale = useTransform(scrollYProgress, [0, 0.35], [1.05, 1]);
+  // Canvas contrast fades down softly as user scrolls
+  const canvasOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.18]);
+  const canvasScale = useTransform(scrollYProgress, [0, 0.4], [1, 0.96]);
 
-  // 3. Content (Name & Details): Initially hidden at scroll 0, slides up and fades in as user scrolls
-  const contentOpacity = useTransform(scrollYProgress, [0.08, 0.35], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.08, 0.35], [70, 0]);
-
-  // 4. Initial Scroll Prompt: Visible at scroll 0, fades out when user begins scrolling
-  const promptOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-
-  const handleScrollDown = () => {
-    const nextSection = document.getElementById("about");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: window.innerHeight * 0.7, behavior: "smooth" });
-    }
-  };
+  // Main profile content fades in & slides up smoothly on scroll
+  const contentOpacity = useTransform(scrollYProgress, [0.05, 0.35], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0.05, 0.35], [60, 0]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[180vh]" id="hero">
-      {/* Sticky Hero Viewport Container */}
+    <div ref={containerRef} className="relative w-full min-h-[160vh]" id="hero">
+      {/* Sticky 100vh Viewport Container */}
       <div className="sticky top-0 left-0 w-full h-screen flex items-center justify-center overflow-hidden bg-white">
 
-        {/* ── 1. Neural AI Canvas (Starts at 100% contrast, fades down on scroll) ── */}
+        {/* ── 1. Full First Page 3D Interactive Keyboard & Neural Canvas ── */}
         <motion.div
           style={{ opacity: canvasOpacity, scale: canvasScale }}
           className="absolute inset-0 w-full h-full z-0 transition-opacity duration-200"
@@ -82,38 +68,12 @@ export default function Hero() {
           }}
         />
 
-        {/* ── 2. Initial Full-Screen Animation Overlay Prompt (Visible before scroll) ── */}
-        <motion.div
-          style={{ opacity: promptOpacity }}
-          className="absolute inset-0 z-30 pointer-events-none flex flex-col items-center justify-between py-12 px-6"
-        >
-          <div className="mt-8 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-md border border-indigo-200 shadow-xl flex items-center gap-2.5 text-xs font-semibold text-indigo-700">
-            <Sparkles size={15} className="text-sky-600 animate-spin" />
-            <span>Interactive AI Neural Engine Initialized</span>
-          </div>
-
-          <button
-            onClick={handleScrollDown}
-            className="pointer-events-auto flex flex-col items-center gap-3 px-6 py-3 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl hover:border-indigo-400 hover:shadow-indigo-500/10 transition-all duration-300 group cursor-pointer"
-          >
-            <span className="text-xs font-bold tracking-widest uppercase text-slate-800 group-hover:text-indigo-600 transition-colors">
-              Scroll Down to Reveal Portfolio
-            </span>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <ArrowDown size={18} className="text-indigo-600" />
-            </motion.div>
-          </button>
-        </motion.div>
-
-        {/* ── 3. Main Hero Content (Slides up & fades in as user scrolls) ── */}
+        {/* ── 2. Main Hero Profile Content (Slides up & reveals as user scrolls) ── */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 container mx-auto px-6 max-w-6xl"
+          className="relative z-10 container mx-auto px-6 max-w-6xl py-8"
         >
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
 
             {/* Left: Text Content */}
             <div className="flex-1 text-center lg:text-left">
@@ -152,7 +112,7 @@ export default function Hero() {
               </p>
 
               {/* Tagline */}
-              <p className="text-base lg:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium">
+              <p className="text-base lg:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium">
                 Spearheading{" "}
                 <span className="text-indigo-600 font-bold">
                   icode Studios
@@ -195,7 +155,7 @@ export default function Hero() {
               </div>
 
               {/* Stats row */}
-              <div className="flex gap-10 mt-12 justify-center lg:justify-start">
+              <div className="flex gap-10 mt-10 justify-center lg:justify-start">
                 {[
                   { label: "Projects Built", value: "10+", color: "#4F46E5" },
                   { label: "AI Models Deployed", value: "5+", color: "#0369A1" },
@@ -233,8 +193,8 @@ export default function Hero() {
                   <div
                     className="relative overflow-hidden rounded-[22px]"
                     style={{
-                      width: "260px",
-                      height: "340px",
+                      width: "250px",
+                      height: "320px",
                       background: "#FFFFFF",
                     }}
                   >
@@ -244,7 +204,7 @@ export default function Hero() {
                       fill
                       className="object-cover object-top"
                       priority
-                      sizes="260px"
+                      sizes="250px"
                       onError={(e) => {
                         const target = e.currentTarget as HTMLImageElement;
                         target.style.display = "none";
@@ -260,4 +220,5 @@ export default function Hero() {
     </div>
   );
 }
+
 

@@ -2,6 +2,29 @@
 
 import { useEffect, useRef } from "react";
 
+interface KeyCap {
+  row: number;
+  col: number;
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  elevation: number;
+  targetElevation: number;
+  color: string;
+  isSpecial?: boolean;
+}
+
+interface NeuralNode {
+  x: number;
+  y: number;
+  targetY: number;
+  layer: number;
+  radius: number;
+  pulseOffset: number;
+}
+
 interface Pulse {
   fromNode: number;
   toNode: number;
@@ -10,17 +33,7 @@ interface Pulse {
   color: string;
 }
 
-interface NeuralNode {
-  x: number;
-  y: number;
-  targetX: number;
-  targetY: number;
-  layer: number;
-  radius: number;
-  pulseOffset: number;
-}
-
-interface CodeParticle {
+interface Particle {
   x: number;
   y: number;
   speedY: number;
@@ -30,7 +43,7 @@ interface CodeParticle {
 
 export default function NeuralCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: -1000, y: -1000, isHover: false });
+  const mouseRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,94 +55,128 @@ export default function NeuralCanvas() {
     let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);
     let height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight);
 
+    let keycaps: KeyCap[] = [];
+    let nodes: NeuralNode[] = [];
+    let connections: Array<{ from: number; to: number; weight: number }> = [];
+    let pulses: Pulse[] = [];
+    let particles: Particle[] = [];
+
     const handleResize = () => {
       if (!canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.clientWidth;
       height = canvas.height = canvas.parentElement.clientHeight;
-      initNeuralNodes();
+      initLayout();
     };
     window.addEventListener("resize", handleResize);
 
-    // ── Neural Architecture Layers ──
-    let nodes: NeuralNode[] = [];
-    let connections: Array<{ from: number; to: number; weight: number }> = [];
-    let pulses: Pulse[] = [];
-    let codeParticles: CodeParticle[] = [];
-
-    const codeTokens = [
-      "import torch",
-      "ResNeXt()",
-      "RAG()",
-      "LoRA",
-      "FastAPI",
-      "W·X+b",
-      "attn",
-      "0.998",
-      "YOLO",
-      "Docker",
-    ];
-
-    const initNeuralNodes = () => {
+    const initLayout = () => {
+      keycaps = [];
       nodes = [];
       connections = [];
       pulses = [];
 
-      const layerCount = 4;
-      const nodesPerLayer = [4, 5, 5, 4];
+      // ── 1. Create Centered 3D Mechanical Keyboard Layout ──
+      const rowLayouts = [
+        ["ESC", "AI", "PyTorch", "RAG", "LoRA", "YOLO", "ResNeXt", "MLOps", "LLM", "FASTAPI", "DOCKER", "DEL"],
+        ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "+", "BACK"],
+        ["TAB", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]"],
+        ["CAPS", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "ENTER"],
+        ["SHIFT", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "SHIFT"],
+        ["CTRL", "OPT", "CMD", "_____ SPACEBAR _____", "CMD", "OPT", "CTRL"],
+      ];
 
-      // Position nodes towards the right half & ambient background to avoid obscuring left hero text
-      const startX = width < 768 ? width * 0.15 : width * 0.45;
-      const availableW = width - startX - width * 0.08;
-      const stepX = availableW / (layerCount - 1);
+      const keyW = Math.min(Math.max(width * 0.042, 28), 44);
+      const keyH = keyW * 0.9;
+      const gap = Math.max(keyW * 0.16, 5);
+
+      const kbdCenterY = height * 0.52;
+
+      rowLayouts.forEach((rowKeys, rIdx) => {
+        let currentX = 0;
+        // Total width of row
+        const rowWidth = rowKeys.reduce((acc, k) => {
+          let multiplier = 1;
+          if (k === "_____ SPACEBAR _____") multiplier = 5.2;
+          else if (["BACK", "ENTER", "CAPS", "SHIFT", "TAB"].includes(k)) multiplier = 1.6;
+          return acc + keyW * multiplier + gap;
+        }, 0);
+
+        currentX = width / 2 - rowWidth / 2;
+        const rowY = kbdCenterY + (rIdx - 2.5) * (keyH + gap);
+
+        rowKeys.forEach((kLabel, cIdx) => {
+          let multiplier = 1;
+          if (kLabel === "_____ SPACEBAR _____") multiplier = 5.2;
+          else if (["BACK", "ENTER", "CAPS", "SHIFT", "TAB"].includes(kLabel)) multiplier = 1.6;
+
+          const w = keyW * multiplier;
+          const isSpecial = ["AI", "PyTorch", "RAG", "LoRA", "YOLO", "ResNeXt", "MLOps", "LLM", "FASTAPI", "DOCKER"].includes(kLabel);
+
+          keycaps.push({
+            row: rIdx,
+            col: cIdx,
+            label: kLabel === "_____ SPACEBAR _____" ? "icode Studios — <you imagine, WE code>" : kLabel,
+            x: currentX,
+            y: rowY,
+            w,
+            h: keyH,
+            elevation: 0,
+            targetElevation: 0,
+            color: isSpecial ? "#0369A1" : "#4F46E5",
+            isSpecial,
+          });
+
+          currentX += w + gap;
+        });
+      });
+
+      // ── 2. Create Surrounding Neural Network Architecture Nodes ──
+      const layerCount = 4;
+      const nodesPerLayer = [5, 6, 6, 5];
+      const marginX = Math.max(width * 0.06, 20);
 
       nodesPerLayer.forEach((count, lIdx) => {
-        const x = startX + lIdx * stepX;
-        const totalH = Math.min(height * 0.5, 340);
-        const startY = height * 0.4 - totalH / 2;
+        const x = lIdx < 2 ? marginX + lIdx * (width * 0.14) : width - marginX - (3 - lIdx) * (width * 0.14);
+        const totalH = Math.min(height * 0.65, 420);
+        const startY = height / 2 - totalH / 2;
         const stepY = totalH / (count - 1 || 1);
 
         for (let nIdx = 0; nIdx < count; nIdx++) {
-          const y = startY + nIdx * stepY;
           nodes.push({
             x,
-            y,
-            targetX: x,
-            targetY: y,
+            y: startY + nIdx * stepY,
+            targetY: startY + nIdx * stepY,
             layer: lIdx,
-            radius: lIdx === 0 || lIdx === 3 ? 8 : 6,
+            radius: lIdx === 0 || lIdx === 3 ? 9 : 7,
             pulseOffset: Math.random() * Math.PI * 2,
           });
         }
       });
 
-      // Build connections between consecutive layers
+      // Build layer connections
       for (let i = 0; i < nodes.length; i++) {
         for (let j = 0; j < nodes.length; j++) {
           if (nodes[j].layer === nodes[i].layer + 1) {
-            if (Math.random() < 0.6) {
-              connections.push({
-                from: i,
-                to: j,
-                weight: 0.3 + Math.random() * 0.7,
-              });
+            if (Math.random() < 0.65) {
+              connections.push({ from: i, to: j, weight: 0.3 + Math.random() * 0.7 });
             }
           }
         }
       }
 
-      // Initialize ambient code particles on the right side
-      codeParticles = Array.from({ length: 10 }, () => ({
-        x: width * 0.4 + Math.random() * (width * 0.55),
-        y: height + Math.random() * 80,
-        speedY: 0.3 + Math.random() * 0.5,
-        text: codeTokens[Math.floor(Math.random() * codeTokens.length)],
-        opacity: 0.15 + Math.random() * 0.25,
+      // Code particles
+      const tokens = ["torch.tensor()", "attn_weights", "loss: 0.001", "RAG_pipe", "LoRA_fit", "FastAPI", "Docker", "q_k_v"];
+      particles = Array.from({ length: 16 }, () => ({
+        x: Math.random() * width,
+        y: height + Math.random() * 100,
+        speedY: 0.4 + Math.random() * 0.6,
+        text: tokens[Math.floor(Math.random() * tokens.length)],
+        opacity: 0.15 + Math.random() * 0.3,
       }));
     };
 
-    initNeuralNodes();
+    initLayout();
 
-    // Spawn pulses along connections
     const spawnPulse = () => {
       if (connections.length === 0) return;
       const conn = connections[Math.floor(Math.random() * connections.length)];
@@ -138,121 +185,41 @@ export default function NeuralCanvas() {
         fromNode: conn.from,
         toNode: conn.to,
         progress: 0,
-        speed: 0.008 + Math.random() * 0.012,
+        speed: 0.01 + Math.random() * 0.015,
         color: colors[Math.floor(Math.random() * colors.length)],
       });
     };
 
-    let pulseTimer = 0;
     let time = 0;
+    let pulseTimer = 0;
 
-    // ── Render Loop ──
+    // ── Render Animation Loop ──
     const render = () => {
       animId = requestAnimationFrame(render);
       time += 0.015;
       pulseTimer++;
 
-      if (pulseTimer % 22 === 0) {
-        spawnPulse();
-      }
+      if (pulseTimer % 16 === 0) spawnPulse();
 
       ctx.clearRect(0, 0, width, height);
 
-      // ── Draw Laptop & Keyboard Graphic Base (Right Side Ambient Perspective) ──
-      const laptopW = Math.min(width * 0.35, 320);
-      const laptopH = laptopW * 0.42;
-      const laptopX = width * 0.65 - laptopW / 2;
-      const laptopY = height * 0.8;
-
-      // Keyboard Base Chassis (Soft Ambient Geometry)
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(laptopX + 20, laptopY);
-      ctx.lineTo(laptopX + laptopW - 20, laptopY);
-      ctx.lineTo(laptopX + laptopW + 20, laptopY + laptopH);
-      ctx.lineTo(laptopX - 20, laptopY + laptopH);
-      ctx.closePath();
-      ctx.fillStyle = "rgba(248, 250, 252, 0.6)";
-      ctx.strokeStyle = "rgba(79, 70, 229, 0.12)";
-      ctx.lineWidth = 1.5;
-      ctx.fill();
-      ctx.stroke();
-
-      // Subtle Key Grid Lines
-      ctx.strokeStyle = "rgba(79, 70, 229, 0.07)";
-      ctx.lineWidth = 1;
-      for (let r = 1; r < 4; r++) {
-        const ry = laptopY + (laptopH / 4) * r;
-        const rRatio = r / 4;
-        ctx.beginPath();
-        ctx.moveTo(laptopX + 20 - 40 * rRatio, ry);
-        ctx.lineTo(laptopX + laptopW - 20 + 40 * rRatio, ry);
-        ctx.stroke();
-      }
-
-      // Illuminated Laptop Screen Frame
-      const screenW = laptopW * 0.72;
-      const screenH = screenW * 0.48;
-      const screenX = width * 0.65 - screenW / 2;
-      const screenY = laptopY - screenH - 4;
-
-      ctx.beginPath();
-      ctx.roundRect(screenX, screenY, screenW, screenH, 6);
-      ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-      ctx.strokeStyle = "rgba(3, 105, 161, 0.25)";
-      ctx.lineWidth = 1.5;
-      ctx.fill();
-      ctx.stroke();
-
-      // Screen Terminal Code Lines
-      ctx.font = "10px monospace";
-      ctx.fillStyle = "rgba(56, 189, 248, 0.8)";
-      ctx.fillText("> model.train()", screenX + 12, screenY + 24);
-      ctx.fillStyle = "rgba(165, 180, 252, 0.8)";
-      ctx.fillText("Loss: 0.0012 [OK]", screenX + 12, screenY + 40);
-
-      ctx.restore();
-
-      // ── Draw Ambient Code Streams ──
-      ctx.save();
-      ctx.font = "10px monospace";
-      codeParticles.forEach((p) => {
-        p.y -= p.speedY;
-        if (p.y < height * 0.1) {
-          p.y = height * 0.85 + Math.random() * 40;
-          p.x = width * 0.4 + Math.random() * (width * 0.55);
-        }
-        ctx.fillStyle = `rgba(3, 105, 161, ${p.opacity * 0.5})`;
-        ctx.fillText(p.text, p.x, p.y);
-      });
-      ctx.restore();
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
 
       // ── Draw Synaptic Connection Edges ──
       ctx.save();
       connections.forEach((conn) => {
-        const fromNode = nodes[conn.from];
-        const toNode = nodes[conn.to];
-        if (!fromNode || !toNode) return;
-
-        const dx = mouseRef.current.x - (fromNode.x + toNode.x) / 2;
-        const dy = mouseRef.current.y - (fromNode.y + toNode.y) / 2;
-        const mouseDist = Math.sqrt(dx * dx + dy * dy);
-        const isHovered = mouseDist < 120;
+        const fn = nodes[conn.from];
+        const tn = nodes[conn.to];
+        if (!fn || !tn) return;
 
         ctx.beginPath();
-        ctx.moveTo(fromNode.x, fromNode.y);
-
-        const cpX = (fromNode.x + toNode.x) / 2;
-        const cpY = (fromNode.y + toNode.y) / 2 + Math.sin(time + conn.from) * 12;
-        ctx.quadraticCurveTo(cpX, cpY, toNode.x, toNode.y);
-
-        if (isHovered) {
-          ctx.strokeStyle = "rgba(79, 70, 229, 0.35)";
-          ctx.lineWidth = 1.8;
-        } else {
-          ctx.strokeStyle = `rgba(79, 70, 229, ${0.08 * conn.weight})`;
-          ctx.lineWidth = 1;
-        }
+        ctx.moveTo(fn.x, fn.y);
+        const cpX = (fn.x + tn.x) / 2;
+        const cpY = (fn.y + tn.y) / 2 + Math.sin(time + conn.from) * 12;
+        ctx.quadraticCurveTo(cpX, cpY, tn.x, tn.y);
+        ctx.strokeStyle = `rgba(79, 70, 229, ${0.12 * conn.weight})`;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       });
       ctx.restore();
@@ -262,23 +229,22 @@ export default function NeuralCanvas() {
       for (let i = pulses.length - 1; i >= 0; i--) {
         const p = pulses[i];
         p.progress += p.speed;
+        const fn = nodes[p.fromNode];
+        const tn = nodes[p.toNode];
 
-        const fromNode = nodes[p.fromNode];
-        const toNode = nodes[p.toNode];
-
-        if (!fromNode || !toNode || p.progress >= 1) {
+        if (!fn || !tn || p.progress >= 1) {
           pulses.splice(i, 1);
           continue;
         }
 
-        const px = fromNode.x + (toNode.x - fromNode.x) * p.progress;
-        const py = fromNode.y + (toNode.y - fromNode.y) * p.progress + Math.sin(p.progress * Math.PI) * 8;
+        const px = fn.x + (tn.x - fn.x) * p.progress;
+        const py = fn.y + (tn.y - fn.y) * p.progress + Math.sin(p.progress * Math.PI) * 10;
 
         ctx.beginPath();
-        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.arc(px, py, 3, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.shadowColor = p.color;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 8;
         ctx.fill();
       }
       ctx.restore();
@@ -287,36 +253,13 @@ export default function NeuralCanvas() {
       ctx.save();
       nodes.forEach((n) => {
         n.y = n.targetY + Math.sin(time * 2 + n.pulseOffset) * 3;
-
-        const dx = mouseRef.current.x - n.x;
-        const dy = mouseRef.current.y - n.y;
-        const mouseDist = Math.sqrt(dx * dx + dy * dy);
-        const isHovered = mouseDist < 70;
-
-        if (mouseDist < 100) {
-          ctx.beginPath();
-          ctx.moveTo(n.x, n.y);
-          ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-          ctx.strokeStyle = `rgba(3, 105, 161, ${0.25 * (1 - mouseDist / 100)})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-
-        // Outer Ring
         ctx.beginPath();
-        ctx.arc(n.x, n.y, isHovered ? n.radius + 4 : n.radius + 2, 0, Math.PI * 2);
-        ctx.fillStyle = isHovered
-          ? "rgba(3, 105, 161, 0.2)"
-          : n.layer === 0
-          ? "rgba(3, 105, 161, 0.08)"
-          : n.layer === 3
-          ? "rgba(124, 58, 237, 0.1)"
-          : "rgba(79, 70, 229, 0.08)";
+        ctx.arc(n.x, n.y, n.radius + 3, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(79, 70, 229, 0.12)";
         ctx.fill();
 
-        // Node Circle Core
         ctx.beginPath();
-        ctx.arc(n.x, n.y, isHovered ? n.radius + 1 : n.radius, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         ctx.fillStyle = n.layer === 0 ? "#0369A1" : n.layer === 3 ? "#7C3AED" : "#4F46E5";
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
@@ -324,21 +267,131 @@ export default function NeuralCanvas() {
         ctx.stroke();
       });
       ctx.restore();
+
+      // ── Draw Floating Code Particles ──
+      ctx.save();
+      ctx.font = "10px monospace";
+      particles.forEach((p) => {
+        p.y -= p.speedY;
+        if (p.y < height * 0.05) {
+          p.y = height * 0.95 + Math.random() * 40;
+          p.x = Math.random() * width;
+        }
+        ctx.fillStyle = `rgba(3, 105, 161, ${p.opacity})`;
+        ctx.fillText(p.text, p.x, p.y);
+      });
+      ctx.restore();
+
+      // ── Draw Centered 3D Interactive Mechanical Keyboard ──
+      ctx.save();
+
+      // Keyboard Ambient Shadow
+      if (keycaps.length > 0) {
+        const minX = Math.min(...keycaps.map((k) => k.x));
+        const maxX = Math.max(...keycaps.map((k) => k.x + k.w));
+        const minY = Math.min(...keycaps.map((k) => k.y));
+        const maxY = Math.max(...keycaps.map((k) => k.y + k.h));
+        const kbdW = maxX - minX;
+        const kbdH = maxY - minY;
+
+        ctx.beginPath();
+        ctx.roundRect(minX - 16, minY - 16, kbdW + 32, kbdH + 32, 20);
+        ctx.fillStyle = "rgba(248, 250, 252, 0.92)";
+        ctx.strokeStyle = "rgba(79, 70, 229, 0.25)";
+        ctx.lineWidth = 2;
+        ctx.shadowColor = "rgba(79, 70, 229, 0.15)";
+        ctx.shadowBlur = 30;
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      // Render 3D Keycaps
+      keycaps.forEach((key) => {
+        // Distance to mouse pointer
+        const keyCenterX = key.x + key.w / 2;
+        const keyCenterY = key.y + key.h / 2;
+        const dist = Math.sqrt((mx - keyCenterX) ** 2 + (my - keyCenterY) ** 2);
+
+        // Hover Pop-up 3D Elevation Calculation
+        const hoverRadius = 110;
+        if (dist < hoverRadius) {
+          const force = 1 - dist / hoverRadius;
+          key.targetElevation = -16 * (force * force); // Pops up to 16px in 3D
+        } else {
+          key.targetElevation = 0;
+        }
+
+        // Smooth spring lerp elevation
+        key.elevation += (key.targetElevation - key.elevation) * 0.2;
+
+        const renderY = key.y + key.elevation;
+        const isPopped = key.elevation < -2;
+
+        // 3D Keycap Side Bevel / Shadow (3D Extrusion Depth)
+        const depth = 5 - key.elevation * 0.3;
+        ctx.fillStyle = isPopped ? "rgba(3, 105, 161, 0.3)" : "rgba(226, 232, 240, 0.95)";
+        ctx.beginPath();
+        ctx.roundRect(key.x, renderY + depth, key.w, key.h, 6);
+        ctx.fill();
+
+        // Keycap Face
+        ctx.beginPath();
+        ctx.roundRect(key.x, renderY, key.w, key.h, 6);
+
+        if (key.isSpecial) {
+          ctx.fillStyle = isPopped ? "#0284C7" : "rgba(3, 105, 161, 0.12)";
+          ctx.strokeStyle = isPopped ? "#0369A1" : "rgba(3, 105, 161, 0.4)";
+        } else {
+          ctx.fillStyle = isPopped ? "#4F46E5" : "#FFFFFF";
+          ctx.strokeStyle = isPopped ? "#4338CA" : "rgba(226, 232, 240, 0.95)";
+        }
+
+        ctx.lineWidth = isPopped ? 2 : 1;
+        ctx.fill();
+        ctx.stroke();
+
+        // 3D Keycap Glow when Popped Up
+        if (isPopped) {
+          ctx.shadowColor = key.isSpecial ? "#0284C7" : "#4F46E5";
+          ctx.shadowBlur = 14;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+
+        // Key Legend Text
+        ctx.font = key.isSpecial
+          ? "700 11px var(--font-space-grotesk), sans-serif"
+          : key.label.length > 6
+          ? "600 10px var(--font-sans), sans-serif"
+          : "600 11px var(--font-sans), sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        if (isPopped) {
+          ctx.fillStyle = "#FFFFFF";
+        } else if (key.isSpecial) {
+          ctx.fillStyle = "#0369A1";
+        } else {
+          ctx.fillStyle = "#334155";
+        }
+
+        ctx.fillText(key.label, key.x + key.w / 2, renderY + key.h / 2);
+      });
+
+      ctx.restore();
     };
 
     render();
 
-    // ── Mouse Listeners ──
+    // ── Mouse Tracking ──
     const onMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current.x = e.clientX - rect.left;
       mouseRef.current.y = e.clientY - rect.top;
-      mouseRef.current.isHover = true;
     };
     const onMouseLeave = () => {
       mouseRef.current.x = -1000;
       mouseRef.current.y = -1000;
-      mouseRef.current.isHover = false;
     };
 
     window.addEventListener("mousemove", onMouseMove);
