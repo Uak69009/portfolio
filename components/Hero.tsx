@@ -1,250 +1,263 @@
 "use client";
 
+import { useRef } from "react";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import { Download, Mail, ArrowDown, Terminal, Cpu, Brain, Sparkles, Code2 } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Download, Mail, ArrowDown, Sparkles } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 
 const NeuralCanvas = dynamic(() => import("./NeuralCanvas"), { ssr: false });
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll position inside the Hero section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Animation transformations based on scroll:
+  // 1. Initial State (scrollYProgress = 0): Canvas is 100% full opacity, full contrast
+  // 2. As user scrolls down (0 -> 0.4): Canvas fades down to 0.25 ambient background
+  const canvasOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0.2]);
+  const canvasScale = useTransform(scrollYProgress, [0, 0.35], [1.05, 1]);
+
+  // 3. Content (Name & Details): Initially hidden at scroll 0, slides up and fades in as user scrolls
+  const contentOpacity = useTransform(scrollYProgress, [0.08, 0.35], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0.08, 0.35], [70, 0]);
+
+  // 4. Initial Scroll Prompt: Visible at scroll 0, fades out when user begins scrolling
+  const promptOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
+  const handleScrollDown = () => {
+    const nextSection = document.getElementById("about");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: window.innerHeight * 0.7, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section
-      id="hero"
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "#FFFFFF" }}
-    >
-      {/* ── 3D Neural Canvas Background ── */}
-      <NeuralCanvas />
+    <div ref={containerRef} className="relative w-full h-[180vh]" id="hero">
+      {/* Sticky Hero Viewport Container */}
+      <div className="sticky top-0 left-0 w-full h-screen flex items-center justify-center overflow-hidden bg-white">
 
-      {/* ── Ambient Orbs ── */}
-      <div
-        className="orb w-[600px] h-[600px] top-[-200px] left-[-200px] opacity-15"
-        style={{ background: "radial-gradient(circle, #4F46E5 0%, transparent 70%)" }}
-      />
-      <div
-        className="orb w-[500px] h-[500px] bottom-[-150px] right-[-150px] opacity-15"
-        style={{ background: "radial-gradient(circle, #0284C7 0%, transparent 70%)" }}
-      />
-      <div
-        className="orb w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10"
-        style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)" }}
-      />
+        {/* ── 1. Neural AI Canvas (Starts at 100% contrast, fades down on scroll) ── */}
+        <motion.div
+          style={{ opacity: canvasOpacity, scale: canvasScale }}
+          className="absolute inset-0 w-full h-full z-0 transition-opacity duration-200"
+        >
+          <NeuralCanvas />
+        </motion.div>
 
-      {/* ── Vignette overlay ── */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, transparent 50%, rgba(255,255,255,0.85) 100%)",
-        }}
-      />
+        {/* ── Ambient Glow Orbs ── */}
+        <div
+          className="orb w-[600px] h-[600px] top-[-200px] left-[-200px] opacity-15 pointer-events-none"
+          style={{ background: "radial-gradient(circle, #4F46E5 0%, transparent 70%)" }}
+        />
+        <div
+          className="orb w-[500px] h-[500px] bottom-[-150px] right-[-150px] opacity-15 pointer-events-none"
+          style={{ background: "radial-gradient(circle, #0284C7 0%, transparent 70%)" }}
+        />
 
-      {/* ── Grid Pattern ── */}
-      <div
-        className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(#4F46E5 1px, transparent 1px), linear-gradient(90deg, #4F46E5 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+        {/* ── Vignette Overlay ── */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 50%, rgba(255,255,255,0.85) 100%)",
+          }}
+        />
 
-      {/* ── Content ── */}
-      <div className="relative z-10 container mx-auto px-6 max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+        {/* ── Grid Pattern ── */}
+        <div
+          className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(#4F46E5 1px, transparent 1px), linear-gradient(90deg, #4F46E5 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
 
-          {/* Left: Text Content */}
-          <div className="flex-1 text-center lg:text-left">
-
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-medium"
-              style={{
-                background: "rgba(79,70,229,0.08)",
-                border: "1px solid rgba(79,70,229,0.2)",
-                color: "#4338CA",
-              }}
-            >
-              <span
-                className="w-2 h-2 rounded-full"
-                style={{ background: "#0369A1", boxShadow: "0 0 8px #0369A1" }}
-              />
-              Available for Opportunities
-            </motion.div>
-
-            {/* Name */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-5xl lg:text-7xl font-extrabold mb-4 leading-[1.1] tracking-tight text-slate-950"
-              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
-            >
-              <span>Umair</span>
-              <br />
-              <span className="text-indigo-600">Amjad Khan</span>
-            </motion.h1>
-
-            {/* Title */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="text-xl lg:text-2xl font-bold mb-4 flex flex-wrap items-center gap-2 text-slate-800"
-            >
-              <span>Founder &amp; CEO @ <span className="text-indigo-600 font-extrabold">icode Studios</span></span>
-              <span className="hidden sm:inline text-slate-400">•</span>
-              <span className="text-sky-700 font-extrabold">AI &amp; ML Engineer</span>
-            </motion.p>
-
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.45 }}
-              className="text-base lg:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium"
-            >
-              Spearheading{" "}
-              <span className="text-indigo-600 font-bold">
-                icode Studios
-              </span>{" "}
-              — Building Production AI Systems, LLM Pipelines, and Intelligent Applications that solve real-world problems.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.55 }}
-              className="flex flex-wrap gap-4 justify-center lg:justify-start"
-            >
-              <a
-                id="btn-download-cv"
-                href="/cv.pdf"
-                download="Umair_Amjad_Khan_CV.pdf"
-                className="btn-primary"
-              >
-                <Download size={18} />
-                Download CV
-              </a>
-
-              <a
-                id="btn-github"
-                href="https://github.com/Uak69009"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline"
-              >
-                <SiGithub size={18} />
-                View GitHub
-              </a>
-
-              <a
-                id="btn-contact"
-                href="#contact"
-                className="btn-outline"
-                style={{ borderColor: "rgba(3,105,161,0.5)", color: "#0369A1" }}
-              >
-                <Mail size={18} />
-                Contact Me
-              </a>
-            </motion.div>
-
-            {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="flex gap-10 mt-12 justify-center lg:justify-start"
-            >
-              {[
-                { label: "Projects Built", value: "10+", color: "#4F46E5" },
-                { label: "AI Models Deployed", value: "5+", color: "#0369A1" },
-                { label: "GitHub Repos", value: "21", color: "#7C3AED" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <div
-                    className="text-3xl font-extrabold"
-                    style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: stat.color }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-xs mt-1 font-semibold text-slate-600">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+        {/* ── 2. Initial Full-Screen Animation Overlay Prompt (Visible before scroll) ── */}
+        <motion.div
+          style={{ opacity: promptOpacity }}
+          className="absolute inset-0 z-30 pointer-events-none flex flex-col items-center justify-between py-12 px-6"
+        >
+          <div className="mt-8 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-md border border-indigo-200 shadow-xl flex items-center gap-2.5 text-xs font-semibold text-indigo-700">
+            <Sparkles size={15} className="text-sky-600 animate-spin" />
+            <span>Interactive AI Neural Engine Initialized</span>
           </div>
 
-          {/* Right: Avatar — Clean Rounded Rectangle Portrait (No overlays) */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, type: "spring", stiffness: 70 }}
-            className="flex-shrink-0 float-anim"
+          <button
+            onClick={handleScrollDown}
+            className="pointer-events-auto flex flex-col items-center gap-3 px-6 py-3 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl hover:border-indigo-400 hover:shadow-indigo-500/10 transition-all duration-300 group cursor-pointer"
           >
-            <div className="relative">
-              {/* Animated gradient border wrapper */}
+            <span className="text-xs font-bold tracking-widest uppercase text-slate-800 group-hover:text-indigo-600 transition-colors">
+              Scroll Down to Reveal Portfolio
+            </span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowDown size={18} className="text-indigo-600" />
+            </motion.div>
+          </button>
+        </motion.div>
+
+        {/* ── 3. Main Hero Content (Slides up & fades in as user scrolls) ── */}
+        <motion.div
+          style={{ opacity: contentOpacity, y: contentY }}
+          className="relative z-10 container mx-auto px-6 max-w-6xl"
+        >
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+
+            {/* Left: Text Content */}
+            <div className="flex-1 text-center lg:text-left">
+
+              {/* Badge */}
               <div
-                className="relative p-[3px] rounded-3xl"
+                className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-medium"
                 style={{
-                  background: "linear-gradient(135deg, #0284C7, #4F46E5, #7C3AED, #0284C7)",
-                  backgroundSize: "300% 300%",
-                  animation: "borderRotate 4s ease infinite",
-                  boxShadow: "0 20px 50px -10px rgba(79,70,229,0.25), 0 10px 30px -5px rgba(2,132,199,0.15)",
+                  background: "rgba(79,70,229,0.08)",
+                  border: "1px solid rgba(79,70,229,0.2)",
+                  color: "#4338CA",
                 }}
               >
-                {/* Inner frame */}
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: "#0369A1", boxShadow: "0 0 8px #0369A1" }}
+                />
+                Available for Opportunities
+              </div>
+
+              {/* Name */}
+              <h1
+                className="text-5xl lg:text-7xl font-extrabold mb-4 leading-[1.1] tracking-tight text-slate-950"
+                style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+              >
+                <span>Umair</span>
+                <br />
+                <span className="text-indigo-600">Amjad Khan</span>
+              </h1>
+
+              {/* Title */}
+              <p className="text-xl lg:text-2xl font-bold mb-4 flex flex-wrap items-center gap-2 text-slate-800">
+                <span>Founder &amp; CEO @ <span className="text-indigo-600 font-extrabold">icode Studios</span></span>
+                <span className="hidden sm:inline text-slate-400">•</span>
+                <span className="text-sky-700 font-extrabold">AI &amp; ML Engineer</span>
+              </p>
+
+              {/* Tagline */}
+              <p className="text-base lg:text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed text-slate-700 font-medium">
+                Spearheading{" "}
+                <span className="text-indigo-600 font-bold">
+                  icode Studios
+                </span>{" "}
+                — Building Production AI Systems, LLM Pipelines, and Intelligent Applications that solve real-world problems.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <a
+                  id="btn-download-cv"
+                  href="/cv.pdf"
+                  download="Umair_Amjad_Khan_CV.pdf"
+                  className="btn-primary"
+                >
+                  <Download size={18} />
+                  Download CV
+                </a>
+
+                <a
+                  id="btn-github"
+                  href="https://github.com/Uak69009"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  <SiGithub size={18} />
+                  View GitHub
+                </a>
+
+                <a
+                  id="btn-contact"
+                  href="#contact"
+                  className="btn-outline"
+                  style={{ borderColor: "rgba(3,105,161,0.5)", color: "#0369A1" }}
+                >
+                  <Mail size={18} />
+                  Contact Me
+                </a>
+              </div>
+
+              {/* Stats row */}
+              <div className="flex gap-10 mt-12 justify-center lg:justify-start">
+                {[
+                  { label: "Projects Built", value: "10+", color: "#4F46E5" },
+                  { label: "AI Models Deployed", value: "5+", color: "#0369A1" },
+                  { label: "GitHub Repos", value: "21", color: "#7C3AED" },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center lg:text-left">
+                    <div
+                      className="text-3xl font-extrabold"
+                      style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: stat.color }}
+                    >
+                      {stat.value}
+                    </div>
+                    <div className="text-xs mt-1 font-semibold text-slate-600">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Avatar — Clean Rounded Rectangle Portrait */}
+            <div className="flex-shrink-0 float-anim">
+              <div className="relative">
+                {/* Animated gradient border wrapper */}
                 <div
-                  className="relative overflow-hidden rounded-[22px]"
+                  className="relative p-[3px] rounded-3xl"
                   style={{
-                    width: "260px",
-                    height: "340px",
-                    background: "#FFFFFF",
+                    background: "linear-gradient(135deg, #0284C7, #4F46E5, #7C3AED, #0284C7)",
+                    backgroundSize: "300% 300%",
+                    animation: "borderRotate 4s ease infinite",
+                    boxShadow: "0 20px 50px -10px rgba(79,70,229,0.25), 0 10px 30px -5px rgba(2,132,199,0.15)",
                   }}
                 >
-                  <Image
-                    src="/profile.jpg"
-                    alt="Umair Amjad Khan — AI & Machine Learning Engineer"
-                    fill
-                    className="object-cover object-top"
-                    priority
-                    sizes="260px"
-                    onError={(e) => {
-                      const target = e.currentTarget as HTMLImageElement;
-                      target.style.display = "none";
+                  {/* Inner frame */}
+                  <div
+                    className="relative overflow-hidden rounded-[22px]"
+                    style={{
+                      width: "260px",
+                      height: "340px",
+                      background: "#FFFFFF",
                     }}
-                  />
+                  >
+                    <Image
+                      src="/profile.jpg"
+                      alt="Umair Amjad Khan — AI & Machine Learning Engineer"
+                      fill
+                      className="object-cover object-top"
+                      priority
+                      sizes="260px"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
+                        target.style.display = "none";
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ── Scroll indicator ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-      >
-        <span className="text-xs tracking-widest uppercase" style={{ color: "#4B5563" }}>
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown size={18} color="#4B5563" />
+          </div>
         </motion.div>
-      </motion.div>
-    </section>
+      </div>
+    </div>
   );
 }
+
