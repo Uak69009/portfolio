@@ -23,12 +23,12 @@ export default function Hero() {
   const canvasOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
   const canvasScale = useTransform(scrollYProgress, [0, 0.18], [1, 0.95]);
 
-  // 3. Profile details reach 100% full opacity quickly with small subtle Y transition (y: 20 -> 0)
+  // 3. Profile details reach 100% full opacity quickly with minor Y offset transition (y: 15 -> 0)
   const contentOpacity = useTransform(scrollYProgress, [0.03, 0.2], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.03, 0.2], [20, 0]);
+  const contentY = useTransform(scrollYProgress, [0.03, 0.2], [15, 0]);
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[140vh]" id="hero">
+    <div ref={containerRef} className="relative w-full min-h-[120vh] scroll-mt-32 py-36" id="hero">
       {/* Sticky 100vh Viewport Container */}
       <div className="sticky top-0 left-0 w-full h-screen flex flex-col justify-center items-center overflow-hidden bg-white">
 
@@ -69,12 +69,12 @@ export default function Hero() {
           }}
         />
 
-        {/* ── 2. Main Hero Profile Content (pt-32 md:pt-40 to clear navbar completely) ── */}
+        {/* ── 2. Main Hero Profile Content (pt-48 md:pt-52 lg:pt-56 to clear navbar completely) ── */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 container mx-auto px-6 max-w-6xl w-full flex-1 flex flex-col justify-center items-center pt-32 md:pt-40 pb-12 overflow-y-auto"
+          className="relative z-10 container mx-auto px-6 max-w-6xl w-full flex-1 flex flex-col justify-center items-center pt-48 md:pt-52 lg:pt-56 pb-12 overflow-y-auto"
         >
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 w-full">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 w-full mt-12 md:mt-16">
 
             {/* Left: Text Content */}
             <div className="flex-1 text-center lg:text-left">
