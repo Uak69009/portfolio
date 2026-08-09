@@ -202,9 +202,10 @@ export default function Experience() {
                 <div className="relative w-8 h-8 rounded-full overflow-hidden bg-white p-0.5 transition-transform duration-200 hover:scale-110">
                   <Image
                     src={item.logo}
-                    alt={item.organization}
+                    alt={`${item.organization} official logo`}
                     fill
                     sizes="32px"
+                    loading="lazy"
                     className="object-contain"
                   />
                 </div>

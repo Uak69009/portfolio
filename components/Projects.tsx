@@ -255,7 +255,8 @@ export default function Projects() {
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
+                          aria-label={`View live demo of ${project.title}`}
+                          className="flex-1 flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-semibold transition-all duration-200"
                           style={{
                             background: `linear-gradient(135deg, ${project.iconColor}18, ${project.iconColor}0A)`,
                             border: `1px solid ${project.iconColor}35`,
@@ -270,15 +271,16 @@ export default function Projects() {
                             (e.currentTarget as HTMLElement).style.boxShadow = "none";
                           }}
                         >
-                          <ExternalLink size={15} />
-                          Demo
+                          <ExternalLink size={16} />
+                          Live Demo
                         </a>
                       )}
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
+                        aria-label={`View GitHub repository for ${project.title}`}
+                        className="flex-1 flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
                           background: "#FFFFFF",
                           border: "1px solid #CBD5E1",

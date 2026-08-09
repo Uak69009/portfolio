@@ -228,7 +228,8 @@ export default function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       title={s.label}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200"
+                      aria-label={`Umair Amjad Khan on ${s.label}`}
+                      className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] min-w-[44px] rounded-xl text-sm font-medium transition-all duration-200"
                       style={{
                         background: s.bg,
                         border: `1px solid ${s.color}25`,

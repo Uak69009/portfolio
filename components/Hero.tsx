@@ -200,8 +200,8 @@ export default function Hero() {
                     }}
                   >
                     <Image
-                      src="/profile.jpg"
-                      alt="Umair Amjad Khan — AI & Machine Learning Engineer"
+                      src="/profile-image.jpg"
+                      alt="Umair Amjad Khan — AI and Machine Learning Engineer"
                       fill
                       className="object-cover object-top"
                       priority

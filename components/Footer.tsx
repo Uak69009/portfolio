@@ -106,6 +106,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={s.label}
+                    aria-label={`Umair Amjad Khan on ${s.label}`}
                     className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
                     style={{
                       background: "#FFFFFF",

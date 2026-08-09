@@ -26,6 +26,8 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #4F46E5 #F1F5F9;
+  overflow-x: clip;
+  max-width: 100vw;
 }
 
 ::-webkit-scrollbar {
@@ -43,9 +45,19 @@ body {
   background-color: #FFFFFF;
   color: #0F172A;
   font-family: "Inter", system-ui, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Selection ── */

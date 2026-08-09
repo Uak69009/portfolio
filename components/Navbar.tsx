@@ -24,6 +24,23 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Keyboard Escape listener & Body scroll handling
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileOpen]);
+
   // Intersection observer for active section highlighting
   useEffect(() => {
     const sections = navLinks.map((l) => l.href.slice(1));
@@ -52,7 +69,7 @@ export default function Navbar() {
   };
 
   return (
-    <>
+    <header>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -66,6 +83,7 @@ export default function Navbar() {
           borderBottom: scrolled ? "1px solid rgba(226, 232, 240, 0.9)" : "none",
           boxShadow: scrolled ? "0 4px 20px -2px rgba(0,0,0,0.05)" : "none",
         }}
+        aria-label="Main Navigation"
       >
         <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between h-16">
 
@@ -73,7 +91,8 @@ export default function Navbar() {
           <a
             href="#hero"
             onClick={(e) => { e.preventDefault(); handleNavClick("#hero"); }}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2 group min-h-[44px] min-w-[44px]"
+            aria-label="Umair Amjad Khan Homepage"
             style={{ textDecoration: "none" }}
           >
             <div
@@ -102,7 +121,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleNavClick(link.href)}
-                    className="relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200"
+                    className="relative px-4 py-2 min-h-[44px] text-sm font-medium rounded-lg transition-all duration-200"
                     style={{
                       color: isActive ? "#4F46E5" : "#64748B",
                       background: isActive
@@ -136,7 +155,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
-            className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+            className="hidden md:inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-lg text-sm font-semibold transition-all duration-200"
             style={{
               background: "linear-gradient(135deg, #4F46E5, #7C3AED)",
               color: "#fff",
@@ -156,12 +175,14 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
+            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg transition-colors"
             style={{
               background: "rgba(79,70,229,0.08)",
               color: "#4F46E5",
             }}
-            aria-label="Toggle mobile menu"
+            aria-label="Toggle mobile navigation menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -172,6 +193,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -183,6 +205,7 @@ export default function Navbar() {
               borderLeft: "1px solid #E2E8F0",
               boxShadow: "-10px 0 30px rgba(0,0,0,0.05)",
             }}
+            aria-label="Mobile Navigation Menu"
           >
             <div className="flex flex-col h-full pt-20 px-8 pb-8">
               <nav className="flex flex-col gap-2 flex-1">
@@ -193,7 +216,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.07 }}
                     onClick={() => handleNavClick(link.href)}
-                    className="text-left px-4 py-3 rounded-xl text-base font-medium transition-all"
+                    className="text-left px-4 py-3 rounded-xl text-base font-medium min-h-[44px] transition-all"
                     style={{
                       color: active === link.href.slice(1) ? "#4F46E5" : "#64748B",
                       background:
@@ -210,7 +233,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
-                className="btn-primary justify-center mt-6"
+                className="btn-primary justify-center min-h-[44px] mt-6"
               >
                 Get In Touch
               </a>
@@ -231,6 +254,6 @@ export default function Navbar() {
           />
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
