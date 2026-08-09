@@ -64,8 +64,8 @@ const socialLinks = [
     icon: Mail,
     label: "Email",
     href: "mailto:umairamjadkhan@gmail.com",
-    color: "#0284C7",
-    bg: "rgba(2,132,199,0.08)",
+    color: "#0369A1",
+    bg: "rgba(3,105,161,0.08)",
   },
 ];
 
@@ -159,7 +159,7 @@ export default function Contact() {
                 label: "Email",
                 value: "umairamjadkhan@gmail.com",
                 href: "mailto:umairamjadkhan@gmail.com",
-                color: "#0284C7",
+                color: "#0369A1",
               },
               {
                 icon: MapPin,

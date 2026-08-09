@@ -38,8 +38,8 @@ const skillCategories = [
   {
     icon: Code2,
     title: "Generative AI & NLP",
-    color: "#00F2FE",
-    glow: "rgba(0,242,254,0.2)",
+    color: "#0369A1",
+    glow: "rgba(3,105,161,0.2)",
     skills: [
       "Transformers",
       "LLM Fine-Tuning",
@@ -217,7 +217,7 @@ export default function Skills() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               { label: "Python & ML Frameworks", pct: 92, color: "#4F46E5" },
-              { label: "Generative AI & LLMs", pct: 88, color: "#0284C7" },
+              { label: "Generative AI & LLMs", pct: 88, color: "#0369A1" },
               { label: "MLOps & Deployment", pct: 80, color: "#7C3AED" },
             ].map((bar) => (
               <div key={bar.label}>

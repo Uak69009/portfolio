@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Download, Mail, ArrowDown } from "lucide-react";
+import { Download, Mail, ArrowDown, Terminal, Cpu, Brain, Sparkles, Code2 } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
 
@@ -72,7 +72,7 @@ export default function Hero() {
             >
               <span
                 className="w-2 h-2 rounded-full"
-                style={{ background: "#0284C7", boxShadow: "0 0 8px #0284C7" }}
+                style={{ background: "#0369A1", boxShadow: "0 0 8px #0369A1" }}
               />
               Available for Opportunities
             </motion.div>
@@ -100,7 +100,7 @@ export default function Hero() {
             >
               <span>Founder &amp; CEO @ <span className="text-indigo-600 font-bold">icode Studios</span></span>
               <span className="hidden sm:inline text-slate-400">•</span>
-              <span className="gradient-text-cyan-indigo">AI &amp; ML Engineer</span>
+              <span className="gradient-text-cyan-indigo font-bold">AI &amp; ML Engineer</span>
             </motion.p>
 
             {/* Tagline */}
@@ -112,7 +112,7 @@ export default function Hero() {
               style={{ color: "#475569" }}
             >
               Spearheading{" "}
-              <span className="gradient-text-cyan-indigo font-semibold">
+              <span className="gradient-text-cyan-indigo font-bold">
                 icode Studios
               </span>{" "}
               — Building Production AI Systems, LLM Pipelines, and Intelligent Applications that solve real-world problems.
@@ -150,7 +150,7 @@ export default function Hero() {
                 id="btn-contact"
                 href="#contact"
                 className="btn-outline"
-                style={{ borderColor: "rgba(2,132,199,0.4)", color: "#0284C7" }}
+                style={{ borderColor: "rgba(3,105,161,0.4)", color: "#0369A1" }}
               >
                 <Mail size={18} />
                 Contact Me
@@ -184,14 +184,49 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Avatar — Rounded Rectangle Portrait */}
+          {/* Right: Avatar — Rounded Rectangle Portrait + Neural & Code Badges */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, type: "spring", stiffness: 70 }}
-            className="flex-shrink-0 float-anim"
+            className="flex-shrink-0 float-anim relative"
           >
             <div className="relative">
+
+              {/* Floating Top-Left Badge: Terminal IDE Input */}
+              <motion.div
+                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="absolute -top-6 -left-10 z-20 hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-mono font-medium bg-white/95 backdrop-blur-md shadow-lg border border-slate-200 text-slate-800"
+              >
+                <div className="w-6 h-6 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600">
+                  <Terminal size={13} />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block tracking-wider">Keyboard IDE</span>
+                  <span className="text-indigo-600 font-bold">&gt; model.fit(RAG)</span>
+                </div>
+              </motion.div>
+
+              {/* Floating Bottom-Right Badge: Neural Engine */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="absolute -bottom-6 -right-8 z-20 hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-sans font-medium bg-white/95 backdrop-blur-md shadow-lg border border-slate-200 text-slate-800"
+              >
+                <div className="w-6 h-6 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600">
+                  <Brain size={14} />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block tracking-wider">Neural Synapses</span>
+                  <span className="text-sky-700 font-bold flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Multi-Head Attn Active
+                  </span>
+                </div>
+              </motion.div>
 
               {/* Animated gradient border wrapper */}
               <div

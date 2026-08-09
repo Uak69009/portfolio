@@ -16,10 +16,10 @@ const fadeUp: Variants = {
 };
 
 const stats = [
-  { label: "Years of Experience", value: "3+", icon: Zap, color: "#00F2FE" },
-  { label: "Projects Delivered", value: "10+", icon: Layers, color: "#6366F1" },
-  { label: "AI Models Deployed", value: "5+", icon: Cpu, color: "#8B5CF6" },
-  { label: "Clients Served", value: "15+", icon: Globe, color: "#F59E0B" },
+  { label: "Years of Experience", value: "3+", icon: Zap, color: "#0369A1" },
+  { label: "Projects Delivered", value: "10+", icon: Layers, color: "#4F46E5" },
+  { label: "AI Models Deployed", value: "5+", icon: Cpu, color: "#7C3AED" },
+  { label: "Clients Served", value: "15+", icon: Globe, color: "#D97706" },
 ];
 
 export default function About() {
@@ -35,7 +35,7 @@ export default function About() {
       {/* Ambient orbs */}
       <div
         className="orb w-[500px] h-[500px] right-[-150px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #0284C7, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #0369A1, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -52,9 +52,9 @@ export default function About() {
               <span
                 className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
                 style={{
-                  color: "#0284C7",
-                  background: "rgba(2,132,199,0.08)",
-                  border: "1px solid rgba(2,132,199,0.2)",
+                  color: "#0369A1",
+                  background: "rgba(3,105,161,0.08)",
+                  border: "1px solid rgba(3,105,161,0.25)",
                 }}
               >
                 About Me
@@ -202,12 +202,12 @@ export default function About() {
               variants={fadeUp}
               custom={8}
               className="glass-card p-5"
-              style={{ border: "1px solid rgba(2,132,199,0.2)" }}
+              style={{ border: "1px solid rgba(3,105,161,0.25)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <span
                   className="w-2 h-2 rounded-full"
-                  style={{ background: "#0284C7", boxShadow: "0 0 8px #0284C7" }}
+                  style={{ background: "#0369A1", boxShadow: "0 0 8px #0369A1" }}
                 />
                 <span className="text-sm font-semibold" style={{ color: "#0F172A" }}>
                   Currently Working On
