@@ -15,7 +15,7 @@ const navLinks = [
 
 const socialLinks = [
   { icon: SiGithub, href: "https://github.com/Uak69009", label: "GitHub" },
-  { icon: FaLinkedinIn, href: "https://linkedin.com/in/umairamjadkhan", label: "LinkedIn" },
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/", label: "LinkedIn" },
   { icon: FaWhatsapp, href: "https://wa.me/923170478541", label: "WhatsApp" },
   { icon: SiUpwork, href: "https://upwork.com", label: "Upwork" },
   { icon: SiFiverr, href: "https://fiverr.com", label: "Fiverr" },

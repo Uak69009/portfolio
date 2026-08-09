@@ -42,7 +42,7 @@ const socialLinks = [
   {
     icon: FaLinkedinIn,
     label: "LinkedIn",
-    href: "https://linkedin.com/in/umairamjadkhan",
+    href: "https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/",
     color: "#0A66C2",
     bg: "rgba(10,102,194,0.08)",
   },
