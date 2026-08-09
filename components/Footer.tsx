@@ -18,7 +18,7 @@ const socialLinks = [
   { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/", label: "LinkedIn" },
   { icon: FaWhatsapp, href: "https://wa.me/923170478541", label: "WhatsApp" },
   { icon: SiUpwork, href: "https://upwork.com", label: "Upwork" },
-  { icon: SiFiverr, href: "https://fiverr.com", label: "Fiverr" },
+  { icon: SiFiverr, href: "https://www.fiverr.com/umair_khan69009", label: "Fiverr" },
   { icon: Mail, href: "mailto:umairamjadkhanamazai@gmail.com", label: "Email" },
 ];
 

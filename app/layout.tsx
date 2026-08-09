@@ -109,7 +109,7 @@ const jsonLd = {
         "https://github.com/Uak69009",
         "https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/",
         "https://upwork.com",
-        "https://fiverr.com",
+        "https://www.fiverr.com/umair_khan69009",
       ],
     },
     {

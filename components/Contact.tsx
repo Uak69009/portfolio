@@ -63,7 +63,7 @@ const socialLinks = [
   {
     icon: SiFiverr,
     label: "Fiverr",
-    href: "https://fiverr.com",
+    href: "https://www.fiverr.com/umair_khan69009",
     color: "#1DBF73",
     bg: "rgba(29,191,115,0.08)",
   },
