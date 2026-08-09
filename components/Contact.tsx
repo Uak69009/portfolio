@@ -115,7 +115,7 @@ export default function Contact() {
       let resData;
       try {
         resData = JSON.parse(resText);
-      } catch (e) {
+      } catch {
         throw new Error("Invalid response from server");
       }
 

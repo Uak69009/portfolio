@@ -131,7 +131,6 @@ export default function NeuralCanvas() {
       });
 
       // ── 2. Create Surrounding Neural Network Architecture Nodes ──
-      const layerCount = 4;
       const nodesPerLayer = [5, 6, 6, 5];
       const marginX = Math.max(width * 0.06, 20);
 
