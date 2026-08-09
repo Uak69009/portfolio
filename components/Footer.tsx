@@ -18,7 +18,7 @@ const socialLinks = [
   { icon: FaLinkedinIn, href: "https://linkedin.com/in/umairamjadkhan", label: "LinkedIn" },
   { icon: SiUpwork, href: "https://upwork.com", label: "Upwork" },
   { icon: SiFiverr, href: "https://fiverr.com", label: "Fiverr" },
-  { icon: Mail, href: "mailto:umairamjadkhan@gmail.com", label: "Email" },
+  { icon: Mail, href: "mailto:umairamjadkhanamazai@gmail.com", label: "Email" },
 ];
 
 export default function Footer() {

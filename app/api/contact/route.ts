@@ -34,8 +34,8 @@ export async function POST(req: Request) {
       }
     }
 
-    // 2. Direct zero-key production delivery to umairamjadkhan@gmail.com via FormSubmit AJAX service
-    const formSubmitRes = await fetch("https://formsubmit.co/ajax/umairamjadkhan@gmail.com", {
+    // 2. Direct zero-key production delivery to umairamjadkhanamazai@gmail.com via FormSubmit AJAX service
+    const formSubmitRes = await fetch("https://formsubmit.co/ajax/umairamjadkhanamazai@gmail.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
