@@ -7,7 +7,7 @@ import Experience from "@/components/Experience";
 import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Chatbot from "@/components/Chatbot";
+import AIChatbot from "@/components/chatbot/AIChatbot";
 import Image from "next/image";
 
 /**
@@ -238,7 +238,7 @@ export default function Home() {
       <Certifications />
       <Contact />
       <Footer />
-      <Chatbot />
+      <AIChatbot />
       <noscript>
         <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
           <h1>Umair Amjad Khan — AI &amp; Machine Learning Engineer</h1>
