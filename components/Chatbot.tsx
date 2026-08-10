@@ -3,15 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  MessageSquare,
   X,
   Send,
   Sparkles,
   Bot,
-  User,
   ArrowRight,
-  RefreshCw,
   Minimize2,
+  AlertCircle,
+  RotateCcw,
 } from "lucide-react";
 import { useAccent } from "@/hooks/useTheme";
 
@@ -21,111 +20,89 @@ interface Message {
   text: string;
   timestamp: string;
   quickActions?: Array<{ label: string; action: string }>;
+  isError?: boolean;
 }
 
 const suggestedQuestions = [
-  "🤖 What are your core AI skills?",
+  "🎯 What are your core AI skills?",
   "🚀 Tell me about your AI projects",
   "💼 What is icode Studios?",
   "📬 How can I contact or hire you?",
 ];
 
-/** Knowledge base search engine for instant accurate responses */
-function getAIResponse(userText: string): {
-  text: string;
-  quickActions?: Array<{ label: string; action: string }>;
-} {
-  const query = userText.toLowerCase();
+/** Utility to format basic Markdown bolding, bullets, and links safely */
+function renderFormattedText(text: string) {
+  const lines = text.split("\n");
+  return lines.map((line, lIdx) => {
+    // Process markdown links [Label](url)
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
 
-  // Greetings
-  if (query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("greetings")) {
-    return {
-      text: "Hello! 👋 I'm **Umair's AI Assistant**. I can tell you all about Umair Amjad Khan's AI engineering expertise, projects, skills, or help you connect with him directly for custom AI solutions!",
-      quickActions: [
-        { label: "View Skills", action: "#skills" },
-        { label: "View Projects", action: "#projects" },
-        { label: "Contact Umair", action: "#contact" },
-      ],
-    };
-  }
+    while ((match = linkRegex.exec(line)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(line.substring(lastIndex, match.index));
+      }
+      const label = match[1];
+      const url = match[2];
+      parts.push(
+        <a
+          key={`${lIdx}-${match.index}`}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline font-semibold hover:opacity-80"
+        >
+          {label}
+        </a>
+      );
+      lastIndex = linkRegex.lastIndex;
+    }
+    if (lastIndex < line.length) {
+      parts.push(line.substring(lastIndex));
+    }
 
-  // Skills & Tech Stack
-  if (query.includes("skill") || query.includes("stack") || query.includes("tech") || query.includes("python") || query.includes("pytorch") || query.includes("framework")) {
-    return {
-      text: "Umair specializes in production-grade AI & Machine Learning:\n\n• **Generative AI & LLMs**: Fine-Tuning (LoRA / QLoRA), RAG Pipelines, LangChain, LlamaIndex, Vector DBs, Prompt Engineering\n• **Machine Learning & CV**: PyTorch, TensorFlow, Computer Vision, OpenCV, ResNeXt, YOLO, CNNs, LSTMs\n• **MLOps & Infrastructure**: Docker, FastAPI, Flask, CI/CD, Model Deployment & Monitoring\n• **Languages**: Python, C++, SQL",
-      quickActions: [{ label: "Explore Technical Arsenal", action: "#skills" }],
-    };
-  }
+    // Process bold text **text**
+    const content = parts.map((part, pIdx) => {
+      if (typeof part !== "string") return part;
+      const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
+      return boldParts.map((bPart, bIdx) => {
+        if (bPart.startsWith("**") && bPart.endsWith("**")) {
+          return (
+            <strong key={`${pIdx}-${bIdx}`} className="font-bold">
+              {bPart.slice(2, -2)}
+            </strong>
+          );
+        }
+        return bPart;
+      });
+    });
 
-  // Projects (Zari.AI, Deepfake, Cyber Defense)
-  if (query.includes("project") || query.includes("zari") || query.includes("deepfake") || query.includes("cyber") || query.includes("work") || query.includes("portfolio")) {
-    return {
-      text: "Here are Umair's flagship AI projects:\n\n1. **Zari.AI**: Voice & WhatsApp-enabled AI crop disease diagnosis system with sub-200ms FastAPI backend.\n2. **Deepfake Detection Platform**: Dual-stream ResNeXt + LSTM pipeline with a Chrome Extension for real-time video verification.\n3. **Autonomous Cyber Defense**: Hierarchical Multi-Agent Reinforcement Learning (MARL) system for automated network threat detection.",
-      quickActions: [{ label: "View All Projects", action: "#projects" }],
-    };
-  }
-
-  // icode Studios
-  if (query.includes("icode") || query.includes("studio") || query.includes("company") || query.includes("founder") || query.includes("ceo")) {
-    return {
-      text: "**icode Studios** (*\"you imagine, WE code\"*) is an AI engineering & custom software development studio founded by Umair Amjad Khan.\n\nWe build custom RAG architectures, LLM fine-tuning pipelines, agentic AI workflows, and full-stack web/mobile applications for clients globally.",
-      quickActions: [{ label: "Get In Touch with icode Studios", action: "#contact" }],
-    };
-  }
-
-  // Contact / Hire / Freelance / Pricing
-  if (query.includes("contact") || query.includes("hire") || query.includes("email") || query.includes("whatsapp") || query.includes("upwork") || query.includes("fiverr") || query.includes("reach") || query.includes("freelance")) {
-    return {
-      text: "You can reach Umair directly through several channels:\n\n📧 **Email**: `umairamjadkhanamazai@gmail.com`  \n📱 **WhatsApp**: `+92 317 0478541`  \n🌐 **LinkedIn**: [Umair Amjad Khan](https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/)  \n💼 **Freelance**: Available on Upwork & Fiverr for custom AI development.",
-      quickActions: [
-        { label: "Send Message Now", action: "#contact" },
-        { label: "Download CV", action: "/cv.pdf" },
-      ],
-    };
-  }
-
-  // Experience / Education / Background
-  if (query.includes("experience") || query.includes("education") || query.includes("giki") || query.includes("haripur") || query.includes("background") || query.includes("intern")) {
-    return {
-      text: "Umair's background:\n\n🎓 **BS in Artificial Intelligence** (University of Haripur, 2022–2026)\n🚀 **Advanced AI Bootcamp** (GIKI, 2026)\n💼 **Founder & CEO** @ icode Studios (2025–Present)\n⚡ **Machine Learning Intern** @ Avant Labs (2024–Present)\n📊 **Data Analytics** @ Galant Engineers (2023–2024)",
-      quickActions: [{ label: "View Full Milestones", action: "#experience" }],
-    };
-  }
-
-  // Certifications
-  if (query.includes("certif") || query.includes("anthropic") || query.includes("ibm") || query.includes("coursera") || query.includes("vanderbilt") || query.includes("credential")) {
-    return {
-      text: "Umair holds verified certifications from industry leaders:\n\n• **Anthropic**: Claude 101 & AI Fluency Framework\n• **IBM**: Develop Generative AI Applications & Build RAG Applications\n• **Vanderbilt University**: Generative AI & Model Selection\n• **DeepLearning.AI**: AI For Everyone & LangGraph AI Agents",
-      quickActions: [{ label: "View Credentials", action: "#certifications" }],
-    };
-  }
-
-  // Default fallback answer
-  return {
-    text: "Thanks for your message! Umair specializes in building custom AI systems, LLM fine-tuning, RAG pipelines, and full-stack software. How can I assist you today?",
-    quickActions: [
-      { label: "View Core Skills", action: "#skills" },
-      { label: "Explore AI Projects", action: "#projects" },
-      { label: "Contact Umair", action: "#contact" },
-    ],
-  };
+    return (
+      <span key={lIdx} className="block min-h-[1.2em]">
+        {content}
+      </span>
+    );
+  });
 }
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [lastFailedMessage, setLastFailedMessage] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome-1",
       sender: "ai",
-      text: "Hi! 👋 I'm **Umair's AI Assistant**. How can I help you today?",
+      text: "Hello! 👋 I am **Umair's Enterprise AI Representative**. How may I assist you today with information regarding Umair's AI engineering capabilities, production projects, or icode Studios?",
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     },
   ]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { isDark, accent, accentAlt, accentBg, accentBorder } = useAccent();
+  const { isDark, accent, accentBg, accentBorder } = useAccent();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -137,7 +114,7 @@ export default function Chatbot() {
     }
   }, [messages, isOpen, isTyping]);
 
-  const handleSend = (textToSend?: string) => {
+  const handleSend = async (textToSend?: string) => {
     const query = textToSend || input.trim();
     if (!query) return;
 
@@ -151,20 +128,48 @@ export default function Chatbot() {
     setMessages((prev) => [...prev, userMsg]);
     if (!textToSend) setInput("");
     setIsTyping(true);
+    setLastFailedMessage(null);
 
-    setTimeout(() => {
-      const response = getAIResponse(query);
+    // Build context window payload (Max last 6 messages)
+    const conversationHistory = [...messages, userMsg].slice(-6).map((m) => ({
+      role: m.sender === "ai" ? "assistant" : "user",
+      content: m.text,
+    }));
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: conversationHistory }),
+      });
+
+      if (!res.ok) throw new Error("API response error");
+
+      const data = await res.json();
       const aiMsg: Message = {
         id: `ai-${Date.now()}`,
         sender: "ai",
-        text: response.text,
+        text: data.reply || "Thank you for reaching out. How else can I assist you?",
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        quickActions: response.quickActions,
+        quickActions: data.quickActions,
       };
 
       setMessages((prev) => [...prev, aiMsg]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setLastFailedMessage(query);
+      const errorMsg: Message = {
+        id: `error-${Date.now()}`,
+        sender: "ai",
+        isError: true,
+        text: "Notice: Unable to establish connection to live stream. You can reach out directly via email at `umairamjadkhanamazai@gmail.com` or click retry below.",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        quickActions: [{ label: "Contact Directly", action: "#contact" }],
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+    } finally {
       setIsTyping(false);
-    }, 600);
+    }
   };
 
   const handleActionClick = (action: string) => {
@@ -216,13 +221,13 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[80vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border backdrop-blur-2xl"
+            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[540px] max-h-[82vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border backdrop-blur-2xl"
             style={{
               background: isDark ? "rgba(12, 12, 12, 0.96)" : "rgba(255, 255, 255, 0.96)",
               borderColor: accentBorder(0.3),
               boxShadow: isDark
-                ? "0 20px 50px rgba(0,0,0,0.8), 0 0 25px rgba(234,179,8,0.15)"
-                : "0 20px 50px rgba(0,0,0,0.15), 0 0 25px rgba(29,78,216,0.1)",
+                ? "0 20px 50px rgba(0,0,0,0.85), 0 0 30px rgba(234,179,8,0.15)"
+                : "0 20px 50px rgba(0,0,0,0.15), 0 0 30px rgba(29,78,216,0.1)",
             }}
           >
             {/* Header */}
@@ -235,7 +240,7 @@ export default function Chatbot() {
             >
               <div className="flex items-center gap-3">
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs"
+                  className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs shadow-md"
                   style={{
                     background: accent,
                     color: isDark ? "#0B1220" : "#FFFFFF",
@@ -248,11 +253,11 @@ export default function Chatbot() {
                     className="font-bold text-sm leading-tight flex items-center gap-1.5"
                     style={{ color: "var(--text-heading)" }}
                   >
-                    Umair&apos;s AI Assistant
+                    Umair&apos;s AI Representative
                   </h3>
-                  <p className="text-[11px] font-medium text-emerald-500 flex items-center gap-1">
+                  <p className="text-[11px] font-semibold text-emerald-500 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Online &bull; Ready to help
+                    Enterprise Core &bull; Grounded Knowledge
                   </p>
                 </div>
               </div>
@@ -278,37 +283,41 @@ export default function Chatbot() {
                     key={msg.id}
                     className={`flex flex-col ${isAI ? "items-start" : "items-end"}`}
                   >
-                    <div className="flex items-end gap-2 max-w-[85%]">
+                    <div className="flex items-end gap-2 max-w-[88%]">
                       {isAI && (
                         <div
                           className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mb-1 text-[10px] font-bold"
                           style={{
-                            background: accentBg(0.2),
-                            color: accent,
+                            background: msg.isError ? "rgba(225,29,72,0.15)" : accentBg(0.2),
+                            color: msg.isError ? "#E11D48" : accent,
                           }}
                         >
-                          AI
+                          {msg.isError ? <AlertCircle size={13} /> : "AI"}
                         </div>
                       )}
                       <div
-                        className="px-4 py-2.5 rounded-2xl text-xs leading-relaxed whitespace-pre-line"
+                        className="px-4 py-2.5 rounded-2xl text-xs leading-relaxed"
                         style={{
                           background: isAI
-                            ? isDark
+                            ? msg.isError
+                              ? "rgba(225,29,72,0.08)"
+                              : isDark
                               ? "rgba(28, 28, 28, 0.9)"
                               : "rgba(241, 245, 249, 0.9)"
                             : accent,
                           color: isAI
-                            ? "var(--text-heading)"
+                            ? msg.isError
+                              ? "#E11D48"
+                              : "var(--text-heading)"
                             : isDark
                             ? "#0B1220"
                             : "#FFFFFF",
                           borderTopLeftRadius: isAI ? "4px" : "16px",
                           borderTopRightRadius: isAI ? "16px" : "4px",
-                          fontWeight: isAI ? 400 : 600,
+                          border: msg.isError ? "1px solid rgba(225,29,72,0.3)" : undefined,
                         }}
                       >
-                        {msg.text}
+                        {renderFormattedText(msg.text)}
                       </div>
                     </div>
 
@@ -323,7 +332,7 @@ export default function Chatbot() {
                           <button
                             key={qa.label}
                             onClick={() => handleActionClick(qa.action)}
-                            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold transition-all duration-200"
+                            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 hover:scale-105"
                             style={{
                               background: accentBg(0.12),
                               border: `1px solid ${accentBorder(0.3)}`,
@@ -340,6 +349,19 @@ export default function Chatbot() {
                 );
               })}
 
+              {/* Retry button on error */}
+              {lastFailedMessage && !isTyping && (
+                <div className="flex justify-center my-1">
+                  <button
+                    onClick={() => handleSend(lastFailedMessage)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-200 dark:bg-rose-950/40 dark:border-rose-800 dark:text-rose-300 hover:scale-105 transition-all"
+                  >
+                    <RotateCcw size={12} />
+                    Retry Last Query
+                  </button>
+                </div>
+              )}
+
               {/* Typing Indicator */}
               {isTyping && (
                 <div className="flex items-center gap-2 text-xs text-slate-400 py-1">
@@ -349,7 +371,7 @@ export default function Chatbot() {
                   >
                     AI
                   </div>
-                  <div className="flex gap-1 items-center bg-slate-200 dark:bg-zinc-800 px-3 py-2 rounded-2xl">
+                  <div className="flex gap-1 items-center bg-slate-200 dark:bg-zinc-800 px-3.5 py-2 rounded-2xl">
                     <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" />
                     <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]" />
                     <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]" />
@@ -360,7 +382,7 @@ export default function Chatbot() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Suggested Questions Quick Strip */}
+            {/* Suggested Questions Strip */}
             <div
               className="px-3 py-2 overflow-x-auto flex gap-2 border-t scrollbar-none"
               style={{
@@ -371,8 +393,8 @@ export default function Chatbot() {
               {suggestedQuestions.map((q) => (
                 <button
                   key={q}
-                  onClick={() => handleSend(q)}
-                  className="flex-shrink-0 text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all duration-200"
+                  onClick={() => handleSend(q.replace(/^[^\s]+\s*/, ""))}
+                  className="flex-shrink-0 text-[11px] font-medium px-3 py-1.5 rounded-full whitespace-nowrap transition-all duration-200 hover:scale-105"
                   style={{
                     background: isDark ? "rgba(255,255,255,0.06)" : "rgba(241,245,249,0.9)",
                     color: "var(--text-body)",
@@ -384,8 +406,12 @@ export default function Chatbot() {
               ))}
             </div>
 
-            {/* Input Footer */}
-            <div
+            {/* Input Form */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend();
+              }}
               className="p-3 border-t flex items-center gap-2"
               style={{ borderColor: accentBorder(0.2) }}
             >
@@ -393,15 +419,14 @@ export default function Chatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                placeholder="Ask me anything about Umair..."
+                placeholder="Ask about AI capabilities, projects, or services..."
                 className="flex-1 bg-transparent px-3 py-2 text-xs focus:outline-none"
                 style={{ color: "var(--text-heading)" }}
               />
               <button
-                onClick={() => handleSend()}
-                disabled={!input.trim()}
-                className="w-8 h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-40"
+                type="submit"
+                disabled={!input.trim() || isTyping}
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-40 hover:scale-105"
                 style={{
                   background: accent,
                   color: isDark ? "#0B1220" : "#FFFFFF",
@@ -410,7 +435,7 @@ export default function Chatbot() {
               >
                 <Send size={14} />
               </button>
-            </div>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>
