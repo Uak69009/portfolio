@@ -257,32 +257,53 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Trigger Button */}
+      {/* Floating Trigger Button with LIVE 3D Avatar */}
       <div className="fixed bottom-6 right-6 z-50">
         <motion.button
-          whileHover={{ scale: 1.08 }}
+          whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.94 }}
           onClick={() => setIsOpen((prev) => !prev)}
-          className="relative flex items-center gap-2.5 px-4 py-3 rounded-full shadow-2xl transition-all duration-300 min-h-[48px]"
+          className="relative flex items-center gap-3 p-1.5 pr-5 rounded-full shadow-2xl transition-all duration-300 min-h-[56px] backdrop-blur-xl border"
           style={{
             background: isDark
-              ? "linear-gradient(135deg, #EAB308, #CA8A04)"
-              : "linear-gradient(135deg, #1D4ED8, #1E40AF)",
-            color: isDark ? "#0B1220" : "#FFFFFF",
+              ? "rgba(18, 18, 18, 0.92)"
+              : "rgba(255, 255, 255, 0.92)",
+            borderColor: accentBorder(0.35),
+            color: "var(--text-heading)",
             boxShadow: isDark
-              ? "0 8px 25px rgba(234, 179, 8, 0.45)"
-              : "0 8px 25px rgba(29, 78, 216, 0.4)",
+              ? "0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(234, 179, 8, 0.25)"
+              : "0 10px 30px rgba(0, 0, 0, 0.15), 0 0 20px rgba(29, 78, 216, 0.2)",
           }}
           aria-label="Open 3D AI Avatar Chat"
         >
-          <div className="relative">
-            <Bot size={22} />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full" />
+          {/* Live Mini 3D Avatar Circle Viewport */}
+          <div
+            className="relative w-11 h-11 rounded-full overflow-hidden flex-shrink-0 border-2"
+            style={{
+              borderColor: accent,
+              background: isDark ? "#0A0A0A" : "#F1F5F9",
+              boxShadow: `0 0 12px ${accentBg(0.5)}`,
+            }}
+          >
+            <Avatar3DCanvas
+              isDark={isDark}
+              accentColor={accent}
+              isSpeaking={isSpeaking}
+            />
+            {/* Live Green Status Dot */}
+            <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-black rounded-full" />
           </div>
-          <span className="text-sm font-bold tracking-wide">
-            {isOpen ? "Close Avatar" : "3D AI Avatar"}
-          </span>
+
+          <div className="flex flex-col text-left">
+            <span className="text-xs font-extrabold tracking-tight flex items-center gap-1" style={{ color: "var(--text-heading)" }}>
+              <span>{isOpen ? "Close Avatar" : "Umair's 3D AI"}</span>
+              <Sparkles size={11} style={{ color: accent }} />
+            </span>
+            <span className="text-[10px] font-semibold text-emerald-500 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              {isOpen ? "Click to minimize" : "Live 3D &bull; Chat Now"}
+            </span>
+          </div>
         </motion.button>
       </div>
 
