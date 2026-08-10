@@ -19,7 +19,7 @@ function getEnterpriseFallback(userMessage: string): {
   const outOfScopeKeywords = ["recipe", "cook", "politics", "president", "weather", "crypto price", "joke", "song", "movie"];
   if (outOfScopeKeywords.some((k) => query.includes(k))) {
     return {
-      reply: "I am specialized strictly as the AI Assistant for Umair Amjad Khan and icode Studios. I can assist you with questions regarding Umair's AI engineering capabilities, projects, technical arsenal, or booking a consultation.",
+      reply: "I am Q (Question AI / QAI), specialized strictly as the AI Assistant for Umair Amjad Khan and icode Studios. I can assist you with questions regarding Umair's AI engineering capabilities, projects, technical arsenal, or booking a consultation.",
       quickActions: [
         { label: "View Core Skills", action: "#skills" },
         { label: "Explore AI Projects", action: "#projects" },
@@ -73,7 +73,7 @@ function getEnterpriseFallback(userMessage: string): {
 
   // General default response
   return {
-    reply: "I am the AI Assistant for Umair Amjad Khan (Founder & CEO @ icode Studios). I can assist you with questions regarding Umair's AI engineering capabilities, production RAG & LLM pipelines, featured projects, or booking a consultation.",
+    reply: "I am Q (Question AI / QAI), the AI Representative for Umair Amjad Khan (Founder & CEO @ icode Studios). How can I assist you with questions regarding Umair's AI engineering capabilities, production RAG & LLM pipelines, featured projects, or booking a consultation?",
     quickActions: [
       { label: "Core Skills", action: "#skills" },
       { label: "AI Projects", action: "#projects" },

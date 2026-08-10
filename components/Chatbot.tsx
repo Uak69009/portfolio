@@ -110,7 +110,7 @@ export default function Chatbot() {
     {
       id: "welcome-1",
       sender: "ai",
-      text: "Hello! 👋 I am **Umair's Live 3D AI Avatar**. How may I assist you today with information regarding Umair's AI engineering capabilities, production projects, or icode Studios?",
+      text: "Hello! 👋 I am **Q (Question AI / QAI)**, Umair's 3D AI Representative. How may I assist you today with information regarding Umair's AI engineering capabilities, production projects, or icode Studios?",
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     },
   ]);
@@ -320,12 +320,12 @@ export default function Chatbot() {
 
           <div className="flex flex-col text-left">
             <span className="text-xs font-extrabold tracking-tight flex items-center gap-1" style={{ color: "var(--text-heading)" }}>
-              <span>{isOpen ? "Close Avatar" : "Umair's 3D AI"}</span>
+              <span>{isOpen ? "Close Q" : "Q AI (Question AI)"}</span>
               <Sparkles size={11} style={{ color: accent }} />
             </span>
             <span className="text-[10px] font-semibold text-emerald-500 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              {isOpen ? "Click to minimize" : "Live 3D &bull; Chat Now"}
+              {isOpen ? "Click to minimize" : "Live 3D &bull; Ask Q"}
             </span>
           </div>
         </motion.button>
@@ -371,7 +371,7 @@ export default function Chatbot() {
                     className="font-bold text-xs sm:text-sm leading-tight flex items-center gap-1.5"
                     style={{ color: "var(--text-heading)" }}
                   >
-                    3D AI Avatar &bull; Umair
+                    Q (Question AI) &bull; 3D Avatar
                   </h3>
                   <p className="text-[10px] font-semibold text-emerald-500 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -599,7 +599,7 @@ export default function Chatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={isListening ? "Listening to your voice..." : "Type or speak to the 3D Avatar..."}
+                placeholder={isListening ? "Q is listening to your voice..." : "Ask Q (Question AI) anything..."}
                 className="flex-1 bg-transparent px-2 py-2 text-xs focus:outline-none"
                 style={{ color: "var(--text-heading)" }}
               />
