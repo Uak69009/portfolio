@@ -4,6 +4,7 @@ import { Mail, Heart } from "lucide-react";
 import { SiGithub, SiUpwork, SiFiverr } from "react-icons/si";
 import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
+import { useAccent } from "@/hooks/useTheme";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -24,6 +25,7 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { accent, accentBg, accentBorder } = useAccent();
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
@@ -40,7 +42,7 @@ export default function Footer() {
       {/* Ambient glow */}
       <div
         className="orb w-[400px] h-[200px] left-1/2 -translate-x-1/2 -top-10 opacity-15"
-        style={{ background: "radial-gradient(ellipse, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(ellipse, ${accent}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -80,7 +82,7 @@ export default function Footer() {
                     onClick={() => scrollTo(link.href)}
                     className="text-sm transition-colors"
                     style={{ color: "var(--text-body)" }}
-                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1D4ED8")}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = accent)}
                     onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text-body)")}
                   >
                     {link.label}
@@ -113,11 +115,11 @@ export default function Footer() {
                       color: "var(--text-body)",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(29,78,216,0.15)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(29,78,216,0.4)";
-                      (e.currentTarget as HTMLElement).style.color = "#1D4ED8";
+                      (e.currentTarget as HTMLElement).style.background = accentBg(0.15);
+                      (e.currentTarget as HTMLElement).style.borderColor = accentBorder(0.4);
+                      (e.currentTarget as HTMLElement).style.color = accent;
                       (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-                      (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(29,78,216,0.2)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 12px ${accentBg(0.25)}`;
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLElement).style.background = "var(--bg-main)";
@@ -148,7 +150,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Umair Amjad Khan. All rights reserved.
           </p>
           <p className="flex items-center gap-1.5">
-            Built with <Heart size={14} fill="#1D4ED8" color="#1D4ED8" /> using Next.js &amp; Three.js
+            Built with <Heart size={14} fill={accent} color={accent} /> using Next.js &amp; Three.js
           </p>
         </div>
       </div>

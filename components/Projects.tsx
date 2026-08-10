@@ -6,6 +6,7 @@ import { ExternalLink, Bot, Shield, Network } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 
 import { Variants } from "framer-motion";
+import { useAccent } from "@/hooks/useTheme";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 50 },
@@ -91,6 +92,17 @@ const projects = [
 export default function Projects() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { accent, accentAlt, accentBg, accentBorder } = useAccent();
+
+  // Re-map project accent colors to theme-aware values at render time
+  const themedProjects = projects.map((p, i) => ({
+    ...p,
+    iconColor: i % 2 === 0 ? accent : accentAlt,
+    iconBg: accentBg(0.09),
+    badgeColor: i % 2 === 0 ? accent : accentAlt,
+    borderColor: accentBorder(i % 2 === 0 ? 0.28 : 0.22),
+    glowColor: accentBg(0.09),
+  }));
 
   return (
     <section
@@ -101,7 +113,7 @@ export default function Projects() {
       {/* Orbs */}
       <div
         className="orb w-[600px] h-[600px] right-[-200px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -117,9 +129,9 @@ export default function Projects() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#1E40AF",
-              background: "rgba(29,78,216,0.08)",
-              border: "1px solid rgba(29,78,216,0.25)",
+              color: accent,
+              background: accentBg(0.09),
+              border: `1px solid ${accentBorder(0.28)}`,
             }}
           >
             Featured Work
@@ -129,7 +141,7 @@ export default function Projects() {
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Production{" "}
-            <span className="text-[#1D4ED8]">AI Projects</span>
+            <span style={{ color: accent }}>AI Projects</span>
           </h2>
           <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
             Real-world intelligent systems built from research to deployment —
@@ -139,7 +151,7 @@ export default function Projects() {
 
         {/* Project Cards */}
         <div className="flex flex-col gap-8">
-          {projects.map((project, i) => {
+          {themedProjects.map((project, i) => {
             const Icon = project.icon;
             return (
               <motion.article
@@ -287,8 +299,8 @@ export default function Projects() {
                           color: "var(--text-body)",
                         }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLElement).style.borderColor = "#1D4ED8";
-                          (e.currentTarget as HTMLElement).style.color = "#1D4ED8";
+                          (e.currentTarget as HTMLElement).style.borderColor = accent;
+                          (e.currentTarget as HTMLElement).style.color = accent;
                         }}
                         onMouseLeave={(e) => {
                           (e.currentTarget as HTMLElement).style.borderColor = "var(--border-color)";

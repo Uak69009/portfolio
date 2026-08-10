@@ -14,6 +14,7 @@ import { SiGithub, SiUpwork, SiFiverr } from "react-icons/si";
 import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 
 import { Variants } from "framer-motion";
+import { useAccent } from "@/hooks/useTheme";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -82,6 +83,14 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { accent, accentAlt, accentBg, accentBorder } = useAccent();
+
+  // Theme-aware social link colors
+  const themedSocialLinks = socialLinks.map((s) => ({
+    ...s,
+    color: accent,
+    bg: accentBg(0.09),
+  }));
 
   const {
     register,
@@ -146,11 +155,11 @@ export default function Contact() {
       {/* Orbs */}
       <div
         className="orb w-[500px] h-[500px] left-[-150px] bottom-[-150px] opacity-15"
-        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
       <div
         className="orb w-[400px] h-[400px] right-[-100px] top-0 opacity-15"
-        style={{ background: "radial-gradient(circle, #16233B, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accentAlt}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -166,9 +175,9 @@ export default function Contact() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#1D4ED8",
-              background: "rgba(29,78,216,0.08)",
-              border: "1px solid rgba(29,78,216,0.2)",
+              color: accent,
+              background: accentBg(0.09),
+              border: `1px solid ${accentBorder(0.22)}`,
             }}
           >
             Get In Touch
@@ -178,7 +187,7 @@ export default function Contact() {
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Let&apos;s Build Something{" "}
-            <span className="text-[#1D4ED8]">Together</span>
+            <span style={{ color: accent }}>Together</span>
           </h2>
           <p className="max-w-lg mx-auto text-base" style={{ color: "var(--text-body)" }}>
             Whether you have a project in mind, want to collaborate, or just
@@ -198,47 +207,23 @@ export default function Contact() {
           >
             {/* Info cards */}
             {[
-              {
-                icon: Mail,
-                label: "Email",
-                value: "umairamjadkhanamazai@gmail.com",
-                href: "mailto:umairamjadkhanamazai@gmail.com",
-                color: "#1E40AF",
-              },
-              {
-                icon: FaWhatsapp,
-                label: "WhatsApp",
-                value: "+92 317 0478541",
-                href: "https://wa.me/923170478541",
-                color: "#1D4ED8",
-              },
-              {
-                icon: MapPin,
-                label: "Location",
-                value: "Pakistan 🇵🇰 — Available Remotely",
-                href: null,
-                color: "#16233B",
-              },
-              {
-                icon: MessageSquare,
-                label: "Response Time",
-                value: "Usually within 24 hours",
-                href: null,
-                color: "#1D4ED8",
-              },
+              { icon: Mail, label: "Email", value: "umairamjadkhanamazai@gmail.com", href: "mailto:umairamjadkhanamazai@gmail.com" },
+              { icon: FaWhatsapp, label: "WhatsApp", value: "+92 317 0478541", href: "https://wa.me/923170478541" },
+              { icon: MapPin, label: "Location", value: "Pakistan 🇵🇰 — Available Remotely", href: null },
+              { icon: MessageSquare, label: "Response Time", value: "Usually within 24 hours", href: null },
             ].map((info) => {
               const Icon = info.icon;
               return (
                 <div
                   key={info.label}
                   className="glass-card p-5 flex items-center gap-4"
-                  style={{ border: `1px solid ${info.color}20` }}
+                  style={{ border: `1px solid ${accentBorder(0.18)}` }}
                 >
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${info.color}12`, border: `1px solid ${info.color}30` }}
+                    style={{ background: accentBg(0.10), border: `1px solid ${accentBorder(0.25)}` }}
                   >
-                    <Icon size={20} color={info.color} />
+                    <Icon size={20} color={accent} />
                   </div>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "var(--text-muted)" }}>
@@ -249,7 +234,7 @@ export default function Contact() {
                         href={info.href}
                         className="text-sm font-medium transition-colors"
                         style={{ color: "var(--text-heading)" }}
-                        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = info.color)}
+                        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = accent)}
                         onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text-heading)")}
                       >
                         {info.value}
@@ -270,7 +255,7 @@ export default function Contact() {
                 Connect With Me
               </p>
               <div className="flex flex-wrap gap-3">
-                {socialLinks.map((s) => {
+                {themedSocialLinks.map((s) => {
                   const Icon = s.icon;
                   return (
                     <a
@@ -314,7 +299,7 @@ export default function Contact() {
           >
             <div
               className="glass-card p-8 relative overflow-hidden"
-              style={{ border: "1px solid rgba(29,78,216,0.2)" }}
+              style={{ border: `1px solid ${accentBorder(0.22)}` }}
             >
               {/* Top gradient accent */}
               <div className="absolute top-0 left-0 right-0 h-px gradient-border" />
@@ -325,7 +310,7 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center gap-4"
                 >
-                  <CheckCircle2 size={56} color="#1D4ED8" />
+                  <CheckCircle2 size={56} color={accent} />
                   <h3
                     className="text-2xl font-bold"
                     style={{ color: "var(--text-heading)", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
@@ -357,7 +342,7 @@ export default function Contact() {
                         className="block text-sm font-medium mb-2"
                         style={{ color: "var(--text-body)" }}
                       >
-                        Full Name <span style={{ color: "#1D4ED8" }}>*</span>
+                        Full Name <span style={{ color: accent }}>*</span>
                       </label>
                       <input
                         id="contact-name"
@@ -381,7 +366,7 @@ export default function Contact() {
                         className="block text-sm font-medium mb-2"
                         style={{ color: "var(--text-body)" }}
                       >
-                        Email Address <span style={{ color: "#1D4ED8" }}>*</span>
+                        Email Address <span style={{ color: accent }}>*</span>
                       </label>
                       <input
                         id="contact-email"
@@ -412,7 +397,7 @@ export default function Contact() {
                       className="block text-sm font-medium mb-2"
                       style={{ color: "var(--text-body)" }}
                     >
-                      Subject <span style={{ color: "#1D4ED8" }}>*</span>
+                      Subject <span style={{ color: accent }}>*</span>
                     </label>
                     <input
                       id="contact-subject"
@@ -436,7 +421,7 @@ export default function Contact() {
                       className="block text-sm font-medium mb-2"
                       style={{ color: "var(--text-body)" }}
                     >
-                      Message <span style={{ color: "#1D4ED8" }}>*</span>
+                      Message <span style={{ color: accent }}>*</span>
                     </label>
                     <textarea
                       id="contact-message"

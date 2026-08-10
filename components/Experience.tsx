@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Briefcase, GraduationCap, MapPin, Calendar } from "lucide-react";
 import Image from "next/image";
-
 import { Variants } from "framer-motion";
+import { useAccent } from "@/hooks/useTheme";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -32,9 +32,7 @@ const timelineItems = [
       "Building custom RAG architectures, LLM fine-tuning & agentic workflows",
       "Delivering scalable web, mobile & cloud software for global clients",
     ],
-    color: "#1D4ED8",
-    bg: "rgba(29,78,216,0.08)",
-    border: "rgba(29,78,216,0.25)",
+    isPrimary: true,
   },
   {
     type: "education",
@@ -51,9 +49,7 @@ const timelineItems = [
       "Object Detection projects using YOLO (Number Plate & Smartphone Detection)",
       "Specialized in Deep Learning, Computer Vision & Pattern Recognition",
     ],
-    color: "#16233B",
-    bg: "rgba(22,35,59,0.08)",
-    border: "rgba(22,35,59,0.25)",
+    isPrimary: false,
   },
   {
     type: "work",
@@ -68,9 +64,7 @@ const timelineItems = [
       "Gained hands-on experience with Flutter mobile app integration",
       "Worked on model inference and backend pipeline optimization",
     ],
-    color: "#1D4ED8",
-    bg: "rgba(29,78,216,0.08)",
-    border: "rgba(29,78,216,0.25)",
+    isPrimary: true,
   },
   {
     type: "work",
@@ -86,9 +80,7 @@ const timelineItems = [
       "Created interactive data visualizations and executive dashboards",
       "Streamlined reporting workflows for engineering analytics",
     ],
-    color: "#16233B",
-    bg: "rgba(22,35,59,0.08)",
-    border: "rgba(22,35,59,0.25)",
+    isPrimary: false,
   },
   {
     type: "work",
@@ -103,9 +95,7 @@ const timelineItems = [
       "Developed AI-powered chatbots & intelligent backends",
       "Delivered production-ready ML solutions globally",
     ],
-    color: "#1D4ED8",
-    bg: "rgba(29,78,216,0.08)",
-    border: "rgba(29,78,216,0.25)",
+    isPrimary: true,
   },
   {
     type: "education",
@@ -122,15 +112,14 @@ const timelineItems = [
       "Deep Learning & LLM Fine-Tuning (LoRA / QLoRA)",
       "End-to-End MLOps & LLMOps Pipeline Engineering",
     ],
-    color: "#16233B",
-    bg: "rgba(22,35,59,0.08)",
-    border: "rgba(22,35,59,0.25)",
+    isPrimary: false,
   },
 ];
 
 export default function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { accent, accentAlt, accentDark, accentBg, accentBorder } = useAccent();
 
   return (
     <section
@@ -141,7 +130,7 @@ export default function Experience() {
       {/* Orb */}
       <div
         className="orb w-[500px] h-[500px] left-[-150px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -157,9 +146,9 @@ export default function Experience() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#1E40AF",
-              background: "rgba(29,78,216,0.08)",
-              border: "1px solid rgba(29,78,216,0.25)",
+              color: accent,
+              background: accentBg(0.10),
+              border: `1px solid ${accentBorder(0.28)}`,
             }}
           >
             Career &amp; Milestones
@@ -169,11 +158,10 @@ export default function Experience() {
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Experience &amp;{" "}
-            <span className="text-[#1D4ED8]">Journey</span>
+            <span style={{ color: accent }}>Journey</span>
           </h2>
           <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
-            My professional path as an AI Engineer, Studio Founder, and Machine
-            Learning researcher.
+            My professional path as an AI Engineer, Studio Founder, and Machine Learning researcher.
           </p>
         </motion.div>
 
@@ -188,7 +176,7 @@ export default function Experience() {
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="w-full h-full rounded-full"
               style={{
-                background: "linear-gradient(to bottom, #1D4ED8 0%, #16233B 50%, #1D4ED8 100%)",
+                background: `linear-gradient(to bottom, ${accent} 0%, ${accentDark} 50%, ${accent} 100%)`,
               }}
             />
           </div>
@@ -197,11 +185,14 @@ export default function Experience() {
             {timelineItems.map((item, i) => {
               const isLeft = i % 2 === 0;
               const TypeIcon = item.type === "work" ? Briefcase : GraduationCap;
+              const itemColor = item.isPrimary ? accent : accentAlt;
+              const itemBg = accentBg(item.isPrimary ? 0.10 : 0.07);
+              const itemBorder = accentBorder(item.isPrimary ? 0.28 : 0.22);
 
-              const LogoContent = item.logo ? (
+              const LogoContent = (item as { logo?: string }).logo ? (
                 <div className="relative w-8 h-8 rounded-full overflow-hidden bg-white p-0.5 transition-transform duration-200 hover:scale-110">
                   <Image
-                    src={item.logo}
+                    src={(item as { logo: string }).logo}
                     alt={`${item.organization} official logo`}
                     fill
                     sizes="32px"
@@ -210,7 +201,7 @@ export default function Experience() {
                   />
                 </div>
               ) : (
-                <TypeIcon size={20} color={item.color} />
+                <TypeIcon size={20} color={itemColor} />
               );
 
               return (
@@ -224,19 +215,19 @@ export default function Experience() {
                     isLeft ? "lg:flex-row" : "lg:flex-row-reverse"
                   }`}
                 >
-                  {/* Mobile/Desktop dot */}
+                  {/* Timeline Dot */}
                   <div className="relative z-10 flex-shrink-0 flex items-center justify-center lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-6">
                     <div
                       className="timeline-dot w-12 h-12 rounded-full flex items-center justify-center overflow-hidden"
                       style={{
-                        background: item.bg,
-                        border: `2px solid ${item.color}`,
-                        boxShadow: `0 0 0 4px var(--bg-main), 0 4px 16px ${item.color}30`,
+                        background: itemBg,
+                        border: `2px solid ${itemColor}`,
+                        boxShadow: `0 0 0 4px var(--bg-main), 0 4px 16px ${accentBg(0.25)}`,
                       }}
                     >
-                      {item.url ? (
+                      {(item as { url?: string }).url ? (
                         <a
-                          href={item.url}
+                          href={(item as { url: string }).url}
                           target="_blank"
                           rel="noopener noreferrer"
                           title={`Visit ${item.organization} official site`}
@@ -255,7 +246,7 @@ export default function Experience() {
                     className={`flex-1 glass-card p-6 lg:max-w-[calc(50%-3rem)] ${
                       isLeft ? "lg:mr-auto" : "lg:ml-auto"
                     }`}
-                    style={{ border: `1px solid ${item.border}` }}
+                    style={{ border: `1px solid ${itemBorder}` }}
                   >
                     {/* Header */}
                     <div className="mb-4">
@@ -263,24 +254,25 @@ export default function Experience() {
                         <span
                           className="text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
                           style={{
-                            color: item.color,
-                            background: `${item.color}14`,
-                            border: `1px solid ${item.color}30`,
+                            color: itemColor,
+                            background: accentBg(0.12),
+                            border: `1px solid ${accentBorder(0.25)}`,
                           }}
                         >
                           {item.type === "work" ? "Work" : "Education"}
                         </span>
-                        {item.logo && (
-                          item.url ? (
+                        {(item as { logo?: string }).logo && (
+                          (item as { url?: string }).url ? (
                             <a
-                              href={item.url}
+                              href={(item as { url: string }).url}
                               target="_blank"
                               rel="noopener noreferrer"
                               title={`Visit ${item.organization} official site`}
-                              className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm transition-all duration-200 hover:scale-110 hover:shadow-md hover:border-[#1D4ED8]"
+                              className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm transition-all duration-200 hover:scale-110 hover:shadow-md"
+                              style={{ borderColor: itemBorder }}
                             >
                               <Image
-                                src={item.logo}
+                                src={(item as { logo: string }).logo}
                                 alt={item.organization}
                                 fill
                                 sizes="40px"
@@ -290,7 +282,7 @@ export default function Experience() {
                           ) : (
                             <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm">
                               <Image
-                                src={item.logo}
+                                src={(item as { logo: string }).logo}
                                 alt={item.organization}
                                 fill
                                 sizes="40px"
@@ -310,10 +302,10 @@ export default function Experience() {
                       >
                         {item.title}
                       </h3>
-                      <p className="font-semibold text-sm mb-3 flex items-center gap-2" style={{ color: item.color }}>
-                        {item.url ? (
+                      <p className="font-semibold text-sm mb-3 flex items-center gap-2" style={{ color: itemColor }}>
+                        {(item as { url?: string }).url ? (
                           <a
-                            href={item.url}
+                            href={(item as { url: string }).url}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:underline flex items-center gap-1.5"
@@ -338,18 +330,16 @@ export default function Experience() {
                       </div>
                     </div>
 
-                    {/* Description */}
                     <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-body)" }}>
                       {item.description}
                     </p>
 
-                    {/* Highlights */}
                     <ul className="flex flex-col gap-2">
                       {item.highlights.map((h) => (
                         <li key={h} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-body)" }}>
                           <span
                             className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
-                            style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }}
+                            style={{ background: itemColor, boxShadow: `0 0 6px ${accentBg(0.5)}` }}
                           />
                           {h}
                         </li>

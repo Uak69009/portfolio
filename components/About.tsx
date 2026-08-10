@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Cpu, Layers, Zap, Globe } from "lucide-react";
-
 import { Variants } from "framer-motion";
+import { useAccent } from "@/hooks/useTheme";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -15,16 +15,17 @@ const fadeUp: Variants = {
   }),
 };
 
-const stats = [
-  { label: "Years of Experience", value: "3+", icon: Zap, color: "#1D4ED8" },
-  { label: "Projects Delivered", value: "10+", icon: Layers, color: "#16233B" },
-  { label: "AI Models Deployed", value: "5+", icon: Cpu, color: "#1D4ED8" },
-  { label: "Clients Served", value: "15+", icon: Globe, color: "#16233B" },
+const statsData = [
+  { label: "Years of Experience", value: "3+", icon: Zap, idx: 0 },
+  { label: "Projects Delivered",  value: "10+", icon: Layers, idx: 1 },
+  { label: "AI Models Deployed",  value: "5+", icon: Cpu, idx: 2 },
+  { label: "Clients Served",      value: "15+", icon: Globe, idx: 3 },
 ];
 
 export default function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { isDark, accent, accentAlt, accentBg, accentBorder } = useAccent();
 
   return (
     <section
@@ -32,10 +33,10 @@ export default function About() {
       className="section-base transition-colors duration-300"
       style={{ background: "var(--bg-alt)" }}
     >
-      {/* Ambient orbs */}
+      {/* Ambient orb */}
       <div
         className="orb w-[500px] h-[500px] right-[-150px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -43,18 +44,13 @@ export default function About() {
 
           {/* Left: Text */}
           <div>
-            <motion.div
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              variants={fadeUp}
-              custom={0}
-            >
+            <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp} custom={0}>
               <span
                 className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
                 style={{
-                  color: "#1E40AF",
-                  background: "rgba(29,78,216,0.08)",
-                  border: "1px solid rgba(29,78,216,0.25)",
+                  color: accent,
+                  background: accentBg(0.10),
+                  border: `1px solid ${accentBorder(0.28)}`,
                 }}
               >
                 About Me
@@ -70,7 +66,7 @@ export default function About() {
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
             >
               Turning Data into{" "}
-              <span className="text-[#1D4ED8]">Intelligent Systems</span>
+              <span style={{ color: accent }}>Intelligent Systems</span>
             </motion.h2>
 
             <motion.div
@@ -83,12 +79,14 @@ export default function About() {
             >
               <p>
                 I&apos;m <span style={{ color: "var(--text-heading)", fontWeight: 600 }}>Umair Amjad Khan</span>,
-                Founder &amp; CEO at <span className="text-[#1D4ED8] font-bold">icode Studios</span> (&ldquo;you imagine, WE code&rdquo;)
-                and an AI &amp; Machine Learning Engineer specializing in building production-grade intelligent systems.
+                Founder &amp; CEO at{" "}
+                <span style={{ color: accent, fontWeight: 700 }}>icode Studios</span>{" "}
+                (&ldquo;you imagine, WE code&rdquo;) and an AI &amp; Machine Learning Engineer
+                specializing in building production-grade intelligent systems.
               </p>
               <p>
-                At icode Studios, I lead software architecture and AI engineering initiatives, delivering custom
-                <span className="text-[#1D4ED8] font-semibold"> RAG pipelines</span>, LLM fine-tuning solutions,
+                At icode Studios, I lead software architecture and AI engineering initiatives, delivering custom{" "}
+                <span style={{ color: accent, fontWeight: 600 }}>RAG pipelines</span>, LLM fine-tuning solutions,
                 and scalable web &amp; mobile applications for clients worldwide.
               </p>
               <p>
@@ -105,28 +103,19 @@ export default function About() {
               custom={3}
               className="flex flex-wrap gap-3 mt-8"
             >
-              {[
-                "LLM Fine-Tuning",
-                "RAG Architectures",
-                "Computer Vision",
-                "MLOps Pipelines",
-                "Multi-Agent Systems",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 text-sm rounded-lg font-medium skill-badge"
-                >
+              {["LLM Fine-Tuning", "RAG Architectures", "Computer Vision", "MLOps Pipelines", "Multi-Agent Systems"].map((tag) => (
+                <span key={tag} className="px-4 py-2 text-sm rounded-lg font-medium skill-badge">
                   {tag}
                 </span>
               ))}
             </motion.div>
           </div>
 
-          {/* Right: Stats + Visual */}
+          {/* Right: Stats + Cards */}
           <div className="flex flex-col gap-6">
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => {
+              {statsData.map((stat, i) => {
                 const Icon = stat.icon;
                 return (
                   <motion.div
@@ -140,17 +129,17 @@ export default function About() {
                     <div
                       className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3"
                       style={{
-                        background: `${stat.color}14`,
-                        border: `1px solid ${stat.color}30`,
+                        background: accentBg(0.12),
+                        border: `1px solid ${accentBorder(0.28)}`,
                       }}
                     >
-                      <Icon size={20} color={stat.color} />
+                      <Icon size={20} color={accent} />
                     </div>
                     <div
                       className="text-3xl font-bold mb-1"
                       style={{
                         fontFamily: "var(--font-space-grotesk, sans-serif)",
-                        color: stat.color,
+                        color: accent,
                       }}
                     >
                       {stat.value}
@@ -170,14 +159,12 @@ export default function About() {
               variants={fadeUp}
               custom={7}
               className="glass-card p-6 relative overflow-hidden"
-              style={{ border: "1px solid rgba(29,78,216,0.2)" }}
+              style={{ border: `1px solid ${accentBorder(0.22)}` }}
             >
-              <div
-                className="absolute top-0 left-0 w-full h-1 gradient-border"
-              />
+              <div className="absolute top-0 left-0 w-full h-1 gradient-border" />
               <div
                 className="text-4xl mb-3 leading-none"
-                style={{ color: "rgba(29,78,216,0.3)", fontFamily: "Georgia, serif" }}
+                style={{ color: accentBg(0.4), fontFamily: "Georgia, serif" }}
               >
                 &ldquo;
               </div>
@@ -185,24 +172,24 @@ export default function About() {
                 The best AI systems are not the most complex — they are the ones
                 that solve real problems reliably, at scale, in production.
               </p>
-              <p className="text-sm font-semibold mt-4 text-[#1D4ED8]">
+              <p className="text-sm font-semibold mt-4" style={{ color: accent }}>
                 — My Engineering Philosophy
               </p>
             </motion.div>
 
-            {/* What I&apos;m working on */}
+            {/* Currently Working On */}
             <motion.div
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               variants={fadeUp}
               custom={8}
               className="glass-card p-5"
-              style={{ border: "1px solid rgba(29,78,216,0.25)" }}
+              style={{ border: `1px solid ${accentBorder(0.25)}` }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <span
                   className="w-2 h-2 rounded-full"
-                  style={{ background: "#1D4ED8", boxShadow: "0 0 8px #1D4ED8" }}
+                  style={{ background: accent, boxShadow: `0 0 8px ${accent}` }}
                 />
                 <span className="text-sm font-semibold" style={{ color: "var(--text-heading)" }}>
                   Currently Working On

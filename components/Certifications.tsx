@@ -6,6 +6,7 @@ import { Award, ShieldCheck, Cpu } from "lucide-react";
 import { SiAnthropic, SiCoursera } from "react-icons/si";
 
 import { Variants } from "framer-motion";
+import { useAccent } from "@/hooks/useTheme";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 35 },
@@ -150,6 +151,14 @@ const certifications: Certification[] = [
 export default function Certifications() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { accent, accentAlt, accentBg, accentBorder } = useAccent();
+
+  const themedCertifications = certifications.map((c, i) => ({
+    ...c,
+    color: i % 2 === 0 ? accent : accentAlt,
+    iconBg: accentBg(0.12),
+    badgeBg: accentBg(0.20),
+  }));
 
   const getBrandIcon = (brand?: string) => {
     switch (brand) {
@@ -173,7 +182,7 @@ export default function Certifications() {
       {/* Orb */}
       <div
         className="orb w-[500px] h-[500px] right-[-150px] top-1/3 opacity-15"
-        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -188,9 +197,9 @@ export default function Certifications() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#1E40AF",
-              background: "rgba(29, 78, 216, 0.08)",
-              border: "1px solid rgba(29, 78, 216, 0.25)",
+              color: accent,
+              background: accentBg(0.09),
+              border: `1px solid ${accentBorder(0.25)}`,
             }}
           >
             Verified Credentials
@@ -199,7 +208,7 @@ export default function Certifications() {
             className="text-4xl lg:text-5xl font-bold mb-4"
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
-            Certifications &amp; <span className="text-[#1D4ED8]">Specializations</span>
+            Certifications &amp; <span style={{ color: accent }}>Specializations</span>
           </h2>
           <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
             Continuous learning credentials from leading AI organizations including Anthropic,
@@ -209,7 +218,7 @@ export default function Certifications() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certifications.map((cert, i) => (
+          {themedCertifications.map((cert, i) => (
             <motion.div
               key={cert.id}
               initial="hidden"
@@ -275,7 +284,7 @@ export default function Certifications() {
                       color: "var(--text-muted)",
                     }}
                   >
-                    <ShieldCheck size={13} className="text-[#1D4ED8] flex-shrink-0" />
+                    <ShieldCheck size={13} color={accent} className="flex-shrink-0" />
                     <span className="truncate">ID: {cert.credentialId}</span>
                   </div>
                 )}

@@ -153,10 +153,10 @@ export default function Navbar() {
                     className="relative px-4 py-2 min-h-[44px] text-sm font-medium rounded-lg transition-all duration-200"
                     style={{
                       color: isActive
-                        ? isDark ? "#60A5FA" : "#1D4ED8"
+                        ? isDark ? "#FACC15" : "#1D4ED8"
                         : isDark ? "#94A3B8" : "#64748B",
                       background: isActive
-                        ? isDark ? "rgba(29, 78, 216, 0.25)" : "rgba(29, 78, 216, 0.08)"
+                        ? isDark ? "rgba(234, 179, 8, 0.18)" : "rgba(29, 78, 216, 0.08)"
                         : "transparent",
                     }}
                     onMouseEnter={(e) => {
@@ -173,7 +173,7 @@ export default function Navbar() {
                       <motion.div
                         layoutId="nav-indicator"
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                        style={{ background: isDark ? "#60A5FA" : "#1D4ED8" }}
+                        style={{ background: isDark ? "#FACC15" : "#1D4ED8" }}
                       />
                     )}
                   </button>
@@ -189,8 +189,8 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300"
               style={{
-                background: isDark ? "rgba(29, 78, 216, 0.25)" : "rgba(29, 78, 216, 0.08)",
-                border: isDark ? "1px solid rgba(96, 165, 250, 0.4)" : "1px solid rgba(29, 78, 216, 0.2)",
+                background: isDark ? "rgba(234, 179, 8, 0.15)" : "rgba(29, 78, 216, 0.08)",
+                border: isDark ? "1px solid rgba(234, 179, 8, 0.5)" : "1px solid rgba(29, 78, 216, 0.2)",
                 color: isDark ? "#FACC15" : "#1D4ED8",
               }}
               title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
@@ -212,19 +212,22 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
               className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-lg text-sm font-semibold transition-all duration-200"
               style={{
-                background: "linear-gradient(135deg, #1D4ED8, #1E40AF)",
-                color: "#fff",
+                background: isDark
+                  ? "linear-gradient(135deg, #EAB308, #CA8A04)"
+                  : "linear-gradient(135deg, #1D4ED8, #1E40AF)",
+                color: isDark ? "#0B1220" : "#fff",
                 boxShadow: isDark
-                  ? "0 4px 14px rgba(29, 78, 216, 0.5)"
+                  ? "0 4px 14px rgba(234, 179, 8, 0.35)"
                   : "0 4px 14px rgba(29, 78, 216, 0.25)",
               }}
               onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.boxShadow =
-                  "0 6px 20px rgba(29, 78, 216, 0.5)")
+                ((e.currentTarget as HTMLElement).style.boxShadow = isDark
+                  ? "0 6px 20px rgba(250, 204, 21, 0.5)"
+                  : "0 6px 20px rgba(29, 78, 216, 0.5)")
               }
               onMouseLeave={(e) =>
                 ((e.currentTarget as HTMLElement).style.boxShadow = isDark
-                  ? "0 4px 14px rgba(29, 78, 216, 0.5)"
+                  ? "0 4px 14px rgba(234, 179, 8, 0.35)"
                   : "0 4px 14px rgba(29, 78, 216, 0.25)")
               }
             >
@@ -238,8 +241,8 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300"
               style={{
-                background: isDark ? "rgba(29, 78, 216, 0.25)" : "rgba(29, 78, 216, 0.08)",
-                border: isDark ? "1px solid rgba(96, 165, 250, 0.4)" : "1px solid rgba(29, 78, 216, 0.2)",
+                background: isDark ? "rgba(234, 179, 8, 0.15)" : "rgba(29, 78, 216, 0.08)",
+                border: isDark ? "1px solid rgba(234, 179, 8, 0.5)" : "1px solid rgba(29, 78, 216, 0.2)",
                 color: isDark ? "#FACC15" : "#1D4ED8",
               }}
               title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
@@ -252,8 +255,8 @@ export default function Navbar() {
               onClick={() => setMobileOpen((v) => !v)}
               className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
               style={{
-                background: isDark ? "rgba(29, 78, 216, 0.25)" : "rgba(29, 78, 216, 0.08)",
-                color: isDark ? "#60A5FA" : "#1D4ED8",
+                background: isDark ? "rgba(234, 179, 8, 0.15)" : "rgba(29, 78, 216, 0.08)",
+                color: isDark ? "#FACC15" : "#1D4ED8",
               }}
               aria-label="Toggle mobile navigation menu"
               aria-expanded={mobileOpen}
@@ -296,11 +299,11 @@ export default function Navbar() {
                     className="text-left px-4 py-3 rounded-xl text-base font-medium min-h-[44px] transition-all"
                     style={{
                       color: active === link.href.slice(1)
-                        ? isDark ? "#60A5FA" : "#1D4ED8"
+                        ? isDark ? "#FACC15" : "#1D4ED8"
                         : isDark ? "#94A3B8" : "#64748B",
                       background:
                         active === link.href.slice(1)
-                          ? isDark ? "rgba(29, 78, 216, 0.25)" : "rgba(29, 78, 216, 0.08)"
+                          ? isDark ? "rgba(234, 179, 8, 0.18)" : "rgba(29, 78, 216, 0.08)"
                           : "transparent",
                     }}
                   >

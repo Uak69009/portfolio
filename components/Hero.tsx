@@ -5,28 +5,29 @@ import { motion } from "framer-motion";
 import { Download, Mail } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
+import { useAccent } from "@/hooks/useTheme";
 
 const NeuralCanvas = dynamic(() => import("./NeuralCanvas"), { ssr: false });
 
-const stats = [
-  { label: "Projects Built", value: "10+", color: "#1D4ED8" },
-  { label: "AI Models Deployed", value: "5+", color: "#16233B" },
-  { label: "GitHub Repos", value: "21", color: "#1D4ED8" },
+const statsData = [
+  { label: "Projects Built", value: "10+" },
+  { label: "AI Models Deployed", value: "5+" },
+  { label: "GitHub Repos", value: "21" },
 ];
 
 function ProfileAvatar({ size = 240 }: { size?: number }) {
   const height = Math.round(size * 1.25);
+  const { accent, accentDark, accentBg } = useAccent();
   return (
     <div className="flex-shrink-0 float-anim">
       <div className="relative">
         <div
           className="relative p-[3px] rounded-3xl"
           style={{
-            background: "linear-gradient(135deg, #16233B, #1D4ED8)",
+            background: `linear-gradient(135deg, ${accentDark}, ${accent})`,
             backgroundSize: "300% 300%",
             animation: "borderRotate 4s ease infinite",
-            boxShadow:
-              "0 20px 50px -10px rgba(29,78,216,0.25), 0 10px 30px -5px rgba(22,35,59,0.15)",
+            boxShadow: `0 20px 50px -10px ${accentBg(0.30)}, 0 10px 30px -5px ${accentBg(0.18)}`,
           }}
         >
           <div
@@ -55,16 +56,17 @@ function ProfileAvatar({ size = 240 }: { size?: number }) {
 function ProfileContent({ align = "center" }: { align?: "center" | "left" }) {
   const textAlign = align === "left" ? "text-center lg:text-left" : "text-center";
   const justify = align === "left" ? "justify-center lg:justify-start" : "justify-center";
+  const { accent, accentAlt, accentBg, accentBorder } = useAccent();
 
   return (
     <div className={`flex-1 ${textAlign}`}>
-      {/* Badge */}
+      {/* Available badge */}
       <div
         className={`inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full text-xs font-semibold`}
         style={{
-          background: "rgba(29,78,216,0.08)",
-          border: "1px solid rgba(29,78,216,0.2)",
-          color: "#1E40AF",
+          background: accentBg(0.08),
+          border: `1px solid ${accentBorder(0.22)}`,
+          color: accent,
         }}
       >
         <span
@@ -81,7 +83,7 @@ function ProfileContent({ align = "center" }: { align?: "center" | "left" }) {
       >
         <span>Umair</span>
         <br />
-        <span className="text-[#1D4ED8]">Amjad Khan</span>
+        <span style={{ color: accent }}>Amjad Khan</span>
       </h1>
 
       {/* Title */}
@@ -91,10 +93,10 @@ function ProfileContent({ align = "center" }: { align?: "center" | "left" }) {
       >
         <span>
           Founder &amp; CEO @{" "}
-          <span className="text-[#1D4ED8] font-extrabold">icode Studios</span>
+          <span style={{ color: accent, fontWeight: 800 }}>icode Studios</span>
         </span>
         <span className="hidden sm:inline text-slate-400">•</span>
-        <span className="text-[#1E40AF] font-extrabold">AI &amp; ML Engineer</span>
+        <span style={{ color: accentAlt, fontWeight: 800 }}>AI &amp; ML Engineer</span>
       </p>
 
       {/* Tagline */}
@@ -104,39 +106,23 @@ function ProfileContent({ align = "center" }: { align?: "center" | "left" }) {
         } leading-relaxed font-medium`}
         style={{ color: "var(--text-body)" }}
       >
-        Spearheading <span className="text-[#1D4ED8] font-bold">icode Studios</span> —
+        Spearheading{" "}
+        <span style={{ color: accent, fontWeight: 700 }}>icode Studios</span> —
         Building Production AI Systems, LLM Pipelines, and Intelligent Applications that
         solve real-world problems.
       </p>
 
       {/* CTA Buttons */}
       <div className={`flex flex-wrap gap-3.5 ${justify}`}>
-        <a
-          id="btn-download-cv"
-          href="/cv.pdf"
-          download="Umair_Amjad_Khan_CV.pdf"
-          className="btn-primary"
-        >
+        <a id="btn-download-cv" href="/cv.pdf" download="Umair_Amjad_Khan_CV.pdf" className="btn-primary">
           <Download size={17} />
           Download CV
         </a>
-
-        <a
-          id="btn-github"
-          href="https://github.com/Uak69009"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-outline"
-        >
+        <a id="btn-github" href="https://github.com/Uak69009" target="_blank" rel="noopener noreferrer" className="btn-outline">
           <SiGithub size={17} />
           View GitHub
         </a>
-
-        <a
-          id="btn-contact"
-          href="#contact"
-          className="btn-outline"
-        >
+        <a id="btn-contact" href="#contact" className="btn-outline">
           <Mail size={17} />
           Contact Me
         </a>
@@ -144,11 +130,11 @@ function ProfileContent({ align = "center" }: { align?: "center" | "left" }) {
 
       {/* Stats row */}
       <div className={`flex gap-8 sm:gap-10 mt-8 ${justify}`}>
-        {stats.map((stat) => (
+        {statsData.map((stat) => (
           <div key={stat.label} className={align === "left" ? "text-center lg:text-left" : "text-center"}>
             <div
               className="text-2xl sm:text-3xl font-extrabold"
-              style={{ color: stat.color, fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+              style={{ color: accent, fontFamily: "var(--font-space-grotesk, sans-serif)" }}
             >
               {stat.value}
             </div>
@@ -163,6 +149,7 @@ function ProfileContent({ align = "center" }: { align?: "center" | "left" }) {
 }
 
 function WelcomeNote() {
+  const { accent, accentDark, accentBg, accentBorder } = useAccent();
   return (
     <div className="relative z-10 w-full max-w-4xl px-4 sm:px-6 flex flex-col items-center mx-auto">
       <div
@@ -173,16 +160,19 @@ function WelcomeNote() {
           boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
         }}
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#16233B] to-[#1D4ED8] opacity-80" />
+        <div
+          className="absolute top-0 left-0 right-0 h-1 opacity-80"
+          style={{ background: `linear-gradient(90deg, ${accentDark}, ${accent})` }}
+        />
 
         <h2
           className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4"
           style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
         >
-          Welcome to my <span className="text-[#1D4ED8]">digital workspace.</span>
+          Welcome to my <span style={{ color: accent }}>digital workspace.</span>
         </h2>
         <p className="text-sm sm:text-base font-medium mb-4 leading-relaxed max-w-3xl mx-auto" style={{ color: "var(--text-body)" }}>
-          I&apos;m <span className="font-bold text-[#1D4ED8]">Umair Amjad Khan</span>—a
+          I&apos;m <span className="font-bold" style={{ color: accent }}>Umair Amjad Khan</span>—a
           Machine Learning Engineer and AI Specialist dedicated to building
           production-grade AI systems, LLM pipelines, and intelligent software
           applications. Whether you&apos;re exploring my latest open-source research,
@@ -193,7 +183,14 @@ function WelcomeNote() {
           Explore my featured projects below, or feel free to reach out directly to
           start a conversation.
         </p>
-        <div className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-wide shadow-md bg-[#1D4ED8] text-white shadow-[#1D4ED8]/20">
+        <div
+          className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-wide shadow-md"
+          style={{
+            background: accent,
+            color: "#0B1220",
+            boxShadow: `0 4px 14px ${accentBg(0.4)}`,
+          }}
+        >
           <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
           Scroll down to explore
         </div>
@@ -203,21 +200,21 @@ function WelcomeNote() {
 }
 
 function AmbientBackground() {
+  const { accent, accentDark, accentBg } = useAccent();
   return (
     <>
       <div
         className="orb w-[600px] h-[600px] top-[-200px] left-[-200px] opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #16233B 0%, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accentDark} 0%, transparent 70%)` }}
       />
       <div
         className="orb w-[500px] h-[500px] bottom-[-150px] right-[-150px] opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #1D4ED8 0%, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent} 0%, transparent 70%)` }}
       />
       <div
         className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none"
         style={{
-          backgroundImage:
-            "linear-gradient(#1D4ED8 1px, transparent 1px), linear-gradient(90deg, #1D4ED8 1px, transparent 1px)",
+          backgroundImage: `linear-gradient(${accent} 1px, transparent 1px), linear-gradient(90deg, ${accent} 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
@@ -232,9 +229,7 @@ export default function Hero() {
       className="relative min-h-screen font-sans overflow-hidden transition-colors duration-300"
       style={{ background: "var(--bg-main)", color: "var(--text-body)" }}
     >
-      {/* ══════════════════════════════════════════════
-          MOBILE & TABLET (< lg): linear stacked layout.
-          ══════════════════════════════════════════════ */}
+      {/* MOBILE & TABLET */}
       <div className="lg:hidden relative w-full pt-20 pb-16 px-6">
         <div className="container mx-auto max-w-xl flex flex-col items-center">
           <motion.div
@@ -267,34 +262,26 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════════
-          DESKTOP (lg+): Full hero with everything visible
-          immediately — no scroll required.
-          ══════════════════════════════════════════════ */}
+      {/* DESKTOP */}
       <div className="hidden lg:block relative w-full">
         <div
           className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-300"
           style={{ background: "var(--bg-main)" }}
         >
-          {/* Background NeuralCanvas */}
           <div className="absolute inset-0 z-0 opacity-30">
             <NeuralCanvas />
           </div>
 
           <AmbientBackground />
 
-          {/* Radial vignette overlay */}
           <div
             className="absolute inset-0 z-[1] pointer-events-none transition-colors duration-300"
             style={{
-              background:
-                "radial-gradient(ellipse at center, transparent 30%, var(--bg-main) 85%)",
+              background: "radial-gradient(ellipse at center, transparent 30%, var(--bg-main) 85%)",
             }}
           />
 
-          {/* Main Content — always visible */}
           <div className="relative z-10 container mx-auto px-6 max-w-6xl w-full flex flex-col items-center gap-12 pt-24 pb-16">
-            {/* Welcome Note */}
             <motion.div
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -304,7 +291,6 @@ export default function Hero() {
               <WelcomeNote />
             </motion.div>
 
-            {/* Profile Row: text left, avatar right */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}

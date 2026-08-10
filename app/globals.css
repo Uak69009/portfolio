@@ -378,26 +378,26 @@ html.dark .glass-card {
 }
 
 html.dark .glass-card-hover:hover {
-  border-color: rgba(96, 165, 250, 0.6) !important;
-  box-shadow: 0 20px 40px -10px rgba(29, 78, 216, 0.4) !important;
+  border-color: rgba(234, 179, 8, 0.5) !important;
+  box-shadow: 0 20px 40px -10px rgba(234, 179, 8, 0.25) !important;
 }
 
 /* Dark Mode Badges & Tags */
 html.dark .skill-badge {
-  background: rgba(29, 78, 216, 0.2) !important;
-  border-color: rgba(29, 78, 216, 0.4) !important;
-  color: #93C5FD !important;
+  background: rgba(234, 179, 8, 0.12) !important;
+  border-color: rgba(234, 179, 8, 0.35) !important;
+  color: #FACC15 !important;
 }
 html.dark .skill-badge:hover {
-  background: rgba(29, 78, 216, 0.35) !important;
+  background: rgba(234, 179, 8, 0.25) !important;
   color: #FFFFFF !important;
-  border-color: #60A5FA !important;
+  border-color: #EAB308 !important;
 }
 
 html.dark .tech-tag {
-  background: rgba(29, 78, 216, 0.2) !important;
-  border-color: rgba(29, 78, 216, 0.4) !important;
-  color: #93C5FD !important;
+  background: rgba(234, 179, 8, 0.12) !important;
+  border-color: rgba(234, 179, 8, 0.35) !important;
+  color: #FACC15 !important;
 }
 
 /* Dark Mode Inputs */
@@ -410,20 +410,31 @@ html.dark .form-input::placeholder {
   color: #94A3B8 !important;
 }
 html.dark .form-input:focus {
-  border-color: #60A5FA !important;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25) !important;
+  border-color: #EAB308 !important;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25) !important;
 }
 
 /* Dark Mode Buttons */
+html.dark .btn-primary {
+  background: linear-gradient(135deg, #EAB308, #CA8A04) !important;
+  color: #0B1220 !important;
+  box-shadow: 0 4px 18px rgba(234, 179, 8, 0.35) !important;
+}
+html.dark .btn-primary:hover {
+  background: linear-gradient(135deg, #FACC15, #EAB308) !important;
+  box-shadow: 0 6px 24px rgba(250, 204, 21, 0.5) !important;
+  color: #0B1220 !important;
+}
+
 html.dark .btn-outline {
   background: #111111 !important;
-  border-color: rgba(29, 78, 216, 0.6) !important;
-  color: #60A5FA !important;
+  border-color: rgba(234, 179, 8, 0.6) !important;
+  color: #EAB308 !important;
 }
 html.dark .btn-outline:hover {
-  background: rgba(29, 78, 216, 0.25) !important;
-  border-color: #60A5FA !important;
-  color: #FFFFFF !important;
+  background: rgba(234, 179, 8, 0.18) !important;
+  border-color: #FACC15 !important;
+  color: #FACC15 !important;
 }
 
 /* ── Hero WelcomeNote card in Dark Mode ── */
@@ -432,3 +443,101 @@ html.dark .welcome-card {
   border-color: rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
 }
+
+/* ── Golden Yellow Accents & Text Highlights in Dark Mode ── */
+html.dark .text-\[\#1D4ED8\],
+html.dark .text-\[\#1E40AF\],
+html.dark [style*="color: #1D4ED8"],
+html.dark [style*="color: #1E40AF"],
+html.dark [style*="color: #16233B"],
+html.dark [style*="color: #0369A1"],
+html.dark [style*="color: rgb(29, 78, 216)"],
+html.dark [style*="color: rgb(30, 64, 175)"],
+html.dark [style*="color: rgb(22, 35, 59)"] {
+  color: #FACC15 !important;
+}
+
+/* Section Pill Badges in Dark Mode (About Me, Technical Arsenal, Featured Work, etc.) */
+html.dark span[style*="rgba(29,78,216"],
+html.dark span[style*="rgba(29, 78, 216"],
+html.dark span[style*="1E40AF"],
+html.dark span[style*="1D4ED8"] {
+  color: #FACC15 !important;
+  background: rgba(234, 179, 8, 0.12) !important;
+  border-color: rgba(234, 179, 8, 0.35) !important;
+}
+
+/* Icon Containers & Stat Badges in Dark Mode */
+html.dark div[style*="background: rgba(29,78,216"],
+html.dark div[style*="background: rgba(29, 78, 216"],
+html.dark div[style*="background: rgba(22,35,59"],
+html.dark div[style*="background: rgba(22, 35, 59"],
+html.dark div[style*="background: rgba(3,105,161"],
+html.dark div[style*="background: rgba(30,64,175"] {
+  background: rgba(234, 179, 8, 0.12) !important;
+  border-color: rgba(234, 179, 8, 0.35) !important;
+}
+
+/* SVG stroke & fill inside icon boxes in Dark Mode */
+html.dark div[style*="background: rgba(29"] svg,
+html.dark div[style*="background: rgba(22"] svg,
+html.dark div[style*="background: rgba(3,"] svg,
+html.dark div[style*="border: 1px solid rgba(29"] svg,
+html.dark div[style*="border: 1px solid rgba(22"] svg {
+  color: #FACC15 !important;
+  stroke: #FACC15 !important;
+}
+
+/* Card borders and accent borders in Dark Mode */
+html.dark [style*="border: 1px solid rgba(29,78,216"],
+html.dark [style*="border: 1px solid rgba(29, 78, 216"],
+html.dark [style*="border: 1px solid rgba(22,35,59"],
+html.dark [style*="border: 1px solid rgba(22, 35, 59"],
+html.dark [style*="border-color: rgba(29,78,216"],
+html.dark [style*="border-color: rgba(29, 78, 216"],
+html.dark [style*="border-color: rgba(22,35,59"],
+html.dark [style*="border-color: rgba(22, 35, 59"] {
+  border-color: rgba(234, 179, 8, 0.35) !important;
+}
+
+html.dark [style*="background: #1D4ED8"],
+html.dark [style*="background-color: #1D4ED8"] {
+  background-color: #EAB308 !important;
+  color: #0B1220 !important;
+}
+
+html.dark .welcome-card .bg-\[\#1D4ED8\] {
+  background-color: #EAB308 !important;
+  color: #0B1220 !important;
+  box-shadow: 0 4px 14px rgba(234, 179, 8, 0.4) !important;
+}
+
+/* Timeline Center Gradient & Dots in Dark Mode */
+html.dark div[style*="linear-gradient(to bottom, #1D4ED8"] {
+  background: linear-gradient(to bottom, #EAB308 0%, #CA8A04 50%, #EAB308 100%) !important;
+}
+
+html.dark .timeline-dot {
+  background: rgba(234, 179, 8, 0.15) !important;
+  border-color: #EAB308 !important;
+  box-shadow: 0 0 0 4px #000000, 0 4px 16px rgba(234, 179, 8, 0.35) !important;
+}
+
+/* Hero Avatar Border Gradient & Glow in Dark Mode */
+html.dark div[style*="linear-gradient(135deg, #16233B, #1D4ED8)"] {
+  background: linear-gradient(135deg, #CA8A04, #FACC15) !important;
+  box-shadow: 0 20px 50px -10px rgba(234, 179, 8, 0.35), 0 10px 30px -5px rgba(202, 138, 4, 0.2) !important;
+}
+
+/* Ambient Orbs in Dark Mode */
+html.dark .orb {
+  background: radial-gradient(circle, #EAB308 0%, transparent 70%) !important;
+  opacity: 0.12 !important;
+}
+
+html.dark footer button:hover,
+html.dark footer a:hover {
+  color: #FACC15 !important;
+}
+
+

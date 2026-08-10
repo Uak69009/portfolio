@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Brain, Server, Layers } from "lucide-react";
+import { useAccent } from "@/hooks/useTheme";
 
 import { Variants } from "framer-motion";
 
@@ -20,73 +21,34 @@ const skillCategories = [
   {
     icon: Brain,
     title: "Machine Learning & Deep Learning",
-    color: "#1D4ED8",
-    glow: "rgba(29,78,216,0.2)",
     skills: [
-      "PyTorch",
-      "TensorFlow",
-      "Scikit-Learn",
-      "Computer Vision",
-      "OpenCV",
-      "ResNeXt",
-      "YOLO",
-      "CNNs",
-      "LSTM",
-      "Reinforcement Learning",
+      "PyTorch", "TensorFlow", "Scikit-Learn", "Computer Vision",
+      "OpenCV", "ResNeXt", "YOLO", "CNNs", "LSTM", "Reinforcement Learning",
     ],
   },
   {
     icon: Code2,
     title: "Generative AI & NLP",
-    color: "#16233B",
-    glow: "rgba(22,35,59,0.2)",
     skills: [
-      "Transformers",
-      "LLM Fine-Tuning",
-      "LoRA / QLoRA",
-      "RAG Pipelines",
-      "LangChain",
-      "LlamaIndex",
-      "Vector Databases",
-      "Prompt Engineering",
-      "HuggingFace",
-      "OpenAI API",
+      "Transformers", "LLM Fine-Tuning", "LoRA / QLoRA", "RAG Pipelines",
+      "LangChain", "LlamaIndex", "Vector Databases", "Prompt Engineering",
+      "HuggingFace", "OpenAI API",
     ],
   },
   {
     icon: Server,
     title: "MLOps & Infrastructure",
-    color: "#1D4ED8",
-    glow: "rgba(29,78,216,0.2)",
     skills: [
-      "Docker",
-      "FastAPI",
-      "Flask",
-      "Git",
-      "Linux",
-      "Model Deployment",
-      "Model Monitoring",
-      "CI/CD",
-      "REST APIs",
-      "WhatsApp API",
+      "Docker", "FastAPI", "Flask", "Git", "Linux",
+      "Model Deployment", "Model Monitoring", "CI/CD", "REST APIs", "WhatsApp API",
     ],
   },
   {
     icon: Layers,
     title: "Languages & Tools",
-    color: "#16233B",
-    glow: "rgba(22,35,59,0.2)",
     skills: [
-      "Python",
-      "C++",
-      "SQL",
-      "Google Colab",
-      "Jupyter",
-      "Pandas",
-      "NumPy",
-      "Matplotlib",
-      "Streamlit",
-      "Postman",
+      "Python", "C++", "SQL", "Google Colab", "Jupyter",
+      "Pandas", "NumPy", "Matplotlib", "Streamlit", "Postman",
     ],
   },
 ];
@@ -94,6 +56,7 @@ const skillCategories = [
 export default function Skills() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { accent, accentAlt, accentBg, accentBorder } = useAccent();
 
   return (
     <section
@@ -104,7 +67,7 @@ export default function Skills() {
       {/* Orb */}
       <div
         className="orb w-[500px] h-[500px] left-[-200px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
+        style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -120,9 +83,9 @@ export default function Skills() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#1D4ED8",
-              background: "rgba(29,78,216,0.08)",
-              border: "1px solid rgba(29,78,216,0.2)",
+              color: accent,
+              background: accentBg(0.09),
+              border: `1px solid ${accentBorder(0.22)}`,
             }}
           >
             Technical Arsenal
@@ -132,7 +95,7 @@ export default function Skills() {
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Core Skills &amp;{" "}
-            <span className="text-[#1D4ED8]">Technologies</span>
+            <span style={{ color: accent }}>Technologies</span>
           </h2>
           <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
             A battle-tested toolkit for building production AI systems — from
@@ -157,9 +120,9 @@ export default function Skills() {
                 <div className="flex items-center gap-3 mb-5">
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: cat.glow, border: `1px solid ${cat.color}30` }}
+                    style={{ background: accentBg(0.12), border: `1px solid ${accentBorder(0.28)}` }}
                   >
-                    <Icon size={20} color={cat.color} />
+                    <Icon size={20} color={accent} />
                   </div>
                   <h3
                     className="font-semibold text-base"
@@ -201,14 +164,14 @@ export default function Skills() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Python & ML Frameworks", pct: 92, color: "#1D4ED8" },
-              { label: "Generative AI & LLMs", pct: 88, color: "#16233B" },
-              { label: "MLOps & Deployment", pct: 80, color: "#1D4ED8" },
+              { label: "Python & ML Frameworks", pct: 92 },
+              { label: "Generative AI & LLMs", pct: 88 },
+              { label: "MLOps & Deployment", pct: 80 },
             ].map((bar) => (
               <div key={bar.label}>
                 <div className="flex justify-between mb-2 text-xs font-medium" style={{ color: "var(--text-body)" }}>
                   <span>{bar.label}</span>
-                  <span style={{ color: bar.color }}>{bar.pct}%</span>
+                  <span style={{ color: accent }}>{bar.pct}%</span>
                 </div>
                 <div
                   className="w-full h-1.5 rounded-full overflow-hidden"
@@ -220,8 +183,8 @@ export default function Skills() {
                     transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
                     className="h-full rounded-full"
                     style={{
-                      background: `linear-gradient(90deg, ${bar.color}, ${bar.color}CC)`,
-                      boxShadow: `0 0 8px ${bar.color}44`,
+                      background: `linear-gradient(90deg, ${accent}, ${accentAlt})`,
+                      boxShadow: `0 0 8px ${accentBg(0.35)}`,
                     }}
                   />
                 </div>
