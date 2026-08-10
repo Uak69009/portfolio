@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import {
-  X,
   Send,
   Sparkles,
   Bot,
@@ -11,8 +11,19 @@ import {
   Minimize2,
   AlertCircle,
   RotateCcw,
+  Mic,
+  MicOff,
+  Volume2,
+  VolumeX,
+  User,
+  Box,
 } from "lucide-react";
 import { useAccent } from "@/hooks/useTheme";
+import { speakText, stopSpeaking } from "@/lib/speech";
+
+const Avatar3DCanvas = dynamic(() => import("./Avatar3DCanvas"), {
+  ssr: false,
+});
 
 interface Message {
   id: string;
@@ -34,7 +45,6 @@ const suggestedQuestions = [
 function renderFormattedText(text: string) {
   const lines = text.split("\n");
   return lines.map((line, lIdx) => {
-    // Process markdown links [Label](url)
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
     const parts = [];
     let lastIndex = 0;
@@ -63,7 +73,6 @@ function renderFormattedText(text: string) {
       parts.push(line.substring(lastIndex));
     }
 
-    // Process bold text **text**
     const content = parts.map((part, pIdx) => {
       if (typeof part !== "string") return part;
       const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
@@ -89,14 +98,19 @@ function renderFormattedText(text: string) {
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [show3DAvatar, setShow3DAvatar] = useState(true);
+  const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [lastFailedMessage, setLastFailedMessage] = useState<string | null>(null);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome-1",
       sender: "ai",
-      text: "Hello! 👋 I am **Umair's Enterprise AI Representative**. How may I assist you today with information regarding Umair's AI engineering capabilities, production projects, or icode Studios?",
+      text: "Hello! 👋 I am **Umair's Live 3D AI Avatar**. How may I assist you today with information regarding Umair's AI engineering capabilities, production projects, or icode Studios?",
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     },
   ]);
@@ -114,9 +128,58 @@ export default function Chatbot() {
     }
   }, [messages, isOpen, isTyping]);
 
+  // Speech-to-Text Push-to-Talk setup using Web Speech API
+  const handleMicToggle = () => {
+    if (typeof window === "undefined") return;
+
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Speech Recognition is not supported in this browser. Try Chrome or Edge!");
+      return;
+    }
+
+    if (isListening) {
+      setIsListening(false);
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      stopSpeaking();
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+      setIsListening(false);
+      handleSend(transcript);
+    };
+
+    recognition.onerror = (err: any) => {
+      console.error("Speech recognition error:", err);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
+
   const handleSend = async (textToSend?: string) => {
     const query = textToSend || input.trim();
     if (!query) return;
+
+    stopSpeaking();
 
     const userMsg: Message = {
       id: `user-${Date.now()}`,
@@ -130,7 +193,6 @@ export default function Chatbot() {
     setIsTyping(true);
     setLastFailedMessage(null);
 
-    // Build context window payload (Max last 6 messages)
     const conversationHistory = [...messages, userMsg].slice(-6).map((m) => ({
       role: m.sender === "ai" ? "assistant" : "user",
       content: m.text,
@@ -146,15 +208,26 @@ export default function Chatbot() {
       if (!res.ok) throw new Error("API response error");
 
       const data = await res.json();
+      const replyText = data.reply || "Thank you for reaching out. How else can I assist you?";
+
       const aiMsg: Message = {
         id: `ai-${Date.now()}`,
         sender: "ai",
-        text: data.reply || "Thank you for reaching out. How else can I assist you?",
+        text: replyText,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         quickActions: data.quickActions,
       };
 
       setMessages((prev) => [...prev, aiMsg]);
+
+      // Trigger TTS Audio & Viseme Lip-Syncing if Voice is Enabled
+      if (isVoiceEnabled) {
+        speakText(
+          replyText,
+          () => setIsSpeaking(true),
+          () => setIsSpeaking(false)
+        );
+      }
     } catch (error) {
       console.error("Chat error:", error);
       setLastFailedMessage(query);
@@ -162,7 +235,7 @@ export default function Chatbot() {
         id: `error-${Date.now()}`,
         sender: "ai",
         isError: true,
-        text: "Notice: Unable to establish connection to live stream. You can reach out directly via email at `umairamjadkhanamazai@gmail.com` or click retry below.",
+        text: "Notice: Unable to establish live connection. Please email `umairamjadkhanamazai@gmail.com` or click retry.",
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         quickActions: [{ label: "Contact Directly", action: "#contact" }],
       };
@@ -200,7 +273,7 @@ export default function Chatbot() {
               ? "0 8px 25px rgba(234, 179, 8, 0.45)"
               : "0 8px 25px rgba(29, 78, 216, 0.4)",
           }}
-          aria-label="Open AI Assistant Chat"
+          aria-label="Open 3D AI Avatar Chat"
         >
           <div className="relative">
             <Bot size={22} />
@@ -208,7 +281,7 @@ export default function Chatbot() {
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full" />
           </div>
           <span className="text-sm font-bold tracking-wide">
-            {isOpen ? "Close AI" : "AI Assistant"}
+            {isOpen ? "Close Avatar" : "3D AI Avatar"}
           </span>
         </motion.button>
       </div>
@@ -221,7 +294,7 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[540px] max-h-[82vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border backdrop-blur-2xl"
+            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[420px] h-[580px] max-h-[85vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border backdrop-blur-2xl"
             style={{
               background: isDark ? "rgba(12, 12, 12, 0.96)" : "rgba(255, 255, 255, 0.96)",
               borderColor: accentBorder(0.3),
@@ -230,39 +303,61 @@ export default function Chatbot() {
                 : "0 20px 50px rgba(0,0,0,0.15), 0 0 30px rgba(29,78,216,0.1)",
             }}
           >
-            {/* Header */}
+            {/* Header Controls */}
             <div
-              className="px-5 py-4 flex items-center justify-between border-b"
+              className="px-4 py-3 flex items-center justify-between border-b"
               style={{
                 background: accentBg(0.12),
                 borderColor: accentBorder(0.2),
               }}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2.5">
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs shadow-md"
+                  className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-md"
                   style={{
                     background: accent,
                     color: isDark ? "#0B1220" : "#FFFFFF",
                   }}
                 >
-                  <Sparkles size={18} />
+                  <Sparkles size={16} />
                 </div>
                 <div>
                   <h3
-                    className="font-bold text-sm leading-tight flex items-center gap-1.5"
+                    className="font-bold text-xs sm:text-sm leading-tight flex items-center gap-1.5"
                     style={{ color: "var(--text-heading)" }}
                   >
-                    Umair&apos;s AI Representative
+                    3D AI Avatar &bull; Umair
                   </h3>
-                  <p className="text-[11px] font-semibold text-emerald-500 flex items-center gap-1">
+                  <p className="text-[10px] font-semibold text-emerald-500 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Enterprise Core &bull; Grounded Knowledge
+                    {isSpeaking ? "Speaking..." : isListening ? "Listening..." : "Interactive & Online"}
                   </p>
                 </div>
               </div>
 
+              {/* Action Buttons: 3D View, Mute, Minimize */}
               <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setShow3DAvatar((v) => !v)}
+                  title={show3DAvatar ? "Hide 3D Avatar" : "Show 3D Avatar"}
+                  className="p-1.5 rounded-lg transition-colors hover:bg-black/10 dark:hover:bg-white/10"
+                  style={{ color: show3DAvatar ? accent : "var(--text-muted)" }}
+                >
+                  <Box size={16} />
+                </button>
+
+                <button
+                  onClick={() => {
+                    setIsVoiceEnabled((v) => !v);
+                    if (isVoiceEnabled) stopSpeaking();
+                  }}
+                  title={isVoiceEnabled ? "Mute Voice" : "Enable Voice"}
+                  className="p-1.5 rounded-lg transition-colors hover:bg-black/10 dark:hover:bg-white/10"
+                  style={{ color: isVoiceEnabled ? accent : "var(--text-muted)" }}
+                >
+                  {isVoiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                </button>
+
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1.5 rounded-lg transition-colors hover:bg-black/10 dark:hover:bg-white/10"
@@ -273,6 +368,29 @@ export default function Chatbot() {
                 </button>
               </div>
             </div>
+
+            {/* 3D Animated Avatar Viewport */}
+            {show3DAvatar && (
+              <div className="relative w-full h-[180px] bg-gradient-to-b from-black/20 to-transparent flex-shrink-0 overflow-hidden border-b border-white/5">
+                <Avatar3DCanvas
+                  isDark={isDark}
+                  accentColor={accent}
+                  isSpeaking={isSpeaking}
+                />
+
+                {/* Subtitle Badge over 3D Canvas */}
+                <div className="absolute bottom-2 left-3 right-3 flex justify-between items-center pointer-events-none">
+                  <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-white/80 border border-white/10">
+                    Real-Time Viseme Lip-Sync
+                  </span>
+                  {isSpeaking && (
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-white animate-pulse">
+                      🔊 Audio Playing
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Messages Body */}
             <div className="flex-1 p-4 overflow-y-auto flex flex-col gap-3.5 scrollbar-thin">
@@ -325,7 +443,7 @@ export default function Chatbot() {
                       {msg.timestamp}
                     </span>
 
-                    {/* Quick Action Buttons attached to AI messages */}
+                    {/* Quick Action Buttons */}
                     {isAI && msg.quickActions && msg.quickActions.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-2 ml-8">
                         {msg.quickActions.map((qa) => (
@@ -349,7 +467,7 @@ export default function Chatbot() {
                 );
               })}
 
-              {/* Retry button on error */}
+              {/* Retry button */}
               {lastFailedMessage && !isTyping && (
                 <div className="flex justify-center my-1">
                   <button
@@ -406,7 +524,7 @@ export default function Chatbot() {
               ))}
             </div>
 
-            {/* Input Form */}
+            {/* Input Form with Push-to-Talk Microphone */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -415,14 +533,32 @@ export default function Chatbot() {
               className="p-3 border-t flex items-center gap-2"
               style={{ borderColor: accentBorder(0.2) }}
             >
+              {/* Push-to-Talk Mic Button */}
+              <button
+                type="button"
+                onClick={handleMicToggle}
+                title={isListening ? "Listening... Click to stop" : "Speak via Microphone"}
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                  isListening ? "animate-pulse ring-2 ring-rose-500 bg-rose-500 text-white" : ""
+                }`}
+                style={{
+                  background: isListening ? "#E11D48" : accentBg(0.15),
+                  color: isListening ? "#FFFFFF" : accent,
+                  border: `1px solid ${accentBorder(0.3)}`,
+                }}
+              >
+                {isListening ? <MicOff size={14} /> : <Mic size={14} />}
+              </button>
+
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about AI capabilities, projects, or services..."
-                className="flex-1 bg-transparent px-3 py-2 text-xs focus:outline-none"
+                placeholder={isListening ? "Listening to your voice..." : "Type or speak to the 3D Avatar..."}
+                className="flex-1 bg-transparent px-2 py-2 text-xs focus:outline-none"
                 style={{ color: "var(--text-heading)" }}
               />
+
               <button
                 type="submit"
                 disabled={!input.trim() || isTyping}
