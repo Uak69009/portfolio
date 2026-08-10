@@ -158,13 +158,13 @@ export default function Avatar3DCanvas({
 
     // ── 5. Idle Animation & Lip-Sync Render Loop ──
     let animId: number;
-    let clock = new THREE.Clock();
+    let startTime = performance.now();
     let blinkTimer = 0;
     let isBlinking = false;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
+      const time = (performance.now() - startTime) * 0.001;
 
       // A. Idle Breathing Motion
       const breath = Math.sin(time * 2.2) * 0.02;

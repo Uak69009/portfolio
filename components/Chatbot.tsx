@@ -128,8 +128,8 @@ export default function Chatbot() {
     }
   }, [messages, isOpen, isTyping]);
 
-  // Speech-to-Text Push-to-Talk setup using Web Speech API
-  const handleMicToggle = () => {
+  // Speech-to-Text Push-to-Talk setup using Web Speech API & MediaDevices
+  const handleMicToggle = async () => {
     if (typeof window === "undefined") return;
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -137,7 +137,7 @@ export default function Chatbot() {
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      alert("Speech Recognition is not supported in this browser. Try Chrome or Edge!");
+      alert("Voice input requires Google Chrome, Microsoft Edge, or Safari!");
       return;
     }
 
@@ -146,33 +146,57 @@ export default function Chatbot() {
       return;
     }
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+    // Request microphone permission first
+    try {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+    } catch (err) {
+      console.warn("Microphone access denied:", err);
+      alert("Microphone access was denied. Please allow microphone permissions in your browser address bar.");
+      return;
+    }
 
-    recognition.onstart = () => {
-      setIsListening(true);
-      stopSpeaking();
-    };
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.continuous = false;
 
-    recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      setInput(transcript);
+      recognition.onstart = () => {
+        setIsListening(true);
+        stopSpeaking();
+      };
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          setInput(transcript);
+          setIsListening(false);
+          handleSend(transcript);
+        }
+      };
+
+      recognition.onerror = (err: any) => {
+        console.warn("Speech recognition error event:", err.error);
+        setIsListening(false);
+        if (err.error === "no-speech") {
+          alert("No speech detected. Please speak into your microphone and try again.");
+        } else if (err.error === "not-allowed") {
+          alert("Microphone permission blocked. Click the lock/mic icon in your browser URL bar to allow microphone.");
+        }
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.start();
+    } catch (err) {
+      console.error("Failed to start speech recognition:", err);
       setIsListening(false);
-      handleSend(transcript);
-    };
-
-    recognition.onerror = (err: any) => {
-      console.error("Speech recognition error:", err);
-      setIsListening(false);
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-    };
-
-    recognition.start();
+    }
   };
 
   const handleSend = async (textToSend?: string) => {
