@@ -24,9 +24,9 @@ const SITE_URL = "https://www.icodestudios.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Umair Amjad Khan — AI & Machine Learning Engineer",
+  title: "Umair Amjad Khan | Official Website & AI Engineer",
   description:
-    "Umair Amjad Khan is an AI & Machine Learning Engineer and Founder & CEO of icode Studios. Specializing in LLMs, RAG pipelines, Computer Vision, MLOps, and production AI systems. Based in Pakistan, available worldwide.",
+    "Official website of Umair Amjad Khan — AI & Machine Learning Engineer and Founder & CEO of icode Studios. Specializing in LLMs, RAG pipelines, Computer Vision, MLOps, and production AI systems.",
   keywords: [
     "Umair Amjad Khan",
     "Umair Khan",
@@ -135,10 +135,13 @@ const jsonLd = {
       givenName: "Umair",
       familyName: "Khan",
       additionalName: "Amjad",
+      alternateName: ["Umair Amjad", "Umair Khan", "Umair Amjad Khan Yousafzai"],
+      disambiguatingDescription: "AI & Machine Learning Engineer, Founder & CEO of icode Studios",
       url: `${SITE_URL}/`,
+      mainEntityOfPage: `${SITE_URL}/`,
       jobTitle: "AI & Machine Learning Engineer",
       description:
-        "Umair Amjad Khan is an AI & Machine Learning Engineer and Founder & CEO of icode Studios. He specializes in building production-grade AI systems, LLM pipelines, RAG architectures, Computer Vision solutions, and MLOps workflows. Based in Pakistan, he works with clients worldwide.",
+        "Official profile of Umair Amjad Khan — AI & Machine Learning Engineer and Founder & CEO of icode Studios. Specializing in LLMs, RAG architectures, Computer Vision, and production AI systems.",
       image: {
         "@type": "ImageObject",
         url: `${SITE_URL}/profile-image.jpg`,
