@@ -24,7 +24,7 @@ function ProfileAvatar({ size = 240 }: { size?: number }) {
         <div
           className="relative p-[3px] rounded-3xl"
           style={{
-            background: `linear-gradient(135deg, ${accentDark}, ${accent})`,
+            backgroundImage: `linear-gradient(135deg, ${accentDark}, ${accent})`,
             backgroundSize: "300% 300%",
             animation: "borderRotate 4s ease infinite",
             boxShadow: `0 20px 50px -10px ${accentBg(0.30)}, 0 10px 30px -5px ${accentBg(0.18)}`,
