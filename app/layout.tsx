@@ -115,11 +115,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/logo.png", type: "image/png", sizes: "512x512" },
       { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png" }],
+    shortcut: ["/icon.png"],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
