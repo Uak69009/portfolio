@@ -64,9 +64,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/`,
   },
   verification: {
-    // Replace these with your actual verification codes from Google Search Console and Bing Webmaster Tools
-    google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
-    // yandex: "YOUR_YANDEX_CODE",
+    google: "google70a3f2bd03998538.html",
     other: {
       "msvalidate.01": "YOUR_BING_WEBMASTER_VERIFICATION_CODE",
     },
