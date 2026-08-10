@@ -1,13 +1,12 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://umairamjadkhan.dev";
-  const lastModified = new Date();
+  const baseUrl = "https://www.icodestudios.dev";
 
   return [
     {
       url: `${baseUrl}/`,
-      lastModified,
+      lastModified: new Date("2026-08-10"),
       changeFrequency: "weekly",
       priority: 1.0,
     },

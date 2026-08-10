@@ -20,10 +20,10 @@ const projects = [
   {
     id: 1,
     icon: Bot,
-    iconColor: "#0369A1",
-    iconBg: "rgba(3,105,161,0.08)",
+    iconColor: "#1D4ED8",
+    iconBg: "rgba(29,78,216,0.08)",
     badge: "Featured Project",
-    badgeColor: "#0369A1",
+    badgeColor: "#1D4ED8",
     title: "Zari.AI",
     subtitle: "Agricultural Disease Detection",
     description:
@@ -35,18 +35,18 @@ const projects = [
       "FastAPI backend with sub-200ms response",
     ],
     stack: ["Python", "Computer Vision", "Speech Processing", "FastAPI", "WhatsApp API", "PyTorch"],
-    borderColor: "rgba(3,105,161,0.25)",
-    glowColor: "rgba(3,105,161,0.08)",
+    borderColor: "rgba(29,78,216,0.25)",
+    glowColor: "rgba(29,78,216,0.08)",
     demoUrl: "#",
     githubUrl: "https://github.com/Uak69009",
   },
   {
     id: 2,
     icon: Shield,
-    iconColor: "#8B5CF6",
-    iconBg: "rgba(139,92,246,0.1)",
+    iconColor: "#16233B",
+    iconBg: "rgba(22,35,59,0.08)",
     badge: "Research Project",
-    badgeColor: "#8B5CF6",
+    badgeColor: "#1E40AF",
     title: "Deepfake Detection Platform",
     subtitle: "ResNeXt + LSTM Pipeline",
     description:
@@ -58,18 +58,18 @@ const projects = [
       "Frame-level confidence scoring with heatmaps",
     ],
     stack: ["PyTorch", "ResNeXt", "LSTM", "Flask", "Chrome Extension API", "OpenCV"],
-    borderColor: "rgba(139,92,246,0.25)",
-    glowColor: "rgba(139,92,246,0.08)",
+    borderColor: "rgba(22,35,59,0.25)",
+    glowColor: "rgba(22,35,59,0.08)",
     demoUrl: "#",
     githubUrl: "https://github.com/Uak69009",
   },
   {
     id: 3,
     icon: Network,
-    iconColor: "#6366F1",
-    iconBg: "rgba(99,102,241,0.1)",
+    iconColor: "#1D4ED8",
+    iconBg: "rgba(29,78,216,0.08)",
     badge: "Systems AI",
-    badgeColor: "#6366F1",
+    badgeColor: "#1D4ED8",
     title: "Autonomous Cyber Defense System",
     subtitle: "Multi-Agent RL for Network Security",
     description:
@@ -81,8 +81,8 @@ const projects = [
       "Network graph-based state representation",
     ],
     stack: ["Python", "PyTorch", "Multi-Agent RL", "Network Analytics", "Gymnasium"],
-    borderColor: "rgba(99,102,241,0.25)",
-    glowColor: "rgba(99,102,241,0.08)",
+    borderColor: "rgba(29,78,216,0.25)",
+    glowColor: "rgba(29,78,216,0.08)",
     demoUrl: null,
     githubUrl: "https://github.com/Uak69009",
   },
@@ -95,13 +95,13 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="section-base"
-      style={{ background: "#F8FAFC" }}
+      className="section-base transition-colors duration-300"
+      style={{ background: "var(--bg-alt)" }}
     >
       {/* Orbs */}
       <div
         className="orb w-[600px] h-[600px] right-[-200px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #4F46E5, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -117,21 +117,21 @@ export default function Projects() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#7C3AED",
-              background: "rgba(124,58,237,0.08)",
-              border: "1px solid rgba(124,58,237,0.2)",
+              color: "#1E40AF",
+              background: "rgba(29,78,216,0.08)",
+              border: "1px solid rgba(29,78,216,0.25)",
             }}
           >
             Featured Work
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Production{" "}
-            <span className="gradient-text">AI Projects</span>
+            <span className="text-[#1D4ED8]">AI Projects</span>
           </h2>
-          <p className="max-w-xl mx-auto text-base" style={{ color: "#475569" }}>
+          <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
             Real-world intelligent systems built from research to deployment —
             spanning computer vision, generative AI, and autonomous agents.
           </p>
@@ -197,7 +197,7 @@ export default function Projects() {
                       className="text-2xl font-bold mb-1"
                       style={{
                         fontFamily: "var(--font-space-grotesk, sans-serif)",
-                        color: "#0F172A",
+                        color: "var(--text-heading)",
                       }}
                     >
                       {project.title}
@@ -207,7 +207,7 @@ export default function Projects() {
                     </p>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed mb-6" style={{ color: "#475569" }}>
+                    <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-body)" }}>
                       {project.description}
                     </p>
 
@@ -229,15 +229,15 @@ export default function Projects() {
                   <div className="lg:w-72 flex flex-col justify-between gap-6">
                     {/* Key Highlights */}
                     <div
-                      className="rounded-xl p-5"
-                      style={{ background: "rgba(248,250,252,0.9)", border: "1px solid #E2E8F0" }}
+                      className="rounded-xl p-5 transition-colors duration-300"
+                      style={{ background: "var(--bg-main)", border: "1px solid var(--border-color)" }}
                     >
-                      <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#64748B" }}>
+                      <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "var(--text-muted)" }}>
                         Key Features
                       </p>
                       <ul className="flex flex-col gap-2.5">
                         {project.highlights.map((h) => (
-                          <li key={h} className="flex items-start gap-2.5 text-sm" style={{ color: "#334155" }}>
+                          <li key={h} className="flex items-start gap-2.5 text-sm" style={{ color: "var(--text-body)" }}>
                             <span
                               className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
                               style={{ background: project.iconColor, boxShadow: `0 0 6px ${project.iconColor}` }}
@@ -282,20 +282,20 @@ export default function Projects() {
                         aria-label={`View GitHub repository for ${project.title}`}
                         className="flex-1 flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
-                          background: "#FFFFFF",
-                          border: "1px solid #CBD5E1",
-                          color: "#475569",
+                          background: "var(--bg-main)",
+                          border: "1px solid var(--border-color)",
+                          color: "var(--text-body)",
                         }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLElement).style.borderColor = "#4F46E5";
-                          (e.currentTarget as HTMLElement).style.color = "#4F46E5";
+                          (e.currentTarget as HTMLElement).style.borderColor = "#1D4ED8";
+                          (e.currentTarget as HTMLElement).style.color = "#1D4ED8";
                         }}
                         onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLElement).style.borderColor = "#CBD5E1";
-                          (e.currentTarget as HTMLElement).style.color = "#475569";
+                          (e.currentTarget as HTMLElement).style.borderColor = "var(--border-color)";
+                          (e.currentTarget as HTMLElement).style.color = "var(--text-body)";
                         }}
                       >
-                      <SiGithub size={15} />
+                        <SiGithub size={15} />
                         GitHub
                       </a>
                     </div>

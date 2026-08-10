@@ -122,7 +122,7 @@ export default function NeuralCanvas() {
             h: keyH,
             elevation: 0,
             targetElevation: 0,
-            color: isSpecial ? "#0369A1" : "#4F46E5",
+            color: isSpecial ? "#1E40AF" : "#1D4ED8",
             isSpecial,
           });
 
@@ -179,7 +179,7 @@ export default function NeuralCanvas() {
     const spawnPulse = () => {
       if (connections.length === 0) return;
       const conn = connections[Math.floor(Math.random() * connections.length)];
-      const colors = ["#0369A1", "#4F46E5", "#7C3AED"];
+      const colors = ["#1D4ED8", "#1E40AF", "#16233B"];
       pulses.push({
         fromNode: conn.from,
         toNode: conn.to,
@@ -217,7 +217,7 @@ export default function NeuralCanvas() {
         const cpX = (fn.x + tn.x) / 2;
         const cpY = (fn.y + tn.y) / 2 + Math.sin(time + conn.from) * 12;
         ctx.quadraticCurveTo(cpX, cpY, tn.x, tn.y);
-        ctx.strokeStyle = `rgba(79, 70, 229, ${0.12 * conn.weight})`;
+        ctx.strokeStyle = `rgba(29, 78, 216, ${0.12 * conn.weight})`;
         ctx.lineWidth = 1.2;
         ctx.stroke();
       });
@@ -254,12 +254,12 @@ export default function NeuralCanvas() {
         n.y = n.targetY + Math.sin(time * 2 + n.pulseOffset) * 3;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius + 3, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(79, 70, 229, 0.12)";
+        ctx.fillStyle = "rgba(29, 78, 216, 0.12)";
         ctx.fill();
 
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = n.layer === 0 ? "#0369A1" : n.layer === 3 ? "#7C3AED" : "#4F46E5";
+        ctx.fillStyle = n.layer === 0 ? "#1E40AF" : n.layer === 3 ? "#16233B" : "#1D4ED8";
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
         ctx.lineWidth = 1.5;
@@ -276,7 +276,7 @@ export default function NeuralCanvas() {
           p.y = height * 0.95 + Math.random() * 40;
           p.x = Math.random() * width;
         }
-        ctx.fillStyle = `rgba(3, 105, 161, ${p.opacity})`;
+        ctx.fillStyle = `rgba(29, 78, 216, ${p.opacity})`;
         ctx.fillText(p.text, p.x, p.y);
       });
       ctx.restore();
@@ -296,9 +296,9 @@ export default function NeuralCanvas() {
         ctx.beginPath();
         ctx.roundRect(minX - 16, minY - 16, kbdW + 32, kbdH + 32, 20);
         ctx.fillStyle = "rgba(248, 250, 252, 0.92)";
-        ctx.strokeStyle = "rgba(79, 70, 229, 0.25)";
+        ctx.strokeStyle = "rgba(29, 78, 216, 0.25)";
         ctx.lineWidth = 2;
-        ctx.shadowColor = "rgba(79, 70, 229, 0.15)";
+        ctx.shadowColor = "rgba(29, 78, 216, 0.15)";
         ctx.shadowBlur = 30;
         ctx.fill();
         ctx.stroke();
@@ -328,7 +328,7 @@ export default function NeuralCanvas() {
 
         // 3D Keycap Side Bevel / Shadow (3D Extrusion Depth)
         const depth = 5 - key.elevation * 0.3;
-        ctx.fillStyle = isPopped ? "rgba(3, 105, 161, 0.3)" : "rgba(226, 232, 240, 0.95)";
+        ctx.fillStyle = isPopped ? "rgba(29, 78, 216, 0.3)" : "rgba(226, 232, 240, 0.95)";
         ctx.beginPath();
         ctx.roundRect(key.x, renderY + depth, key.w, key.h, 6);
         ctx.fill();
@@ -338,11 +338,11 @@ export default function NeuralCanvas() {
         ctx.roundRect(key.x, renderY, key.w, key.h, 6);
 
         if (key.isSpecial) {
-          ctx.fillStyle = isPopped ? "#0284C7" : "rgba(3, 105, 161, 0.12)";
-          ctx.strokeStyle = isPopped ? "#0369A1" : "rgba(3, 105, 161, 0.4)";
+          ctx.fillStyle = isPopped ? "#2563EB" : "rgba(30, 64, 175, 0.12)";
+          ctx.strokeStyle = isPopped ? "#1E40AF" : "rgba(30, 64, 175, 0.4)";
         } else {
-          ctx.fillStyle = isPopped ? "#4F46E5" : "#FFFFFF";
-          ctx.strokeStyle = isPopped ? "#4338CA" : "rgba(226, 232, 240, 0.95)";
+          ctx.fillStyle = isPopped ? "#1D4ED8" : "#FFFFFF";
+          ctx.strokeStyle = isPopped ? "#1E40AF" : "rgba(226, 232, 240, 0.95)";
         }
 
         ctx.lineWidth = isPopped ? 2 : 1;
@@ -351,7 +351,7 @@ export default function NeuralCanvas() {
 
         // 3D Keycap Glow when Popped Up
         if (isPopped) {
-          ctx.shadowColor = key.isSpecial ? "#0284C7" : "#4F46E5";
+          ctx.shadowColor = key.isSpecial ? "#2563EB" : "#1D4ED8";
           ctx.shadowBlur = 14;
         } else {
           ctx.shadowBlur = 0;

@@ -20,8 +20,8 @@ const skillCategories = [
   {
     icon: Brain,
     title: "Machine Learning & Deep Learning",
-    color: "#6366F1",
-    glow: "rgba(99,102,241,0.2)",
+    color: "#1D4ED8",
+    glow: "rgba(29,78,216,0.2)",
     skills: [
       "PyTorch",
       "TensorFlow",
@@ -38,8 +38,8 @@ const skillCategories = [
   {
     icon: Code2,
     title: "Generative AI & NLP",
-    color: "#0369A1",
-    glow: "rgba(3,105,161,0.2)",
+    color: "#16233B",
+    glow: "rgba(22,35,59,0.2)",
     skills: [
       "Transformers",
       "LLM Fine-Tuning",
@@ -56,8 +56,8 @@ const skillCategories = [
   {
     icon: Server,
     title: "MLOps & Infrastructure",
-    color: "#8B5CF6",
-    glow: "rgba(139,92,246,0.2)",
+    color: "#1D4ED8",
+    glow: "rgba(29,78,216,0.2)",
     skills: [
       "Docker",
       "FastAPI",
@@ -74,8 +74,8 @@ const skillCategories = [
   {
     icon: Layers,
     title: "Languages & Tools",
-    color: "#F59E0B",
-    glow: "rgba(245,158,11,0.2)",
+    color: "#16233B",
+    glow: "rgba(22,35,59,0.2)",
     skills: [
       "Python",
       "C++",
@@ -98,13 +98,13 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="section-base"
-      style={{ background: "#FFFFFF" }}
+      className="section-base transition-colors duration-300"
+      style={{ background: "var(--bg-main)" }}
     >
       {/* Orb */}
       <div
         className="orb w-[500px] h-[500px] left-[-200px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #7C3AED, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -120,21 +120,21 @@ export default function Skills() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#4F46E5",
-              background: "rgba(79,70,229,0.08)",
-              border: "1px solid rgba(79,70,229,0.2)",
+              color: "#1D4ED8",
+              background: "rgba(29,78,216,0.08)",
+              border: "1px solid rgba(29,78,216,0.2)",
             }}
           >
             Technical Arsenal
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Core Skills &amp;{" "}
-            <span className="gradient-text">Technologies</span>
+            <span className="text-[#1D4ED8]">Technologies</span>
           </h2>
-          <p className="max-w-xl mx-auto text-base" style={{ color: "#475569" }}>
+          <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
             A battle-tested toolkit for building production AI systems — from
             raw data to deployed intelligent applications.
           </p>
@@ -164,7 +164,7 @@ export default function Skills() {
                   <h3
                     className="font-semibold text-base"
                     style={{
-                      color: "#0F172A",
+                      color: "var(--text-heading)",
                       fontFamily: "var(--font-space-grotesk, sans-serif)",
                     }}
                   >
@@ -178,21 +178,6 @@ export default function Skills() {
                     <span
                       key={skill}
                       className="skill-badge"
-                      style={{
-                        borderColor: `${cat.color}30`,
-                        background: `${cat.color}0D`,
-                        color: "#334155",
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}60`;
-                        (e.currentTarget as HTMLElement).style.color = "#0F172A";
-                        (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 12px ${cat.glow}`;
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}30`;
-                        (e.currentTarget as HTMLElement).style.color = "#334155";
-                        (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                      }}
                     >
                       {skill}
                     </span>
@@ -211,23 +196,23 @@ export default function Skills() {
           custom={6}
           className="mt-12 glass-card p-6"
         >
-          <p className="text-sm mb-5 font-medium" style={{ color: "#475569" }}>
+          <p className="text-sm mb-5 font-medium" style={{ color: "var(--text-heading)" }}>
             Core Proficiency
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { label: "Python & ML Frameworks", pct: 92, color: "#4F46E5" },
-              { label: "Generative AI & LLMs", pct: 88, color: "#0369A1" },
-              { label: "MLOps & Deployment", pct: 80, color: "#7C3AED" },
+              { label: "Python & ML Frameworks", pct: 92, color: "#1D4ED8" },
+              { label: "Generative AI & LLMs", pct: 88, color: "#16233B" },
+              { label: "MLOps & Deployment", pct: 80, color: "#1D4ED8" },
             ].map((bar) => (
               <div key={bar.label}>
-                <div className="flex justify-between mb-2 text-xs font-medium" style={{ color: "#475569" }}>
+                <div className="flex justify-between mb-2 text-xs font-medium" style={{ color: "var(--text-body)" }}>
                   <span>{bar.label}</span>
                   <span style={{ color: bar.color }}>{bar.pct}%</span>
                 </div>
                 <div
                   className="w-full h-1.5 rounded-full overflow-hidden"
-                  style={{ background: "#E2E8F0" }}
+                  style={{ background: "var(--border-color)" }}
                 >
                   <motion.div
                     initial={{ width: 0 }}

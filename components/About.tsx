@@ -16,10 +16,10 @@ const fadeUp: Variants = {
 };
 
 const stats = [
-  { label: "Years of Experience", value: "3+", icon: Zap, color: "#0369A1" },
-  { label: "Projects Delivered", value: "10+", icon: Layers, color: "#4F46E5" },
-  { label: "AI Models Deployed", value: "5+", icon: Cpu, color: "#7C3AED" },
-  { label: "Clients Served", value: "15+", icon: Globe, color: "#D97706" },
+  { label: "Years of Experience", value: "3+", icon: Zap, color: "#1D4ED8" },
+  { label: "Projects Delivered", value: "10+", icon: Layers, color: "#16233B" },
+  { label: "AI Models Deployed", value: "5+", icon: Cpu, color: "#1D4ED8" },
+  { label: "Clients Served", value: "15+", icon: Globe, color: "#16233B" },
 ];
 
 export default function About() {
@@ -29,13 +29,13 @@ export default function About() {
   return (
     <section
       id="about"
-      className="section-base"
-      style={{ background: "#F8FAFC" }}
+      className="section-base transition-colors duration-300"
+      style={{ background: "var(--bg-alt)" }}
     >
       {/* Ambient orbs */}
       <div
         className="orb w-[500px] h-[500px] right-[-150px] top-1/2 -translate-y-1/2 opacity-15"
-        style={{ background: "radial-gradient(circle, #0369A1, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -52,9 +52,9 @@ export default function About() {
               <span
                 className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
                 style={{
-                  color: "#0369A1",
-                  background: "rgba(3,105,161,0.08)",
-                  border: "1px solid rgba(3,105,161,0.25)",
+                  color: "#1E40AF",
+                  background: "rgba(29,78,216,0.08)",
+                  border: "1px solid rgba(29,78,216,0.25)",
                 }}
               >
                 About Me
@@ -67,10 +67,10 @@ export default function About() {
               variants={fadeUp}
               custom={1}
               className="text-4xl lg:text-5xl font-bold mb-6"
-              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
+              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
             >
               Turning Data into{" "}
-              <span className="gradient-text">Intelligent Systems</span>
+              <span className="text-[#1D4ED8]">Intelligent Systems</span>
             </motion.h2>
 
             <motion.div
@@ -79,16 +79,16 @@ export default function About() {
               variants={fadeUp}
               custom={2}
               className="flex flex-col gap-4 text-base leading-relaxed"
-              style={{ color: "#475569" }}
+              style={{ color: "var(--text-body)" }}
             >
               <p>
-                I&apos;m <span style={{ color: "#0F172A", fontWeight: 600 }}>Umair Amjad Khan</span>,
-                Founder &amp; CEO at <span className="gradient-text font-bold">icode Studios</span> (&ldquo;you imagine, WE code&rdquo;)
+                I&apos;m <span style={{ color: "var(--text-heading)", fontWeight: 600 }}>Umair Amjad Khan</span>,
+                Founder &amp; CEO at <span className="text-[#1D4ED8] font-bold">icode Studios</span> (&ldquo;you imagine, WE code&rdquo;)
                 and an AI &amp; Machine Learning Engineer specializing in building production-grade intelligent systems.
               </p>
               <p>
                 At icode Studios, I lead software architecture and AI engineering initiatives, delivering custom
-                <span className="gradient-text-cyan-indigo font-semibold"> RAG pipelines</span>, LLM fine-tuning solutions,
+                <span className="text-[#1D4ED8] font-semibold"> RAG pipelines</span>, LLM fine-tuning solutions,
                 and scalable web &amp; mobile applications for clients worldwide.
               </p>
               <p>
@@ -114,12 +114,7 @@ export default function About() {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-4 py-2 text-sm rounded-lg font-medium"
-                  style={{
-                    background: "rgba(79,70,229,0.08)",
-                    border: "1px solid rgba(79,70,229,0.2)",
-                    color: "#4F46E5",
-                  }}
+                  className="px-4 py-2 text-sm rounded-lg font-medium skill-badge"
                 >
                   {tag}
                 </span>
@@ -160,7 +155,7 @@ export default function About() {
                     >
                       {stat.value}
                     </div>
-                    <div className="text-xs" style={{ color: "#64748B" }}>
+                    <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                       {stat.label}
                     </div>
                   </motion.div>
@@ -175,22 +170,22 @@ export default function About() {
               variants={fadeUp}
               custom={7}
               className="glass-card p-6 relative overflow-hidden"
-              style={{ border: "1px solid rgba(79,70,229,0.2)" }}
+              style={{ border: "1px solid rgba(29,78,216,0.2)" }}
             >
               <div
                 className="absolute top-0 left-0 w-full h-1 gradient-border"
               />
               <div
                 className="text-4xl mb-3 leading-none"
-                style={{ color: "rgba(79,70,229,0.3)", fontFamily: "Georgia, serif" }}
+                style={{ color: "rgba(29,78,216,0.3)", fontFamily: "Georgia, serif" }}
               >
                 &ldquo;
               </div>
-              <p className="text-sm leading-relaxed italic" style={{ color: "#475569" }}>
+              <p className="text-sm leading-relaxed italic" style={{ color: "var(--text-body)" }}>
                 The best AI systems are not the most complex — they are the ones
                 that solve real problems reliably, at scale, in production.
               </p>
-              <p className="text-sm font-semibold mt-4 gradient-text-cyan-indigo">
+              <p className="text-sm font-semibold mt-4 text-[#1D4ED8]">
                 — My Engineering Philosophy
               </p>
             </motion.div>
@@ -202,18 +197,18 @@ export default function About() {
               variants={fadeUp}
               custom={8}
               className="glass-card p-5"
-              style={{ border: "1px solid rgba(3,105,161,0.25)" }}
+              style={{ border: "1px solid rgba(29,78,216,0.25)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <span
                   className="w-2 h-2 rounded-full"
-                  style={{ background: "#0369A1", boxShadow: "0 0 8px #0369A1" }}
+                  style={{ background: "#1D4ED8", boxShadow: "0 0 8px #1D4ED8" }}
                 />
-                <span className="text-sm font-semibold" style={{ color: "#0F172A" }}>
+                <span className="text-sm font-semibold" style={{ color: "var(--text-heading)" }}>
                   Currently Working On
                 </span>
               </div>
-              <ul className="flex flex-col gap-2 text-sm" style={{ color: "#475569" }}>
+              <ul className="flex flex-col gap-2 text-sm" style={{ color: "var(--text-body)" }}>
                 <li>🤖 Advanced multi-modal RAG systems</li>
                 <li>🌾 Expanding Zari.AI to new crop diseases</li>
                 <li>🛡️ Publishing cyber defense research</li>

@@ -3,6 +3,7 @@
 import { Mail, Heart } from "lucide-react";
 import { SiGithub, SiUpwork, SiFiverr } from "react-icons/si";
 import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import Image from "next/image";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -30,16 +31,16 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden"
+      className="relative overflow-hidden transition-colors duration-300"
       style={{
-        background: "#F8FAFC",
-        borderTop: "1px solid #E2E8F0",
+        background: "var(--bg-alt)",
+        borderTop: "1px solid var(--border-color)",
       }}
     >
       {/* Ambient glow */}
       <div
         className="orb w-[400px] h-[200px] left-1/2 -translate-x-1/2 -top-10 opacity-15"
-        style={{ background: "radial-gradient(ellipse, #4F46E5, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, #1D4ED8, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -50,21 +51,18 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm"
-                style={{
-                  background: "linear-gradient(135deg, #4F46E5, #7C3AED)",
-                  color: "#fff",
-                  fontFamily: "var(--font-space-grotesk, sans-serif)",
-                }}
-              >
-                UAK
-              </div>
-              <span className="font-semibold" style={{ color: "#0F172A" }}>
+              <Image
+                src="/icon.svg"
+                width={40}
+                height={40}
+                alt="Umair Amjad Khan AI Logo"
+                className="rounded-xl shadow-sm w-10 h-10 object-contain"
+              />
+              <span className="font-semibold" style={{ color: "var(--text-heading)" }}>
                 Umair Amjad Khan
               </span>
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: "#64748B" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
               AI &amp; Machine Learning Engineer specializing in LLM pipelines, RAG
               architectures, and production-grade intelligent systems.
             </p>
@@ -72,7 +70,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="md:text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#64748B" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
               Navigation
             </p>
             <ul className="flex flex-col gap-2.5">
@@ -81,9 +79,9 @@ export default function Footer() {
                   <button
                     onClick={() => scrollTo(link.href)}
                     className="text-sm transition-colors"
-                    style={{ color: "#475569" }}
-                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#4F46E5")}
-                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#475569")}
+                    style={{ color: "var(--text-body)" }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1D4ED8")}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text-body)")}
                   >
                     {link.label}
                   </button>
@@ -94,7 +92,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#64748B" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
               Connect
             </p>
             <div className="flex flex-wrap gap-3">
@@ -110,21 +108,21 @@ export default function Footer() {
                     aria-label={`Umair Amjad Khan on ${s.label}`}
                     className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
                     style={{
-                      background: "#FFFFFF",
-                      border: "1px solid #CBD5E1",
-                      color: "#475569",
+                      background: "var(--bg-main)",
+                      border: "1px solid var(--border-color)",
+                      color: "var(--text-body)",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(79,70,229,0.08)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(79,70,229,0.3)";
-                      (e.currentTarget as HTMLElement).style.color = "#4F46E5";
+                      (e.currentTarget as HTMLElement).style.background = "rgba(29,78,216,0.15)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(29,78,216,0.4)";
+                      (e.currentTarget as HTMLElement).style.color = "#1D4ED8";
                       (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-                      (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(79,70,229,0.15)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(29,78,216,0.2)";
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "#FFFFFF";
-                      (e.currentTarget as HTMLElement).style.borderColor = "#CBD5E1";
-                      (e.currentTarget as HTMLElement).style.color = "#475569";
+                      (e.currentTarget as HTMLElement).style.background = "var(--bg-main)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "var(--border-color)";
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-body)";
                       (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
                       (e.currentTarget as HTMLElement).style.boxShadow = "none";
                     }}
@@ -135,22 +133,22 @@ export default function Footer() {
               })}
             </div>
 
-            <p className="text-sm mt-4" style={{ color: "#64748B" }}>
+            <p className="text-sm mt-4" style={{ color: "var(--text-muted)" }}>
               📍 Pakistan &nbsp;|&nbsp; Open to Remote Work Worldwide
             </p>
           </div>
         </div>
 
         {/* Divider */}
-        <div style={{ height: "1px", background: "#E2E8F0" }} />
+        <div style={{ height: "1px", background: "var(--border-color)" }} />
 
         {/* Bottom row */}
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: "#64748B" }}>
+        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: "var(--text-muted)" }}>
           <p suppressHydrationWarning>
             © {new Date().getFullYear()} Umair Amjad Khan. All rights reserved.
           </p>
           <p className="flex items-center gap-1.5">
-            Built with <Heart size={14} fill="#6366F1" color="#6366F1" /> using Next.js &amp; Three.js
+            Built with <Heart size={14} fill="#1D4ED8" color="#1D4ED8" /> using Next.js &amp; Three.js
           </p>
         </div>
       </div>

@@ -36,43 +36,43 @@ const socialLinks = [
     icon: SiGithub,
     label: "GitHub",
     href: "https://github.com/Uak69009",
-    color: "#0F172A",
-    bg: "rgba(15,23,42,0.06)",
+    color: "#16233B",
+    bg: "rgba(22,35,59,0.06)",
   },
   {
     icon: FaLinkedinIn,
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/",
-    color: "#0A66C2",
-    bg: "rgba(10,102,194,0.08)",
+    color: "#0369A1",
+    bg: "rgba(3,105,161,0.08)",
   },
   {
     icon: FaWhatsapp,
     label: "WhatsApp",
     href: "https://wa.me/923170478541",
-    color: "#25D366",
-    bg: "rgba(37,211,102,0.08)",
+    color: "#1D4ED8",
+    bg: "rgba(29,78,216,0.08)",
   },
   {
     icon: SiUpwork,
     label: "Upwork",
     href: "https://upwork.com",
-    color: "#14A800",
-    bg: "rgba(20,168,0,0.08)",
+    color: "#16233B",
+    bg: "rgba(22,35,59,0.08)",
   },
   {
     icon: SiFiverr,
     label: "Fiverr",
     href: "https://www.fiverr.com/umair_khan69009",
-    color: "#1DBF73",
-    bg: "rgba(29,191,115,0.08)",
+    color: "#1E40AF",
+    bg: "rgba(30,64,175,0.08)",
   },
   {
     icon: Mail,
     label: "Email",
     href: "mailto:umairamjadkhanamazai@gmail.com",
-    color: "#0369A1",
-    bg: "rgba(3,105,161,0.08)",
+    color: "#1D4ED8",
+    bg: "rgba(29,78,216,0.08)",
   },
 ];
 
@@ -140,17 +140,17 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="section-base"
-      style={{ background: "#FFFFFF" }}
+      className="section-base transition-colors duration-300"
+      style={{ background: "var(--bg-main)" }}
     >
       {/* Orbs */}
       <div
         className="orb w-[500px] h-[500px] left-[-150px] bottom-[-150px] opacity-15"
-        style={{ background: "radial-gradient(circle, #4F46E5, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
       />
       <div
         className="orb w-[400px] h-[400px] right-[-100px] top-0 opacity-15"
-        style={{ background: "radial-gradient(circle, #0284C7, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #16233B, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -166,21 +166,21 @@ export default function Contact() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#4F46E5",
-              background: "rgba(79,70,229,0.08)",
-              border: "1px solid rgba(79,70,229,0.2)",
+              color: "#1D4ED8",
+              background: "rgba(29,78,216,0.08)",
+              border: "1px solid rgba(29,78,216,0.2)",
             }}
           >
             Get In Touch
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Let&apos;s Build Something{" "}
-            <span className="gradient-text">Together</span>
+            <span className="text-[#1D4ED8]">Together</span>
           </h2>
-          <p className="max-w-lg mx-auto text-base" style={{ color: "#475569" }}>
+          <p className="max-w-lg mx-auto text-base" style={{ color: "var(--text-body)" }}>
             Whether you have a project in mind, want to collaborate, or just
             want to say hi — my inbox is always open.
           </p>
@@ -203,28 +203,28 @@ export default function Contact() {
                 label: "Email",
                 value: "umairamjadkhanamazai@gmail.com",
                 href: "mailto:umairamjadkhanamazai@gmail.com",
-                color: "#0369A1",
+                color: "#1E40AF",
               },
               {
                 icon: FaWhatsapp,
                 label: "WhatsApp",
                 value: "+92 317 0478541",
                 href: "https://wa.me/923170478541",
-                color: "#25D366",
+                color: "#1D4ED8",
               },
               {
                 icon: MapPin,
                 label: "Location",
                 value: "Pakistan 🇵🇰 — Available Remotely",
                 href: null,
-                color: "#7C3AED",
+                color: "#16233B",
               },
               {
                 icon: MessageSquare,
                 label: "Response Time",
                 value: "Usually within 24 hours",
                 href: null,
-                color: "#4F46E5",
+                color: "#1D4ED8",
               },
             ].map((info) => {
               const Icon = info.icon;
@@ -241,21 +241,21 @@ export default function Contact() {
                     <Icon size={20} color={info.color} />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "#64748B" }}>
+                    <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "var(--text-muted)" }}>
                       {info.label}
                     </p>
                     {info.href ? (
                       <a
                         href={info.href}
                         className="text-sm font-medium transition-colors"
-                        style={{ color: "#0F172A" }}
+                        style={{ color: "var(--text-heading)" }}
                         onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = info.color)}
-                        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#0F172A")}
+                        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text-heading)")}
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-sm font-medium" style={{ color: "#0F172A" }}>
+                      <p className="text-sm font-medium" style={{ color: "var(--text-heading)" }}>
                         {info.value}
                       </p>
                     )}
@@ -265,8 +265,8 @@ export default function Contact() {
             })}
 
             {/* Social Links */}
-            <div className="glass-card p-6" style={{ border: "1px solid #E2E8F0" }}>
-              <p className="text-sm font-semibold mb-4" style={{ color: "#475569" }}>
+            <div className="glass-card p-6" style={{ border: "1px solid var(--border-color)" }}>
+              <p className="text-sm font-semibold mb-4" style={{ color: "var(--text-heading)" }}>
                 Connect With Me
               </p>
               <div className="flex flex-wrap gap-3">
@@ -314,7 +314,7 @@ export default function Contact() {
           >
             <div
               className="glass-card p-8 relative overflow-hidden"
-              style={{ border: "1px solid rgba(79,70,229,0.2)" }}
+              style={{ border: "1px solid rgba(29,78,216,0.2)" }}
             >
               {/* Top gradient accent */}
               <div className="absolute top-0 left-0 right-0 h-px gradient-border" />
@@ -325,14 +325,14 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-16 text-center gap-4"
                 >
-                  <CheckCircle2 size={56} color="#0284C7" />
+                  <CheckCircle2 size={56} color="#1D4ED8" />
                   <h3
                     className="text-2xl font-bold"
-                    style={{ color: "#0F172A", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+                    style={{ color: "var(--text-heading)", fontFamily: "var(--font-space-grotesk, sans-serif)" }}
                   >
                     Message Sent!
                   </h3>
-                  <p style={{ color: "#475569" }}>
+                  <p style={{ color: "var(--text-body)" }}>
                     Thanks for reaching out. I&apos;ll get back to you within 24 hours.
                   </p>
                 </motion.div>
@@ -355,9 +355,9 @@ export default function Contact() {
                       <label
                         htmlFor="contact-name"
                         className="block text-sm font-medium mb-2"
-                        style={{ color: "#334155" }}
+                        style={{ color: "var(--text-body)" }}
                       >
-                        Full Name <span style={{ color: "#4F46E5" }}>*</span>
+                        Full Name <span style={{ color: "#1D4ED8" }}>*</span>
                       </label>
                       <input
                         id="contact-name"
@@ -379,9 +379,9 @@ export default function Contact() {
                       <label
                         htmlFor="contact-email"
                         className="block text-sm font-medium mb-2"
-                        style={{ color: "#334155" }}
+                        style={{ color: "var(--text-body)" }}
                       >
-                        Email Address <span style={{ color: "#4F46E5" }}>*</span>
+                        Email Address <span style={{ color: "#1D4ED8" }}>*</span>
                       </label>
                       <input
                         id="contact-email"
@@ -410,9 +410,9 @@ export default function Contact() {
                     <label
                       htmlFor="contact-subject"
                       className="block text-sm font-medium mb-2"
-                      style={{ color: "#334155" }}
+                      style={{ color: "var(--text-body)" }}
                     >
-                      Subject <span style={{ color: "#4F46E5" }}>*</span>
+                      Subject <span style={{ color: "#1D4ED8" }}>*</span>
                     </label>
                     <input
                       id="contact-subject"
@@ -434,9 +434,9 @@ export default function Contact() {
                     <label
                       htmlFor="contact-message"
                       className="block text-sm font-medium mb-2"
-                      style={{ color: "#334155" }}
+                      style={{ color: "var(--text-body)" }}
                     >
-                      Message <span style={{ color: "#4F46E5" }}>*</span>
+                      Message <span style={{ color: "#1D4ED8" }}>*</span>
                     </label>
                     <textarea
                       id="contact-message"

@@ -32,9 +32,9 @@ const timelineItems = [
       "Building custom RAG architectures, LLM fine-tuning & agentic workflows",
       "Delivering scalable web, mobile & cloud software for global clients",
     ],
-    color: "#0369A1",
-    bg: "rgba(3,105,161,0.08)",
-    border: "rgba(3,105,161,0.25)",
+    color: "#1D4ED8",
+    bg: "rgba(29,78,216,0.08)",
+    border: "rgba(29,78,216,0.25)",
   },
   {
     type: "education",
@@ -51,9 +51,9 @@ const timelineItems = [
       "Object Detection projects using YOLO (Number Plate & Smartphone Detection)",
       "Specialized in Deep Learning, Computer Vision & Pattern Recognition",
     ],
-    color: "#4338CA",
-    bg: "rgba(67,56,202,0.08)",
-    border: "rgba(67,56,202,0.25)",
+    color: "#16233B",
+    bg: "rgba(22,35,59,0.08)",
+    border: "rgba(22,35,59,0.25)",
   },
   {
     type: "work",
@@ -68,9 +68,9 @@ const timelineItems = [
       "Gained hands-on experience with Flutter mobile app integration",
       "Worked on model inference and backend pipeline optimization",
     ],
-    color: "#0369A1",
-    bg: "rgba(3,105,161,0.08)",
-    border: "rgba(3,105,161,0.25)",
+    color: "#1D4ED8",
+    bg: "rgba(29,78,216,0.08)",
+    border: "rgba(29,78,216,0.25)",
   },
   {
     type: "work",
@@ -86,9 +86,9 @@ const timelineItems = [
       "Created interactive data visualizations and executive dashboards",
       "Streamlined reporting workflows for engineering analytics",
     ],
-    color: "#047857",
-    bg: "rgba(4,120,87,0.08)",
-    border: "rgba(4,120,87,0.25)",
+    color: "#16233B",
+    bg: "rgba(22,35,59,0.08)",
+    border: "rgba(22,35,59,0.25)",
   },
   {
     type: "work",
@@ -103,9 +103,9 @@ const timelineItems = [
       "Developed AI-powered chatbots & intelligent backends",
       "Delivered production-ready ML solutions globally",
     ],
-    color: "#6D28D9",
-    bg: "rgba(109,40,217,0.08)",
-    border: "rgba(109,40,217,0.25)",
+    color: "#1D4ED8",
+    bg: "rgba(29,78,216,0.08)",
+    border: "rgba(29,78,216,0.25)",
   },
   {
     type: "education",
@@ -122,9 +122,9 @@ const timelineItems = [
       "Deep Learning & LLM Fine-Tuning (LoRA / QLoRA)",
       "End-to-End MLOps & LLMOps Pipeline Engineering",
     ],
-    color: "#D97706",
-    bg: "rgba(217,119,6,0.08)",
-    border: "rgba(217,119,6,0.25)",
+    color: "#16233B",
+    bg: "rgba(22,35,59,0.08)",
+    border: "rgba(22,35,59,0.25)",
   },
 ];
 
@@ -135,16 +135,16 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="section-base"
-      style={{ background: "#FFFFFF" }}
+      className="section-base transition-colors duration-300"
+      style={{ background: "var(--bg-main)" }}
     >
       {/* Orb */}
       <div
-        className="orb w-[400px] h-[400px] left-1/2 -translate-x-1/2 -top-20 opacity-15"
-        style={{ background: "radial-gradient(circle, #4F46E5, transparent 70%)" }}
+        className="orb w-[500px] h-[500px] left-[-150px] top-1/2 -translate-y-1/2 opacity-15"
+        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
       />
 
-      <div className="container mx-auto px-6 max-w-4xl" ref={ref}>
+      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
 
         {/* Section Header */}
         <motion.div
@@ -152,44 +152,44 @@ export default function Experience() {
           animate={inView ? "visible" : "hidden"}
           variants={fadeUp}
           custom={0}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#0284C7",
-              background: "rgba(2,132,199,0.08)",
-              border: "1px solid rgba(2,132,199,0.2)",
+              color: "#1E40AF",
+              background: "rgba(29,78,216,0.08)",
+              border: "1px solid rgba(29,78,216,0.25)",
             }}
           >
-            Journey
+            Career &amp; Milestones
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
             Experience &amp;{" "}
-            <span className="gradient-text">Education</span>
+            <span className="text-[#1D4ED8]">Journey</span>
           </h2>
-          <p className="max-w-lg mx-auto text-base" style={{ color: "#475569" }}>
-            A track record of building real AI systems — from academic research
-            to production deployments for global clients.
+          <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
+            My professional path as an AI Engineer, Studio Founder, and Machine
+            Learning researcher.
           </p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Timeline Container */}
         <div className="relative">
-          {/* Vertical Line */}
-          <div
-            className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-px lg:-translate-x-1/2"
-            style={{ background: "linear-gradient(to bottom, transparent, rgba(79,70,229,0.2) 10%, rgba(79,70,229,0.2) 90%, transparent)" }}
-          >
+
+          {/* Center Vertical Timeline Line */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden sm:block">
             <motion.div
-              initial={{ height: "0%" }}
-              animate={inView ? { height: "100%" } : { height: "0%" }}
-              transition={{ duration: 1.5, delay: 0.3, ease: "easeInOut" }}
-              className="w-full"
-              style={{ background: "linear-gradient(to bottom, #4F46E5, #7C3AED)" }}
+              initial={{ height: 0 }}
+              animate={inView ? { height: "100%" } : { height: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="w-full h-full rounded-full"
+              style={{
+                background: "linear-gradient(to bottom, #1D4ED8 0%, #16233B 50%, #1D4ED8 100%)",
+              }}
             />
           </div>
 
@@ -231,7 +231,7 @@ export default function Experience() {
                       style={{
                         background: item.bg,
                         border: `2px solid ${item.color}`,
-                        boxShadow: `0 0 0 4px #FFFFFF, 0 4px 16px ${item.color}30`,
+                        boxShadow: `0 0 0 4px var(--bg-main), 0 4px 16px ${item.color}30`,
                       }}
                     >
                       {item.url ? (
@@ -277,7 +277,7 @@ export default function Experience() {
                               target="_blank"
                               rel="noopener noreferrer"
                               title={`Visit ${item.organization} official site`}
-                              className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm transition-all duration-200 hover:scale-110 hover:shadow-md hover:border-amber-400"
+                              className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border border-slate-200 shadow-sm transition-all duration-200 hover:scale-110 hover:shadow-md hover:border-[#1D4ED8]"
                             >
                               <Image
                                 src={item.logo}
@@ -304,7 +304,7 @@ export default function Experience() {
                       <h3
                         className="text-lg font-bold mb-1"
                         style={{
-                          color: "#0F172A",
+                          color: "var(--text-heading)",
                           fontFamily: "var(--font-space-grotesk, sans-serif)",
                         }}
                       >
@@ -326,7 +326,7 @@ export default function Experience() {
                         )}
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#64748B" }}>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "var(--text-muted)" }}>
                         <span className="flex items-center gap-1">
                           <MapPin size={12} />
                           {item.location}
@@ -339,14 +339,14 @@ export default function Experience() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: "#475569" }}>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-body)" }}>
                       {item.description}
                     </p>
 
                     {/* Highlights */}
                     <ul className="flex flex-col gap-2">
                       {item.highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-2 text-sm" style={{ color: "#334155" }}>
+                        <li key={h} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-body)" }}>
                           <span
                             className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
                             style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }}

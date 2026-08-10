@@ -36,9 +36,9 @@ const certifications: Certification[] = [
     issuer: "Anthropic",
     issueDate: "Jul 2026",
     credentialId: "rqyino9f2azv",
-    color: "#D97706",
-    iconBg: "rgba(217, 119, 6, 0.12)",
-    badgeBg: "rgba(217, 119, 6, 0.2)",
+    color: "#1D4ED8",
+    iconBg: "rgba(29, 78, 216, 0.12)",
+    badgeBg: "rgba(29, 78, 216, 0.2)",
     brandIcon: "anthropic",
     skills: ["Claude AI", "Prompt Engineering", "LLM APIs"],
   },
@@ -48,9 +48,9 @@ const certifications: Certification[] = [
     issuer: "Anthropic",
     issueDate: "Jul 2026",
     credentialId: "9p7xdnwknfz6",
-    color: "#F59E0B",
-    iconBg: "rgba(245, 158, 11, 0.12)",
-    badgeBg: "rgba(245, 158, 11, 0.2)",
+    color: "#16233B",
+    iconBg: "rgba(22, 35, 59, 0.12)",
+    badgeBg: "rgba(22, 35, 59, 0.2)",
     brandIcon: "anthropic",
     skills: ["Prompt Engineering", "AI Foundations"],
   },
@@ -60,9 +60,9 @@ const certifications: Certification[] = [
     issuer: "IBM",
     issueDate: "Jun 2025",
     credentialId: "JYEPO77WHTAV",
-    color: "#0062FF",
-    iconBg: "rgba(0, 98, 255, 0.12)",
-    badgeBg: "rgba(0, 98, 255, 0.2)",
+    color: "#1D4ED8",
+    iconBg: "rgba(29, 78, 216, 0.12)",
+    badgeBg: "rgba(29, 78, 216, 0.2)",
     brandIcon: "ibm",
     skills: ["Generative AI", "Application Development", "Python"],
   },
@@ -72,9 +72,9 @@ const certifications: Certification[] = [
     issuer: "IBM",
     issueDate: "Jun 2025",
     credentialId: "7RFD0U06D9A1",
-    color: "#0369A1",
-    iconBg: "rgba(3, 105, 161, 0.12)",
-    badgeBg: "rgba(3, 105, 161, 0.15)",
+    color: "#16233B",
+    iconBg: "rgba(22, 35, 59, 0.12)",
+    badgeBg: "rgba(22, 35, 59, 0.2)",
     brandIcon: "ibm",
     skills: ["RAG Pipelines", "Vector Databases", "LangChain"],
   },
@@ -84,9 +84,9 @@ const certifications: Certification[] = [
     issuer: "Vanderbilt University",
     issueDate: "Feb 2025",
     credentialId: "V5YQQLJLG755",
-    color: "#8B5CF6",
-    iconBg: "rgba(139, 92, 246, 0.12)",
-    badgeBg: "rgba(139, 92, 246, 0.2)",
+    color: "#1D4ED8",
+    iconBg: "rgba(29, 78, 216, 0.12)",
+    badgeBg: "rgba(29, 78, 216, 0.2)",
     skills: ["Model Selection", "LLM Evaluation", "Fine-Tuning Strategy"],
   },
   {
@@ -95,9 +95,9 @@ const certifications: Certification[] = [
     issuer: "DeepLearning.AI",
     issueDate: "Feb 2025",
     credentialId: "P9ZL6GAT5SSJ",
-    color: "#6366F1",
-    iconBg: "rgba(99, 102, 241, 0.12)",
-    badgeBg: "rgba(99, 102, 241, 0.2)",
+    color: "#16233B",
+    iconBg: "rgba(22, 35, 59, 0.12)",
+    badgeBg: "rgba(22, 35, 59, 0.2)",
     brandIcon: "deeplearning",
     skills: ["AI Strategy", "Machine Learning Concepts", "AI Ethics"],
   },
@@ -106,9 +106,9 @@ const certifications: Certification[] = [
     title: "Hack N' Connect",
     issuer: "Ghulam Ishaq Khan Institute (GIKI)",
     issueDate: "Sep 2023",
-    color: "#10B981",
-    iconBg: "rgba(16, 185, 129, 0.12)",
-    badgeBg: "rgba(16, 185, 129, 0.2)",
+    color: "#1D4ED8",
+    iconBg: "rgba(29, 78, 216, 0.12)",
+    badgeBg: "rgba(29, 78, 216, 0.2)",
     brandIcon: "giki",
     skills: ["Computer Networking", "Systems"],
   },
@@ -117,9 +117,9 @@ const certifications: Certification[] = [
     title: "AI Agents in LangGraph (Short Course)",
     issuer: "Coursera / DeepLearning.AI",
     issueDate: "2026",
-    color: "#EC4899",
-    iconBg: "rgba(236, 72, 153, 0.12)",
-    badgeBg: "rgba(236, 72, 153, 0.2)",
+    color: "#16233B",
+    iconBg: "rgba(22, 35, 59, 0.12)",
+    badgeBg: "rgba(22, 35, 59, 0.2)",
     brandIcon: "coursera",
     skills: ["LangGraph", "Agentic Workflows", "Multi-Agent Systems"],
   },
@@ -128,9 +128,9 @@ const certifications: Certification[] = [
     title: "Python for Data Science, AI & Development",
     issuer: "IBM / Coursera",
     issueDate: "2026",
-    color: "#3B82F6",
-    iconBg: "rgba(59, 130, 246, 0.12)",
-    badgeBg: "rgba(59, 130, 246, 0.2)",
+    color: "#1D4ED8",
+    iconBg: "rgba(29, 78, 216, 0.12)",
+    badgeBg: "rgba(29, 78, 216, 0.2)",
     brandIcon: "coursera",
     skills: ["Python", "Pandas", "Data Science", "API Integration"],
   },
@@ -139,9 +139,9 @@ const certifications: Certification[] = [
     title: "Foundations of Cybersecurity",
     issuer: "Google / Coursera",
     issueDate: "2026",
-    color: "#14B8A6",
-    iconBg: "rgba(20, 184, 166, 0.12)",
-    badgeBg: "rgba(20, 184, 166, 0.2)",
+    color: "#16233B",
+    iconBg: "rgba(22, 35, 59, 0.12)",
+    badgeBg: "rgba(22, 35, 59, 0.2)",
     brandIcon: "coursera",
     skills: ["Cybersecurity", "Network Security", "Threat Analysis"],
   },
@@ -167,13 +167,13 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="section-base"
-      style={{ background: "#F8FAFC" }}
+      className="section-base transition-colors duration-300"
+      style={{ background: "var(--bg-alt)" }}
     >
-      {/* Ambient Orb */}
+      {/* Orb */}
       <div
         className="orb w-[500px] h-[500px] right-[-150px] top-1/3 opacity-15"
-        style={{ background: "radial-gradient(circle, #7C3AED, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #1D4ED8, transparent 70%)" }}
       />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -188,20 +188,20 @@ export default function Certifications() {
           <span
             className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full"
             style={{
-              color: "#7C3AED",
-              background: "rgba(124,58,237,0.08)",
-              border: "1px solid rgba(124,58,237,0.2)",
+              color: "#1E40AF",
+              background: "rgba(29, 78, 216, 0.08)",
+              border: "1px solid rgba(29, 78, 216, 0.25)",
             }}
           >
             Verified Credentials
           </span>
           <h2
             className="text-4xl lg:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "#0F172A" }}
+            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)", color: "var(--text-heading)" }}
           >
-            Certifications &amp; <span className="gradient-text">Specializations</span>
+            Certifications &amp; <span className="text-[#1D4ED8]">Specializations</span>
           </h2>
-          <p className="max-w-xl mx-auto text-base" style={{ color: "#475569" }}>
+          <p className="max-w-xl mx-auto text-base" style={{ color: "var(--text-body)" }}>
             Continuous learning credentials from leading AI organizations including Anthropic,
             IBM, DeepLearning.AI, and Vanderbilt University.
           </p>
@@ -253,7 +253,7 @@ export default function Certifications() {
                 <h3
                   className="font-bold text-base mb-1.5 leading-snug"
                   style={{
-                    color: "#0F172A",
+                    color: "var(--text-heading)",
                     fontFamily: "var(--font-space-grotesk, sans-serif)",
                   }}
                 >
@@ -268,14 +268,14 @@ export default function Certifications() {
                 {/* Credential ID */}
                 {cert.credentialId && (
                   <div
-                    className="flex items-center gap-1.5 text-[11px] mb-4 font-mono px-2.5 py-1 rounded-md"
+                    className="flex items-center gap-1.5 text-[11px] mb-4 font-mono px-2.5 py-1 rounded-md transition-colors duration-300"
                     style={{
-                      background: "rgba(248,250,252,0.9)",
-                      border: "1px solid #E2E8F0",
-                      color: "#64748B",
+                      background: "var(--bg-main)",
+                      border: "1px solid var(--border-color)",
+                      color: "var(--text-muted)",
                     }}
                   >
-                    <ShieldCheck size={13} className="text-emerald-600 flex-shrink-0" />
+                    <ShieldCheck size={13} className="text-[#1D4ED8] flex-shrink-0" />
                     <span className="truncate">ID: {cert.credentialId}</span>
                   </div>
                 )}
@@ -286,12 +286,7 @@ export default function Certifications() {
                     {cert.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="text-[11px] font-medium px-2 py-0.5 rounded-md"
-                        style={{
-                          background: "rgba(79,70,229,0.06)",
-                          color: "#334155",
-                          border: "1px solid rgba(79,70,229,0.15)",
-                        }}
+                        className="text-[11px] font-medium px-2 py-0.5 rounded-md tech-tag"
                       >
                         {skill}
                       </span>

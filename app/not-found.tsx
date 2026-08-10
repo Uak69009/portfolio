@@ -1,11 +1,18 @@
 import Link from "next/link";
 import { ArrowLeft, AlertCircle } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Page Not Found — Umair Amjad Khan Portfolio",
+  description:
+    "The page you are looking for doesn't exist. Return to Umair Amjad Khan's AI & Machine Learning Engineer portfolio.",
+};
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-6 py-24 text-slate-900">
       <div className="max-w-md w-full text-center">
-        <div className="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center mx-auto mb-6 text-indigo-600">
+        <div className="w-16 h-16 rounded-2xl bg-[#1D4ED8]/10 border border-[#1D4ED8]/20 flex items-center justify-center mx-auto mb-6 text-[#1D4ED8]">
           <AlertCircle size={32} />
         </div>
         <h1 className="text-6xl font-extrabold mb-2 text-slate-950 tracking-tight" style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}>
@@ -17,7 +24,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-600/20"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-[#1D4ED8] hover:bg-[#1E40AF] transition-colors shadow-lg shadow-[#1D4ED8]/20"
         >
           <ArrowLeft size={16} />
           Back to Portfolio
