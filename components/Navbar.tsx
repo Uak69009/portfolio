@@ -231,7 +231,7 @@ export default function Navbar() {
                   : "0 4px 14px rgba(29, 78, 216, 0.25)")
               }
             >
-              Hire Me
+              Let&apos;s Connect
             </a>
           </div>
 
