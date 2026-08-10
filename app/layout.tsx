@@ -24,7 +24,7 @@ const SITE_URL = "https://www.icodestudios.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Umair Amjad Khan — AI & Machine Learning Engineer | Founder @ icode Studios",
+  title: "Umair Amjad Khan — AI & Machine Learning Engineer",
   description:
     "Umair Amjad Khan is an AI & Machine Learning Engineer and Founder & CEO of icode Studios. Specializing in LLMs, RAG pipelines, Computer Vision, MLOps, and production AI systems. Based in Pakistan, available worldwide.",
   keywords: [
@@ -401,9 +401,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Preconnect for performance */}
+        {/* Preconnect & Preload for Google Core Web Vitals */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" as="image" href="/profile-image.jpg" type="image/jpeg" />
       </head>
       <body className="bg-white text-slate-900 antialiased overflow-x-hidden selection:bg-[#1D4ED8] selection:text-white" suppressHydrationWarning>
         {children}
