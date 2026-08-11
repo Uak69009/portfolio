@@ -1,0 +1,37 @@
+# Umair Amjad Khan — AI & Machine Learning Engineer
+
+> Umair Amjad Khan is an AI & Machine Learning Engineer and the Founder & CEO of icode Studios. He specializes in building production-grade AI systems, Large Language Model (LLM) pipelines, Retrieval Augmented Generation (RAG) architectures, Computer Vision solutions, MLOps workflows, and LLMOps pipelines. Based in Pakistan, Umair works with clients worldwide delivering intelligent software applications.
+
+## Links
+
+- Official Website & Portfolio: https://www.icodestudios.dev
+- GitHub: https://github.com/Uak69009
+- LinkedIn: https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/
+- Fiverr: https://www.fiverr.com/umair_khan69009
+- Email: umairamjadkhanamazai@gmail.com
+
+## Core Expertise
+
+- Machine Learning & Deep Learning (PyTorch, TensorFlow, CNNs, LSTMs, Transformers)
+- Large Language Models (LLM Fine-Tuning, LoRA, QLoRA, RAG Pipelines)
+- Computer Vision (Object Detection, YOLO, ResNeXt, OpenCV)
+- MLOps & LLMOps (Docker, CI/CD, Model Monitoring, LLM Evaluation, Guardrails)
+- Multi-Agent Systems & Agentic Workflows (LangChain, LangGraph)
+- Natural Language Processing (NLP)
+- Generative AI & Prompt Engineering
+
+## Featured Projects
+
+- Zari.AI: Voice-enabled AI system for real-time agricultural crop disease diagnosis via web and WhatsApp. Built with Python, Computer Vision, FastAPI, and PyTorch.
+- Deepfake Detection Platform: End-to-end deepfake video verification using ResNeXt + LSTM with a Chrome Extension. Achieves 90%+ accuracy.
+- Autonomous Cyber Defense System: Hierarchical multi-agent reinforcement learning for real-time network threat detection and automated mitigation.
+
+## Education
+
+- BS Artificial Intelligence, University of Haripur (2022–2026)
+- Incoming MS AI, GIKI — Ghulam Ishaq Khan Institute (2026)
+- Advanced AI Bootcamp 2026, GIKI
+
+## Full Details
+
+For the full, detailed profile, see: https://www.icodestudios.dev/llms-full.txt

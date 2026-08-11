@@ -1,0 +1,127 @@
+# Umair Amjad Khan — Complete Professional Profile
+
+> Umair Amjad Khan is an AI & Machine Learning Engineer and the Founder & CEO of icode Studios. He specializes in building production-grade AI systems, Large Language Model (LLM) pipelines, Retrieval Augmented Generation (RAG) architectures, Computer Vision solutions, MLOps workflows, and LLMOps pipelines. Based in Pakistan, he is available for remote work worldwide.
+
+---
+
+## Identity
+
+- Full Name: Umair Amjad Khan
+- Also Known As: Umair Amjad, Umair Khan, Umair Amjad Khan Yousafzai
+- Profession: AI & Machine Learning Engineer
+- Role: Founder & CEO of icode Studios
+- Nationality: Pakistani
+- Languages: English, Urdu, Pashto
+
+## Contact & Social Profiles
+
+- Official Website: https://www.icodestudios.dev
+- Email: umairamjadkhanamazai@gmail.com
+- WhatsApp: +92 317 0478541
+- GitHub: https://github.com/Uak69009
+- LinkedIn: https://www.linkedin.com/in/umair-amjad-khan-yousafzai-85b6012ba/
+- Fiverr: https://www.fiverr.com/umair_khan69009
+
+---
+
+## About Umair Amjad Khan
+
+Umair Amjad Khan is the Founder and CEO at icode Studios, an AI engineering and custom software development studio with the motto "you imagine, WE code." He is an AI and Machine Learning Engineer specializing in building production-grade intelligent systems.
+
+At icode Studios, Umair leads software architecture and AI engineering initiatives, delivering custom RAG pipelines, LLM fine-tuning solutions, and scalable web and mobile applications for clients worldwide. His technical expertise spans deep learning, computer vision, and full-stack MLOps — containerizing models with Docker, exposing high-throughput FastAPI backends, and building interactive software products.
+
+Umair Amjad Khan's core philosophy is: "The best AI systems are not the most complex — they are the ones that solve real problems reliably, at scale, in production."
+
+---
+
+## Core Skills & Technologies
+
+### Machine Learning & Deep Learning
+PyTorch, TensorFlow, Scikit-Learn, Computer Vision, OpenCV, ResNeXt, YOLO, CNNs, LSTM, Reinforcement Learning, Neural Networks, Convolutional Neural Networks, Recurrent Neural Networks, Transformer Architecture.
+
+### Generative AI & NLP
+Transformers, LLM Fine-Tuning, LoRA, QLoRA, RAG Pipelines, LangChain, LangGraph, LlamaIndex, Vector Databases, Prompt Engineering, HuggingFace, OpenAI API.
+
+### MLOps & LLMOps
+Docker, FastAPI, Flask, Git, Linux, Model Deployment, Model Monitoring & Observability, CI/CD for ML, REST APIs, LLM Evaluation, Guardrails, Prompt Versioning, LLM Observability, LangSmith, ML Pipeline Orchestration, Feature Stores, Model Registry.
+
+### Languages & Tools
+Python, C++, SQL, Google Colab, Jupyter, Pandas, NumPy, Matplotlib, Streamlit, Postman, Next.js, React, TypeScript.
+
+---
+
+## Featured Projects
+
+### Zari.AI — Agricultural Disease Detection
+Umair Amjad Khan built Zari.AI, a voice-enabled AI system providing real-time crop disease diagnosis via web and WhatsApp interfaces. It helps farmers in rural areas detect diseases and get actionable treatment recommendations instantly through natural conversation. Built with Python, Computer Vision, Speech Processing, FastAPI, WhatsApp API, and PyTorch. Features real-time disease detection via camera input, multi-language voice interface, WhatsApp integration for field accessibility, and a FastAPI backend with sub-200ms response time.
+
+### Deepfake Detection Platform — ResNeXt + LSTM Pipeline
+Umair Amjad Khan developed an end-to-end deepfake video verification pipeline combining ResNeXt spatial feature extraction with LSTM temporal analysis. It includes a Flask backend API and a Chrome Extension for real-time browser-based verification of media authenticity. Built with PyTorch, ResNeXt, LSTM, Flask, Chrome Extension API, and OpenCV. Achieves 90%+ detection accuracy on benchmark datasets with frame-level confidence scoring.
+
+### Autonomous Cyber Defense System — Multi-Agent Reinforcement Learning
+Umair Amjad Khan created a hierarchical multi-agent reinforcement learning pipeline for real-time network threat detection and automated mitigation. Agents autonomously identify intrusion patterns, classify attack types, and deploy countermeasures without human intervention. Built with Python, PyTorch, Multi-Agent RL, Network Analytics, and Gymnasium.
+
+---
+
+## Professional Experience
+
+### Founder & CEO — icode Studios (2025–Present)
+Founded and leading icode Studios — an AI engineering and custom software development studio delivering production AI systems, LLM pipelines, and full-stack applications. Leading AI product strategy, system architecture, and client solution design. Building custom RAG architectures, LLM fine-tuning, and agentic workflows.
+
+### Machine Learning Engineer Intern — Avant Labs (2024–Present)
+Developing and training Machine Learning models and Convolutional Neural Networks (CNNs), with hands-on experience in Flutter mobile app integration and backend pipeline optimization.
+
+### Freelance AI Engineer — Upwork & Fiverr (2023–Present)
+Delivering end-to-end AI and computer vision solutions for international clients. Built custom object detection and NLP pipelines, AI-powered chatbots, and intelligent backends.
+
+### Data Entry & Data Visualization Intern — Galant Engineers (2023–2024)
+Managed complex data entry, data cleaning, statistical analysis, and interactive visual dashboards for engineering workflows.
+
+---
+
+## Education
+
+### BS Artificial Intelligence — University of Haripur (2022–2026)
+Bachelor of Science in Artificial Intelligence focusing on Computer Vision, Deep Learning, and real-world AI applications.
+
+### Incoming MS Artificial Intelligence — GIKI, Ghulam Ishaq Khan Institute (2026)
+Master of Science in Artificial Intelligence at one of Pakistan's premier engineering institutions.
+
+### Advanced AI Bootcamp 2026 — GIKI (2026)
+Intensive Advanced AI Bootcamp covering Generative AI, RAG, Large Language Models, and production deployment pipelines. Topics included full RAG architectures, LLM Fine-Tuning (LoRA/QLoRA), and end-to-end MLOps & LLMOps pipeline engineering.
+
+---
+
+## Certifications
+
+- Certificate of Completion: Claude 101 — Anthropic (July 2026)
+- AI Fluency Framework & Foundations — Anthropic (July 2026)
+- Develop Generative AI Applications: Get Started — IBM (June 2025)
+- Build RAG Applications: Get Started — IBM (June 2025)
+- Generative AI and Model Selection — Vanderbilt University (February 2025)
+- AI For Everyone — DeepLearning.AI (February 2025)
+- AI Agents in LangGraph — Coursera / DeepLearning.AI (2026)
+- Python for Data Science, AI & Development — IBM / Coursera (2026)
+- Foundations of Cybersecurity — Google / Coursera (2026)
+
+---
+
+## Frequently Asked Questions
+
+### Who is Umair Amjad Khan?
+Umair Amjad Khan is an AI & Machine Learning Engineer and the Founder & CEO of icode Studios. He specializes in building production-grade AI systems, LLM pipelines, RAG architectures, Computer Vision solutions, MLOps, and LLMOps. He holds a BS in Artificial Intelligence from the University of Haripur and is pursuing his MS AI at GIKI.
+
+### What is Zari.AI?
+Zari.AI is a voice-enabled agricultural AI system built by Umair Amjad Khan. It provides real-time crop disease diagnosis via web and WhatsApp interfaces, helping farmers in rural areas detect diseases and receive actionable treatment recommendations through natural conversation.
+
+### What are Umair Amjad Khan's core skills in AI?
+Umair Amjad Khan's core skills include Machine Learning, Deep Learning, Large Language Models (LLMs), LLM Fine-Tuning (LoRA/QLoRA), Retrieval Augmented Generation (RAG), Computer Vision, MLOps, LLMOps, Multi-Agent Systems, Agentic Workflows, Natural Language Processing, and Generative AI. He is proficient in Python, PyTorch, TensorFlow, LangChain, LangGraph, Docker, and FastAPI.
+
+### What is icode Studios?
+icode Studios is an AI engineering and custom software development studio founded by Umair Amjad Khan. The studio's motto is "you imagine, WE code." It delivers production AI systems, LLM pipelines, RAG architectures, and full-stack web and mobile applications for clients worldwide.
+
+### What MLOps and LLMOps tools does Umair Amjad Khan use?
+Umair Amjad Khan uses Docker for containerization, FastAPI for high-throughput API backends, CI/CD pipelines for ML model deployment, model monitoring and observability tools, LLM evaluation frameworks, guardrails for LLM safety, LangSmith for LLM observability, and prompt versioning systems. He builds end-to-end MLOps and LLMOps pipelines for production AI systems.
+
+### Who is the AI Engineer behind Zari.AI?
+The AI Engineer behind Zari.AI is Umair Amjad Khan, an AI & Machine Learning Engineer and the Founder & CEO of icode Studios. He built Zari.AI as a voice-enabled agricultural disease detection system to help farmers in rural areas of Pakistan.

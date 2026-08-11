@@ -37,10 +37,11 @@ const skillCategories = [
   },
   {
     icon: Server,
-    title: "MLOps & Infrastructure",
+    title: "MLOps, LLMOps & Infrastructure",
     skills: [
       "Docker", "FastAPI", "Flask", "Git", "Linux",
       "Model Deployment", "Model Monitoring", "CI/CD", "REST APIs", "WhatsApp API",
+      "LLM Evaluation", "Guardrails", "Prompt Versioning", "LLM Observability", "LangSmith",
     ],
   },
   {
@@ -166,7 +167,7 @@ export default function Skills() {
             {[
               { label: "Python & ML Frameworks", pct: 92 },
               { label: "Generative AI & LLMs", pct: 88 },
-              { label: "MLOps & Deployment", pct: 80 },
+              { label: "MLOps & LLMOps", pct: 82 },
             ].map((bar) => (
               <div key={bar.label}>
                 <div className="flex justify-between mb-2 text-xs font-medium" style={{ color: "var(--text-body)" }}>

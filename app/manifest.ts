@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Umair Amjad Khan — AI & Machine Learning Engineer Portfolio",
     short_name: "Umair Khan",
     description:
-      "Official portfolio of Umair Amjad Khan — AI & Machine Learning Engineer and Founder & CEO of icode Studios. Specializing in LLMs, RAG, Computer Vision, and MLOps.",
+      "Official portfolio of Umair Amjad Khan — AI & Machine Learning Engineer and Founder & CEO of icode Studios. Specializing in LLMs, RAG, Computer Vision, MLOps, and LLMOps.",
     start_url: "/",
     display: "standalone",
     background_color: "#FFFFFF",

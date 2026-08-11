@@ -90,8 +90,8 @@ export default function About() {
                 and scalable web &amp; mobile applications for clients worldwide.
               </p>
               <p>
-                My technical expertise spans deep learning, computer vision, and full-stack MLOps — containerizing
-                models with Docker, exposing high-throughput FastAPI backends, and building interactive software products.
+                My technical expertise spans deep learning, computer vision, and full-stack MLOps &amp; LLMOps — containerizing
+                models with Docker, building CI/CD pipelines for ML, deploying LLM evaluation guardrails, exposing high-throughput FastAPI backends, and building interactive software products.
               </p>
             </motion.div>
 
@@ -103,7 +103,7 @@ export default function About() {
               custom={3}
               className="flex flex-wrap gap-3 mt-8"
             >
-              {["LLM Fine-Tuning", "RAG Architectures", "Computer Vision", "MLOps Pipelines", "Multi-Agent Systems"].map((tag) => (
+              {["LLM Fine-Tuning", "RAG Architectures", "Computer Vision", "MLOps Pipelines", "LLMOps Pipelines", "Multi-Agent Systems"].map((tag) => (
                 <span key={tag} className="px-4 py-2 text-sm rounded-lg font-medium skill-badge">
                   {tag}
                 </span>

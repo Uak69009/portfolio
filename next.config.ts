@@ -33,8 +33,18 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Cache images for SEO (let Google cache your profile image)
-        source: "/:path*.(jpg|jpeg|png|svg|webp|ico)",
+        // Profile & logo images: short cache + revalidate for logo purge protocol
+        source: "/(profile-image|og-image|icon|logo|apple-touch-icon|umair-amjad-khan-ai-machine-learning-engineer)\\.(jpg|jpeg|png|svg|webp)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, must-revalidate, stale-while-revalidate=3600",
+          },
+        ],
+      },
+      {
+        // Other static assets: long-term immutable cache
+        source: "/:path*\\.(jpg|jpeg|png|svg|webp|ico)",
         headers: [
           {
             key: "Cache-Control",

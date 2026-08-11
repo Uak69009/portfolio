@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.icodestudios.dev/</loc>
+    <image:image>
+      <image:loc>https://www.icodestudios.dev/profile-image.jpg?v=3</image:loc>
+      <image:title>Umair Amjad Khan — AI and Machine Learning Engineer Profile Photo</image:title>
+      <image:caption>Official profile photo of Umair Amjad Khan, AI and Machine Learning Engineer and Founder of icode Studios</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.icodestudios.dev/og-image.jpg?v=3</image:loc>
+      <image:title>Umair Amjad Khan — AI Engineer Portfolio OpenGraph Image</image:title>
+      <image:caption>OpenGraph social preview image for Umair Amjad Khan AI Engineer portfolio</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.icodestudios.dev/icon.png?v=3</image:loc>
+      <image:title>Umair Amjad Khan — Official AI Engineer Logo</image:title>
+      <image:caption>Official logo of Umair Amjad Khan, AI and Machine Learning Engineer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.icodestudios.dev/umair-amjad-khan-ai-machine-learning-engineer.jpg?v=3</image:loc>
+      <image:title>Umair Amjad Khan — AI and Machine Learning Engineer</image:title>
+      <image:caption>Umair Amjad Khan AI and Machine Learning Engineer professional photo</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.icodestudios.dev/logo.png?v=3</image:loc>
+      <image:title>Umair Amjad Khan — Brand Logo</image:title>
+      <image:caption>Brand logo for Umair Amjad Khan AI Engineer portfolio</image:caption>
+    </image:image>
+  </url>
+</urlset>
